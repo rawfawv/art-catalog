@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUAS Admin | 작품 업로드</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #f2f2f2;
+        color: #111;
+        padding: 32px 16px 80px;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; }
+    h1 {
+        font-size: 22px;
+        font-weight: 900;
+        margin: 0 0 4px;
+    }
+    .sub {
+        font-size: 13px;
+        color: #666;
+        margin: 0 0 28px;
+    }
+    form {
+        background: #fff;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+    .field { margin-bottom: 16px; }
+    label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #555;
+        margin-bottom: 6px;
+    }
+    input[type="text"], input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+        background: #fafafa;
+    }
+    textarea { min-height: 90px; resize: vertical; }
+    .checkbox-field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    .checkbox-field input { width: 16px; height: 16px; }
+    .checkbox-field label { margin: 0; text-transform: none; font-weight: 500; font-size: 14px; }
+
+    .image-drop {
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 8px;
+        transition: border-color .15s;
+    }
+    .image-drop:hover { border-color: #999; }
+    .image-drop.has-image { border-style: solid; }
+    .image-drop input { display: none; }
+    #preview {
+        max-width: 100%;
+        max-height: 240px;
+        display: none;
+        margin: 0 auto 8px;
+        border-radius: 4px;
+    }
+    .drop-label { font-size: 13px; color: #777; }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 14px;
+        background: #111;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 4px;
+    }
+    button[type="submit"]:disabled { background: #999; cursor: not-allowed; }
+
+    #status {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        display: none;
+    }
+    #status.ok { background: #eaf7ea; color: #1e5e1e; display: block; }
+    #status.err { background: #fbe9e9; color: #8a1f1f; display: block; }
+    #status a { color: inherit; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1>LUAS 작품 업로드</h1>
+    <p class="sub">이미지와 정보를 입력하고 업로드하면 assets 폴더에 저장 → app.js에 자동 반영 → GitHub에 자동 push까지 한번에 처리됩니다.</p>
+
+    <form id="artwork-form">
+        <div class="image-drop" id="image-drop">
+            <img id="preview" alt="preview">
+            <div class="drop-label" id="drop-label">클릭해서 이미지 선택 (PNG / JPG / WEBP)</div>
+            <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp,image/gif">
+        </div>
+
+        <div class="field">
+            <label for="title">작품제목 *</label>
+            <input type="text" id="title" placeholder="예: 시간의 화분" required>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label for="artist">작가명</label>
+                <input type="text" id="artist" value="Rawfaw">
+            </div>
+            <div class="field">
+                <label for="year">제작연도</label>
+                <input type="text" id="year" placeholder="예: 2026">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label for="dimensions">실제규격</label>
+                <input type="text" id="dimensions" placeholder="예: 116.8 x 91.0cm">
+            </div>
+            <div class="field">
+                <label for="material">재질</label>
+                <input type="text" id="material" placeholder="예: 캔버스에 유화">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label for="price">가격 *</label>
+                <input type="text" id="price" placeholder="예: $3,000" required>
+            </div>
+            <div class="field">
+                <label for="category">카테고리</label>
+                <select id="category">
+                    <option value="ORIGINAL">ORIGINAL (오리지널)</option>
+                    <option value="LIMITED">LIMITED (리미티드 에디션)</option>
+                    <option value="POSTER">POSTER (아트 포스터)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="color">포스터뷰 색상 태그</label>
+            <select id="color">
+                <option value="terracotta">terracotta</option>
+                <option value="dustyrose">dustyrose</option>
+                <option value="teal">teal</option>
+                <option value="mustard">mustard</option>
+                <option value="sage">sage</option>
+                <option value="purple">purple</option>
+                <option value="brown">brown</option>
+                <option value="slate">slate</option>
+                <option value="clay">clay</option>
+            </select>
+        </div>
+
+        <div class="checkbox-field">
+            <input type="checkbox" id="isNew" checked>
+            <label for="isNew">NEW 배지 표시</label>
+        </div>
+
+        <div class="field">
+            <label for="shippingNote">배송/액자 안내 (선택)</label>
+            <input type="text" id="shippingNote" placeholder="예: 배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)">
+        </div>
+
+        <div class="field">
+            <label for="description">작품 설명 (선택)</label>
+            <textarea id="description" placeholder="작품에 대한 간단한 설명을 입력하세요."></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn">업로드</button>
+    </form>
+
+    <div id="status"></div>
+</div>
+
+<script>
+const dropArea = document.getElementById("image-drop");
+const imageInput = document.getElementById("image-input");
+const preview = document.getElementById("preview");
+const dropLabel = document.getElementById("drop-label");
+
+let imageBase64 = null;
+let imageMimeType = null;
+
+dropArea.addEventListener("click", () => imageInput.click());
+
+imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (!file) return;
+    imageMimeType = file.type;
+    const reader = new FileReader();
+    reader.onload = () => {
+        const dataUrl = reader.result;
+        imageBase64 = dataUrl.split(",")[1];
+        preview.src = dataUrl;
+        preview.style.display = "block";
+        dropLabel.textContent = file.name;
+        dropArea.classList.add("has-image");
+    };
+    reader.readAsDataURL(file);
+});
+
+const form = document.getElementById("artwork-form");
+const statusBox = document.getElementById("status");
+const submitBtn = document.getElementById("submit-btn");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!imageBase64) {
+        showStatus(false, "이미지를 선택해주세요.");
+        return;
+    }
+
+    const payload = {
+        title: document.getElementById("title").value,
+        artist: document.getElementById("artist").value,
+        year: document.getElementById("year").value,
+        dimensions: document.getElementById("dimensions").value,
+        material: document.getElementById("material").value,
+        price: document.getElementById("price").value,
+        category: document.getElementById("category").value,
+        color: document.getElementById("color").value,
+        isNew: document.getElementById("isNew").checked,
+        shippingNote: document.getElementById("shippingNote").value,
+        description: document.getElementById("description").value,
+        imageBase64,
+        imageMimeType,
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "업로드 중...";
+
+    try {
+        const res = await fetch("/add-artwork", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+        const result = await res.json();
+
+        if (result.ok) {
+            showStatus(true,
+                `"${payload.title}" 추가 완료 (id ${result.id})\n이미지: ${result.image}\n` +
+                (result.pushed
+                    ? `GitHub에 push 완료 ✅\n\n잠시 후 https://rawfawv.github.io/art-catalog/ 에서 확인하세요.`
+                    : `⚠️ app.js/이미지는 저장됐지만 git push에 실패했습니다:\n${result.gitOutput}`)
+            );
+            form.reset();
+            preview.style.display = "none";
+            dropLabel.textContent = "클릭해서 이미지 선택 (PNG / JPG / WEBP)";
+            dropArea.classList.remove("has-image");
+            imageBase64 = null;
+            imageMimeType = null;
+            document.getElementById("artist").value = "Rawfaw";
+            document.getElementById("isNew").checked = true;
+        } else {
+            showStatus(false, result.error || "알 수 없는 오류가 발생했습니다.");
+        }
+    } catch (err) {
+        showStatus(false, "서버에 연결할 수 없습니다: " + err.message);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "업로드";
+    }
+});
+
+function showStatus(ok, message) {
+    statusBox.className = ok ? "ok" : "err";
+    statusBox.textContent = message;
+    statusBox.style.display = "block";
+}
+</script>
+</body>
+</html>
