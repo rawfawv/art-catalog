@@ -18,7 +18,7 @@ const ARTWORKS_DATA = [
         id: 2,
         title: "Composition with Red",
         artist: "Wassily Kandinsky",
-        image: "assets/abstract_red.png",
+        image: "assets/still_life_vase.png",
         price: "$120,000",
         numericPrice: 120000,
         category: "ORIGINAL",
