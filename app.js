@@ -113,22 +113,6 @@ const ARTWORKS_DATA = [
         color: "clay",
         isNew: false,
         description: `"Bildnis Nikolaus" by Wilhelm Trübner is a classic portrait painted with thick, confident brushstrokes and dark atmospheric tones. It captures the solemn character of the subject, focusing on the dramatic plays of light across facial features.`
-    },
-    {
-        id: 10,
-        title: "TEST_DELETE_ME",
-        artist: "Rawfaw",
-        image: "assets/test-delete-me.png",
-        price: "$1",
-        numericPrice: 1,
-        category: "ORIGINAL",
-        color: "terracotta",
-        isNew: true,
-        dimensions: "1x1cm",
-        material: "test",
-        year: "2026",
-        shippingNote: "",
-        description: "pipeline test entry, safe to ignore"
     }
 ];
 
