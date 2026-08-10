@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUAS | Art Catalog</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Page Wrapper -->
+    <div id="app-wrapper">
+        
+        <!-- Neon Header Banner (Reference Image 2 & 3) -->
+        <header class="neon-header">
+            <div class="header-left">
+                <a href="#" class="logo" id="logo-btn">LUAS</a>
+                <button class="search-btn" id="search-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>SEARCH</span>
+                </button>
+            </div>
+            
+            <nav class="header-nav">
+                <a href="#" class="nav-link active" data-category="ALL">All Artworks</a>
+                <a href="#" class="nav-link" data-category="ORIGINAL">Originals</a>
+                <a href="#" class="nav-link" data-category="LIMITED">Limited Editions</a>
+                <a href="#" class="nav-link" data-category="POSTER">Art Posters</a>
+                <a href="#contact-section" class="nav-link">Contact</a>
+                <a href="#" class="nav-link" id="trigger-404">Demo 404</a>
+            </nav>
+
+            <div class="header-right">
+                <button class="cart-btn" id="cart-toggle-btn">
+                    CART (<span id="cart-count">0</span>)
+                </button>
+                <!-- Mobile Hamburger Menu Button -->
+                <button class="menu-mobile-btn" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="#" class="mobile-nav-link active" data-category="ALL">All Artworks</a>
+            <a href="#" class="mobile-nav-link" data-category="ORIGINAL">Originals</a>
+            <a href="#" class="mobile-nav-link" data-category="LIMITED">Limited Editions</a>
+            <a href="#" class="mobile-nav-link" data-category="POSTER">Art Posters</a>
+            <a href="#contact-section" class="mobile-nav-link">Contact</a>
+            <a href="#" class="mobile-nav-link" id="trigger-404-mobile">Demo 404</a>
+        </div>
+
+        <!-- Filter / Layout Switcher Controls (Reference Image 2) -->
+        <section class="controls-bar">
+            <div class="control-group">
+                <label for="view-select">View:</label>
+                <div class="select-wrapper">
+                    <select id="view-select">
+                        <option value="GRID">GRID (Modern Minimalist)</option>
+                        <option value="POSTER">POSTER (Bold Editorial)</option>
+                        <option value="COMPACT">COMPACT (Mobile Classic)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="sort-select">Sort by:</label>
+                <div class="select-wrapper">
+                    <select id="sort-select">
+                        <option value="NEW">최신순 (NEW)</option>
+                        <option value="TITLE">작품이름순 (TITLE)</option>
+                        <option value="PRICE_ASC">가격 낮은순 (PRICE: LOW)</option>
+                        <option value="PRICE_DESC">가격 높은순 (PRICE: HIGH)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group search-bar-container" id="inline-search-container">
+                <input type="text" id="catalog-search-input" placeholder="Search artworks or artists...">
+                <button id="search-clear-btn">&times;</button>
+            </div>
+        </section>
+
+        <!-- Dynamic Category Tags Bar (Reference Image 3) -->
+        <div class="pills-bar">
+            <button class="pill-btn active" data-filter="ALL">전체보기 (ALL)</button>
+            <button class="pill-btn" data-filter="NEW">NEW</button>
+            <button class="pill-btn" data-filter="ORIGINAL">오리지널 (Original)</button>
+            <button class="pill-btn" data-filter="LIMITED">리미티드 에디션 (Limited)</button>
+            <button class="pill-btn" data-filter="POSTER">아트 포스터 (Poster)</button>
+        </div>
+
+        <!-- Main Catalog Grid Container -->
+        <main class="catalog-container">
+            <div id="catalog-grid" class="view-grid">
+                <!-- Dynamically populated cards via JS -->
+            </div>
+            
+            <!-- Empty state -->
+            <div id="no-results" class="no-results-message hidden">
+                <p>검색 결과가 없습니다.</p>
+                <button id="reset-filters-btn">필터 초기화</button>
+            </div>
+        </main>
+
+        <!-- Contact Section (Reference Image 3) -->
+        <section id="contact-section" class="contact-section">
+            <div class="contact-header">
+                <h2>Contact</h2>
+                <p>Hello, Our goal is to establish a virtuous cycle in the art industry by connecting various media industries, ultimately creating a vibrant world filled with diverse artworks. We are looking forward to having you join us.</p>
+            </div>
+
+            <form id="inquiry-form" class="inquiry-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="input-name">이름 <span class="required">*</span></label>
+                        <input type="text" id="input-name" name="name" required placeholder="이름을 입력해 주세요.">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-company">회사명</label>
+                        <input type="text" id="input-company" name="company" placeholder="회사명을 입력해 주세요.">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="input-email">이메일 <span class="required">*</span></label>
+                        <input type="email" id="input-email" name="email" required placeholder="이메일 주소를 입력해 주세요.">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-phone">전화번호 <span class="required">*</span></label>
+                        <input type="tel" id="input-phone" name="phone" required placeholder="'-' 없이 입력해 주세요.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="textarea-header">
+                        <label for="input-message">문의내용 <span class="required">*</span></label>
+                        <span class="char-counter"><span id="char-count">0</span>/1000</span>
+                    </div>
+                    <textarea id="input-message" name="message" maxlength="1000" required placeholder="1000자 이내로 작성해 주세요."></textarea>
+                </div>
+
+                <!-- Custom Styled File Attachment (Reference Image 3) -->
+                <div class="form-group file-upload-group">
+                    <label>파일첨부</label>
+                    <div class="file-upload-wrapper">
+                        <span class="file-name" id="file-name-label">선택된 파일 없음</span>
+                        <label for="input-file" class="file-upload-btn">파일첨부</label>
+                        <input type="file" id="input-file" name="file" class="hidden-file-input">
+                    </div>
+                </div>
+
+                <!-- Privacy Policy Consent Checkbox -->
+                <div class="form-group checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="input-agree" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">개인정보 처리 방침에 동의합니다.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">보내기 (Submit)</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+            <div class="footer-info">
+                <p>주식회사 루아스 | 대표자 김루아</p>
+                <p>사업자등록번호 123-88-02861 | 이메일 biz@luas.com</p>
+                <p>주소: 대구광역시 동구 동대구로 174, 2층</p>
+                <p class="copyright">Copyright &copy; 2026 LUAS All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Artwork Details Slide-over Panel (Reference Image 3) -->
+    <div id="detail-panel" class="side-panel">
+        <div class="panel-overlay" id="detail-overlay"></div>
+        <div class="panel-content">
+            <button class="panel-close-btn" id="detail-close-btn">&times;</button>
+            
+            <div class="detail-body">
+                <h2 class="detail-title" id="detail-title">George Spencer Watson</h2>
+                <h3 class="detail-subtitle" id="detail-subtitle">The Orange Dress</h3>
+                
+                <div class="detail-info-block">
+                    <h4>작품 정보</h4>
+                    <p id="detail-desc">"The Orange Dress" (1926) by British artist George Spencer Watson is a refined oil portrait...</p>
+                </div>
+
+                <div class="detail-price-row">
+                    <span class="price-label">Estimated Price:</span>
+                    <span class="price-value" id="detail-price">$32,000</span>
+                </div>
+
+                <!-- Inquiry buttons -->
+                <div class="detail-inquiry-grid">
+                    <button class="inquiry-btn primary" id="btn-purchase-inquiry">
+                        <span class="btn-label">구매 문의</span>
+                        <span class="btn-sub">02) 0000-0000</span>
+                    </button>
+                    <button class="inquiry-btn secondary" id="btn-sponsor-inquiry">
+                        <span class="btn-label">협찬 문의</span>
+                        <span class="btn-sub">02) 0000-0000</span>
+                    </button>
+                </div>
+
+                <button class="add-to-inquiry-cart-btn" id="btn-add-to-cart">
+                    관심 작품 목록에 추가 (Add to Inquiry)
+                </button>
+
+                <div class="detail-image-wrapper">
+                    <img src="" alt="" id="detail-img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="side-panel">
+        <div class="panel-overlay" id="cart-overlay"></div>
+        <div class="panel-content">
+            <button class="panel-close-btn" id="cart-close-btn">&times;</button>
+            
+            <div class="cart-body">
+                <h2>Inquiry Cart (<span id="cart-items-count">0</span>)</h2>
+                <p class="cart-subtitle">구매 또는 대여 문의를 보내실 작품 목록입니다.</p>
+
+                <div class="cart-items-container" id="cart-items-list">
+                    <!-- Dynamic items -->
+                    <div class="empty-cart-message">관심 목록에 추가된 작품이 없습니다.</div>
+                </div>
+
+                <div class="cart-footer">
+                    <button class="cart-checkout-btn" id="cart-checkout-btn">선택한 작품 문의하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen 404 Error Screen (Reference Image 3) -->
+    <div id="error-screen" class="error-screen hidden">
+        <div class="error-content">
+            <p class="error-warning">존재하지 않거나 사용할 수 없는 페이지입니다.</p>
+            <p class="error-instruction">입력하신 주소가 정확한지 다시 한 번 확인해 주세요.</p>
+            
+            <div class="error-code">404</div>
+            
+            <p class="error-detail">That's an error. The requested URL was not found on this server. That's all we know.</p>
+            
+            <button class="error-back-btn" id="error-back-btn">돌아가기 (Return to Home)</button>
+
+            <div class="error-footer">
+                <div class="error-social">
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                </div>
+                <div class="error-info">
+                    <p>주식회사 루아스 | 대표자 김루아</p>
+                    <p>사업자등록번호 123-88-02861 | 이메일 biz@luas.com</p>
+                    <p>주소: 대구광역시 동구 동대구로 174, 2층</p>
+                    <p>Copyright &copy; 2025 LUAS All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
