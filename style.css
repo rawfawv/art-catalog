@@ -1109,6 +1109,14 @@ button {
     font-weight: 700;
 }
 
+.detail-shipping-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: -16px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
 /* Detailed Inquiry Grid */
 .detail-inquiry-grid {
     display: grid;

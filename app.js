@@ -16,15 +16,19 @@ const ARTWORKS_DATA = [
     },
     {
         id: 2,
-        title: "Composition with Red",
-        artist: "Wassily Kandinsky",
+        title: "시간의 화분",
+        artist: "Artist Unknown",
         image: "assets/still_life_vase.png",
-        price: "$120,000",
-        numericPrice: 120000,
+        price: "$3,000",
+        numericPrice: 3000,
         category: "ORIGINAL",
         color: "dustyrose",
         isNew: true,
-        description: `Wassily Kandinsky's "Composition with Red" is a vibrant display of abstract expressionism. Combining complex grids, geometric shapes, overlapping circles, and sharp linear paths, the piece represents the harmony of color and sound. Kandinsky, a pioneer of abstract art, believed that colors and shapes communicate directly with the human soul, creating a spiritual symphony on canvas.`
+        dimensions: "116.8 x 91.0cm",
+        material: "캔버스에 유화 (Oil on canvas)",
+        year: "2023",
+        shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)",
+        description: `"시간의 화분" (2023) is an oil on canvas work measuring 116.8 x 91.0cm.`
     },
     {
         id: 3,
@@ -141,6 +145,7 @@ const detailTitle = document.getElementById("detail-title");
 const detailSubtitle = document.getElementById("detail-subtitle");
 const detailDesc = document.getElementById("detail-desc");
 const detailPrice = document.getElementById("detail-price");
+const detailShippingNote = document.getElementById("detail-shipping-note");
 const detailImg = document.getElementById("detail-img");
 const btnAddToCart = document.getElementById("btn-add-to-cart");
 
@@ -532,6 +537,13 @@ function openDetailPanel(art) {
     detailSubtitle.textContent = art.title;
     detailDesc.textContent = art.description;
     detailPrice.textContent = art.price;
+    if (art.shippingNote) {
+        detailShippingNote.textContent = art.shippingNote;
+        detailShippingNote.classList.remove("hidden");
+    } else {
+        detailShippingNote.textContent = "";
+        detailShippingNote.classList.add("hidden");
+    }
     detailImg.src = art.image;
     detailImg.alt = art.title;
 
