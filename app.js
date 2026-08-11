@@ -129,6 +129,22 @@ const ARTWORKS_DATA = [
         year: "2024",
         shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)",
         description: "Flowerpot of the Body\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world.\n\nThe body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions.\n\nBy placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence.\n\nThis work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity."
+    },
+    {
+        id: 11,
+        title: "Flowerpot of the Soul | 영혼의화분",
+        artist: "Rawfaw",
+        image: "assets/flowerpot-of-the-soul.png",
+        price: "$2,800",
+        numericPrice: 2800,
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "116.8 x 80.3 cm",
+        material: "Oil on panel",
+        year: "2025",
+        shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
+        description: "Flowerpot of the Soul\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Soul explores the question of whether the soul can ever become truly free.\n\nThe soul is often considered the deepest and most essential part of who we are. Yet it is easily confined by fear, desire, memory, and the expectations of the world.\n\nThe flowerpot represents those invisible boundaries that keep the soul rooted in one place.\n\nThrough this work, I ask a simple question:\n\nCan my soul leave the flowerpot and take root in the earth?\n\nRather than offering an answer, the work leaves that question open, inviting viewers to reflect on the possibility of spiritual independence and growth."
     }
 ];
 
