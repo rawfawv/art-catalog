@@ -161,6 +161,22 @@ const ARTWORKS_DATA = [
         year: "2025",
         shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
         description: "Flowerpot of the Mind (Summer)\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Summer) explores the paradox of growth without freedom.\n\nSummer brings warmth, light, and abundant life. Everything appears to flourish, yet the mind remains inside the same flowerpot.\n\nEven when conditions seem perfect for growth, we can still find ourselves unable to move beyond the invisible boundaries we have lived within for so long.\n\nThis work asks whether true growth is possible without independence.\n\nCan the mind truly grow if it never leaves the flowerpot?\n\nSummer symbolizes vitality and possibility, while the flowerpot represents the limitations that continue to shape the mind."
+    },
+    {
+        id: 13,
+        title: "Flowerpot of the Mind (Winter) | 정신의 화분(겨울)",
+        artist: "Rawfaw",
+        image: "assets/flowerpot-of-the-mind-winter.png",
+        price: "$4,800",
+        numericPrice: 4800,
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "145.5 x 112.1cm ",
+        material: "Oil on panel",
+        year: "2026",
+        shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
+        description: "I believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Winter) reflects on the passage of time within an unchanged state.\n\nWhile trapped inside the flowerpot, the seasons continue to pass. Winter fades, summer returns, and the cycle repeats endlessly. Although the world keeps changing, the mind often remains rooted in the same place.\n\nThis work asks what it means to remain emotionally or mentally confined while time moves forward without waiting.\n\nHow many seasons must pass before the mind can finally leave the flowerpot?\n\nThe changing seasons symbolize the flow of time, while the flowerpot represents the invisible boundaries that keep the mind from moving freely."
     }
 ];
 
