@@ -113,6 +113,22 @@ const ARTWORKS_DATA = [
         color: "clay",
         isNew: false,
         description: `"Bildnis Nikolaus" by Wilhelm Trübner is a classic portrait painted with thick, confident brushstrokes and dark atmospheric tones. It captures the solemn character of the subject, focusing on the dramatic plays of light across facial features.`
+    },
+    {
+        id: 10,
+        title: "육체의 화분(눈알)",
+        artist: "Rawfaw",
+        image: "assets/artwork.png",
+        price: "$2,000",
+        numericPrice: 2000,
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "36.6x46.9cm",
+        material: "판넬에 유화",
+        year: "2024",
+        shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)",
+        description: "Flowerpot of the Body\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world.\n\nThe body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions.\n\nBy placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence.\n\nThis work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity."
     }
 ];
 
