@@ -176,8 +176,6 @@ let inquiryCart = [];
 
 // DOM Elements
 const catalogGrid = document.getElementById("catalog-grid");
-const viewSelect = document.getElementById("view-select");
-const sortSelect = document.getElementById("sort-select");
 const searchInput = document.getElementById("catalog-search-input");
 const searchClearBtn = document.getElementById("search-clear-btn");
 const pillsBar = document.querySelector(".pills-bar");
@@ -240,15 +238,6 @@ const I18N = {
     nav_posters: { en: "Art Posters", ko: "아트 포스터" },
     nav_contact: { en: "Contact", ko: "문의하기" },
     nav_404: { en: "Demo 404", ko: "데모 404" },
-    view_label: { en: "View:", ko: "보기:" },
-    view_grid: { en: "GRID (Modern Minimalist)", ko: "그리드 (모던 미니멀)" },
-    view_poster: { en: "POSTER (Bold Editorial)", ko: "포스터 (볼드 에디토리얼)" },
-    view_compact: { en: "COMPACT (Mobile Classic)", ko: "컴팩트 (모바일 클래식)" },
-    sort_label: { en: "Sort by:", ko: "정렬:" },
-    sort_new: { en: "Newest (NEW)", ko: "최신순 (NEW)" },
-    sort_title: { en: "Title (TITLE)", ko: "작품이름순 (TITLE)" },
-    sort_price_asc: { en: "Price: Low to High", ko: "가격 낮은순" },
-    sort_price_desc: { en: "Price: High to Low", ko: "가격 높은순" },
     search_placeholder: { en: "Search artworks or artists...", ko: "작품명 또는 작가명으로 검색..." },
     pill_all: { en: "All", ko: "전체보기" },
     pill_original: { en: "Originals", ko: "오리지널" },
@@ -381,19 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // Event Listeners Setup
 // ==========================================================================
 function initEventListeners() {
-    // View Switcher
-    viewSelect.addEventListener("change", (e) => {
-        currentView = e.target.value;
-        catalogGrid.className = `view-${currentView.toLowerCase()}`;
-        renderCatalog();
-    });
-
-    // Sorting
-    sortSelect.addEventListener("change", (e) => {
-        currentSort = e.target.value;
-        renderCatalog();
-    });
-
     // Search input
     searchInput.addEventListener("input", (e) => {
         currentSearchQuery = e.target.value.trim().toLowerCase();
