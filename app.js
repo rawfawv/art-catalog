@@ -192,12 +192,157 @@ const fileNameLabel = document.getElementById("file-name-label");
 const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
 const mobileNavMenu = document.getElementById("mobile-nav-menu");
 
+// Language Switch
+const langButtons = document.querySelectorAll(".lang-btn");
+
+// ==========================================================================
+// i18n (English / Korean toggle for site chrome — artwork data itself is
+// already bilingual inline and is not affected by this toggle)
+// ==========================================================================
+const I18N = {
+    search: { en: "SEARCH", ko: "검색" },
+    cart_label: { en: "CART", ko: "장바구니" },
+    nav_all: { en: "All Artworks", ko: "전체 작품" },
+    nav_originals: { en: "Originals", ko: "오리지널" },
+    nav_limited: { en: "Limited Editions", ko: "리미티드 에디션" },
+    nav_posters: { en: "Art Posters", ko: "아트 포스터" },
+    nav_contact: { en: "Contact", ko: "문의하기" },
+    nav_404: { en: "Demo 404", ko: "데모 404" },
+    view_label: { en: "View:", ko: "보기:" },
+    view_grid: { en: "GRID (Modern Minimalist)", ko: "그리드 (모던 미니멀)" },
+    view_poster: { en: "POSTER (Bold Editorial)", ko: "포스터 (볼드 에디토리얼)" },
+    view_compact: { en: "COMPACT (Mobile Classic)", ko: "컴팩트 (모바일 클래식)" },
+    sort_label: { en: "Sort by:", ko: "정렬:" },
+    sort_new: { en: "Newest (NEW)", ko: "최신순 (NEW)" },
+    sort_title: { en: "Title (TITLE)", ko: "작품이름순 (TITLE)" },
+    sort_price_asc: { en: "Price: Low to High", ko: "가격 낮은순" },
+    sort_price_desc: { en: "Price: High to Low", ko: "가격 높은순" },
+    search_placeholder: { en: "Search artworks or artists...", ko: "작품명 또는 작가명으로 검색..." },
+    pill_all: { en: "All", ko: "전체보기" },
+    pill_original: { en: "Originals", ko: "오리지널" },
+    pill_limited: { en: "Limited Editions", ko: "리미티드 에디션" },
+    pill_poster: { en: "Art Posters", ko: "아트 포스터" },
+    no_results: { en: "No results found.", ko: "검색 결과가 없습니다." },
+    reset_filters: { en: "Reset Filters", ko: "필터 초기화" },
+    contact_heading: { en: "Contact", ko: "문의하기" },
+    contact_intro: {
+        en: "Hello, Our goal is to establish a virtuous cycle in the art industry by connecting various media industries, ultimately creating a vibrant world filled with diverse artworks. We are looking forward to having you join us.",
+        ko: "안녕하세요, 저희의 목표는 다양한 미디어 산업을 연결하여 예술 산업에 선순환을 만드는 것입니다. 다채로운 작품으로 가득한 활기찬 세상을 만들어가고자 하며, 함께해 주시길 기대합니다.",
+    },
+    label_name: { en: "Name", ko: "이름" },
+    placeholder_name: { en: "Please enter your name.", ko: "이름을 입력해 주세요." },
+    label_company: { en: "Company", ko: "회사명" },
+    placeholder_company: { en: "Please enter your company name.", ko: "회사명을 입력해 주세요." },
+    label_email: { en: "Email", ko: "이메일" },
+    placeholder_email: { en: "Please enter your email address.", ko: "이메일 주소를 입력해 주세요." },
+    label_phone: { en: "Phone", ko: "전화번호" },
+    placeholder_phone: { en: "Please enter numbers only, without '-'.", ko: "'-' 없이 입력해 주세요." },
+    label_message: { en: "Message", ko: "문의내용" },
+    placeholder_message: { en: "Please write within 1000 characters.", ko: "1000자 이내로 작성해 주세요." },
+    label_attach: { en: "Attach File", ko: "파일첨부" },
+    no_file_selected: { en: "No file selected", ko: "선택된 파일 없음" },
+    privacy_agree: { en: "I agree to the Privacy Policy.", ko: "개인정보 처리 방침에 동의합니다." },
+    submit_btn: { en: "Submit", ko: "보내기" },
+    footer_company: { en: "LUAS Inc. | CEO: Kim Rua", ko: "주식회사 루아스 | 대표자 김루아" },
+    footer_biz: { en: "Business Reg. No. 123-88-02861 | Email: biz@luas.com", ko: "사업자등록번호 123-88-02861 | 이메일 biz@luas.com" },
+    footer_address: { en: "Address: 2F, 174 Dongdaegu-ro, Dong-gu, Daegu, South Korea", ko: "주소: 대구광역시 동구 동대구로 174, 2층" },
+    artwork_info: { en: "Artwork Information", ko: "작품 정보" },
+    estimated_price: { en: "Estimated Price:", ko: "예상 가격:" },
+    purchase_inquiry: { en: "Purchase Inquiry", ko: "구매 문의" },
+    sponsor_inquiry: { en: "Sponsorship Inquiry", ko: "협찬 문의" },
+    add_to_inquiry: { en: "Add to Inquiry", ko: "관심 작품 목록에 추가" },
+    remove_from_inquiry: { en: "Remove from Inquiry", ko: "관심 목록에서 제거" },
+    inquiry_cart_heading: { en: "Inquiry Cart", ko: "문의 목록" },
+    cart_subtitle: { en: "Artworks you'd like to inquire about for purchase or rental.", ko: "구매 또는 대여 문의를 보내실 작품 목록입니다." },
+    cart_empty: { en: "No artworks added yet.", ko: "관심 목록에 추가된 작품이 없습니다." },
+    cart_checkout: { en: "Inquire About Selected Items", ko: "선택한 작품 문의하기" },
+    cart_item_remove: { en: "Remove", ko: "제거" },
+    error_warning: { en: "This page does not exist or is unavailable.", ko: "존재하지 않거나 사용할 수 없는 페이지입니다." },
+    error_instruction: { en: "Please check that you entered the correct address.", ko: "입력하신 주소가 정확한지 다시 한 번 확인해 주세요." },
+    error_detail: {
+        en: "That's an error. The requested URL was not found on this server. That's all we know.",
+        ko: "오류가 발생했습니다. 요청하신 URL을 이 서버에서 찾을 수 없습니다.",
+    },
+    return_home: { en: "Return to Home", ko: "돌아가기" },
+    price_on_request: { en: "Price on Request", ko: "가격 문의" },
+    view_artwork: { en: "View Artwork", ko: "작품 보기" },
+    badge_original: { en: "ORIGINAL", ko: "오리지널" },
+    badge_limited: { en: "LIMITED", ko: "리미티드" },
+    badge_poster: { en: "POSTER", ko: "포스터" },
+    required_field_alert: { en: "Please fill in all required fields.", ko: "필수 입력 값을 입력해 주세요." },
+};
+
+let currentLang = localStorage.getItem("rawfaw_lang") || "en";
+
+function t(key) {
+    const entry = I18N[key];
+    if (!entry) return key;
+    return entry[currentLang] || entry.en;
+}
+
+function badgeLabel(category) {
+    if (category === "ORIGINAL") return t("badge_original");
+    if (category === "LIMITED") return t("badge_limited");
+    if (category === "POSTER") return t("badge_poster");
+    return category;
+}
+
+function thankYouMessage(name) {
+    return currentLang === "ko"
+        ? `감사합니다, ${name}님! 문의가 정상적으로 접수되었습니다. 담당 큐레이터가 빠르게 연락드리겠습니다.`
+        : `Thank you, ${name}! Your inquiry has been received. A curator will contact you shortly.`;
+}
+
+function purchaseInquiryMessage(artist, title) {
+    return currentLang === "ko"
+        ? `안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다.`
+        : `Hello, I would like to inquire about purchasing "${title}" by ${artist}.`;
+}
+
+function sponsorInquiryMessage(artist, title) {
+    return currentLang === "ko"
+        ? `안녕하세요, ${artist} 작가의 "${title}" 작품 협찬/대여에 관해 문의드립니다.`
+        : `Hello, I would like to inquire about sponsorship/rental for "${title}" by ${artist}.`;
+}
+
+function combinedInquiryMessage(artList) {
+    return currentLang === "ko"
+        ? `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다.\n\n${artList}`
+        : `Hello, I would like a combined quote and details for the following artworks on my inquiry list.\n\n${artList}`;
+}
+
+function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem("rawfaw_lang", lang);
+    document.documentElement.lang = lang;
+
+    langButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t(el.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        el.placeholder = t(el.dataset.i18nPlaceholder);
+    });
+
+    // Re-render dynamic pieces that carry translated text
+    renderCatalog();
+    if (cartDrawer.classList.contains("open")) renderCart();
+    if (detailPanel.classList.contains("open")) {
+        const currentId = parseInt(btnAddToCart.dataset.artId, 10);
+        const inCart = inquiryCart.some((item) => item.id === currentId);
+        btnAddToCart.textContent = inCart ? t("remove_from_inquiry") : t("add_to_inquiry");
+    }
+}
+
 // ==========================================================================
 // Initialization
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     initEventListeners();
-    renderCatalog();
+    applyLanguage(currentLang);
 });
 
 // ==========================================================================
@@ -308,6 +453,11 @@ function initEventListeners() {
         renderCatalog();
     });
 
+    // Language Switch (EN / KO)
+    langButtons.forEach((btn) => {
+        btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+    });
+
     // Mobile Hamburger Toggle
     mobileMenuToggle.addEventListener("click", () => {
         mobileMenuToggle.classList.toggle("active");
@@ -331,24 +481,24 @@ function initEventListeners() {
     document.getElementById("btn-purchase-inquiry").addEventListener("click", () => {
         const title = detailSubtitle.textContent;
         const artist = detailTitle.textContent;
-        scrollToContactForm(`안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다. (Hello, I would like to inquire about purchasing "${title}" by ${artist}.)`);
+        scrollToContactForm(purchaseInquiryMessage(artist, title));
         closeDetailPanel();
     });
 
     document.getElementById("btn-sponsor-inquiry").addEventListener("click", () => {
         const title = detailSubtitle.textContent;
         const artist = detailTitle.textContent;
-        scrollToContactForm(`안녕하세요, ${artist} 작가의 "${title}" 작품 협찬/대여에 관해 문의드립니다. (Hello, I would like to inquire about sponsorship/rental for "${title}" by ${artist}.)`);
+        scrollToContactForm(sponsorInquiryMessage(artist, title));
         closeDetailPanel();
     });
 
     // Cart Checkout button
     cartCheckoutBtn.addEventListener("click", () => {
         if (inquiryCart.length === 0) return;
-        
+
         const artList = inquiryCart.map(item => `  - ${item.artist} : "${item.title}"`).join("\n");
-        const queryMsg = `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다. (Hello, I would like a combined quote and details for the following artworks on my inquiry list.)\n\n${artList}`;
-        
+        const queryMsg = combinedInquiryMessage(artList);
+
         scrollToContactForm(queryMsg);
         closeCartDrawer();
     });
@@ -365,7 +515,7 @@ function initEventListeners() {
             fileNameLabel.textContent = e.target.files[0].name;
             fileNameLabel.style.color = "var(--black)";
         } else {
-            fileNameLabel.textContent = "선택된 파일 없음 (No file selected)";
+            fileNameLabel.textContent = t("no_file_selected");
             fileNameLabel.style.color = "var(--text-muted-light)";
         }
     });
@@ -380,13 +530,13 @@ function initEventListeners() {
         const agree = document.getElementById("input-agree").checked;
 
         if (!name || !email || !phone || !agree) {
-            alert("필수 입력 값을 입력해 주세요. (Please fill in all required fields.)");
+            alert(t("required_field_alert"));
             return;
         }
 
-        alert(`감사합니다, ${name}님! 문의가 정상적으로 접수되었습니다. 담당 큐레이터가 빠르게 연락드리겠습니다. (Thank you, ${name}! Your inquiry has been received. A curator will contact you shortly.)`);
+        alert(thankYouMessage(name));
         inquiryForm.reset();
-        fileNameLabel.textContent = "선택된 파일 없음 (No file selected)";
+        fileNameLabel.textContent = t("no_file_selected");
         charCount.textContent = 0;
     });
 
@@ -508,8 +658,8 @@ function createCardHTML(art, index) {
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
                 <p class="card-artist">${isHighlighted ? art.description : art.artist}</p>
                 <div class="card-meta">
-                    <span class="card-price">${isHighlighted ? 'Price on Request' : art.price}</span>
-                    <span class="card-badge">${isHighlighted ? 'View Artwork' : art.category}</span>
+                    <span class="card-price">${isHighlighted ? t('price_on_request') : art.price}</span>
+                    <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
                 </div>
             </div>
         `;
@@ -525,7 +675,7 @@ function createCardHTML(art, index) {
                 <p class="card-description">${art.description}</p>
                 <div class="card-meta">
                     <span class="card-price">${art.price}</span>
-                    <span class="card-badge"># ${art.category}</span>
+                    <span class="card-badge"># ${badgeLabel(art.category)}</span>
                 </div>
             </div>
         `;
@@ -566,10 +716,10 @@ function openDetailPanel(art) {
     // Configure Add to Cart button based on current inquiry list
     const inCart = inquiryCart.some(item => item.id === art.id);
     if (inCart) {
-        btnAddToCart.textContent = "관심 목록에서 제거 (Remove)";
+        btnAddToCart.textContent = t("remove_from_inquiry");
         btnAddToCart.classList.add("in-cart");
     } else {
-        btnAddToCart.textContent = "관심 작품 목록에 추가 (Add to Inquiry)";
+        btnAddToCart.textContent = t("add_to_inquiry");
         btnAddToCart.classList.remove("in-cart");
     }
 
@@ -603,12 +753,12 @@ function toggleCartItem(art) {
     if (idx > -1) {
         // Remove
         inquiryCart.splice(idx, 1);
-        btnAddToCart.textContent = "관심 작품 목록에 추가 (Add to Inquiry)";
+        btnAddToCart.textContent = t("add_to_inquiry");
         btnAddToCart.classList.remove("in-cart");
     } else {
         // Add
         inquiryCart.push(art);
-        btnAddToCart.textContent = "관심 목록에서 제거 (Remove)";
+        btnAddToCart.textContent = t("remove_from_inquiry");
         btnAddToCart.classList.add("in-cart");
     }
     updateCartCount();
@@ -629,7 +779,7 @@ function updateCartCount() {
 function renderCart() {
     cartItemsList.innerHTML = "";
     if (inquiryCart.length === 0) {
-        cartItemsList.innerHTML = '<div class="empty-cart-message">관심 목록에 추가된 작품이 없습니다. (No artworks added yet.)</div>';
+        cartItemsList.innerHTML = `<div class="empty-cart-message">${t("cart_empty")}</div>`;
         return;
     }
 
@@ -642,7 +792,7 @@ function renderCart() {
                 <h4 class="cart-item-artist">${item.artist}</h4>
                 <p class="cart-item-title">${item.title}</p>
                 <div class="cart-item-price">${item.price}</div>
-                <button class="cart-item-remove" onclick="removeCartItem(${item.id})">제거 (Remove)</button>
+                <button class="cart-item-remove" onclick="removeCartItem(${item.id})">${t("cart_item_remove")}</button>
             </div>
         `;
         cartItemsList.appendChild(itemElement);

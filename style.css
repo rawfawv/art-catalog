@@ -194,6 +194,42 @@ button {
     color: var(--neon-yellow);
 }
 
+/* Language Switch (EN / KO) */
+.lang-switch {
+    display: flex;
+    border: 1px solid var(--black);
+    overflow: hidden;
+}
+
+.lang-btn {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    padding: 6px 10px;
+    background: transparent;
+    color: var(--black);
+    transition: var(--transition-smooth);
+}
+
+.lang-btn + .lang-btn {
+    border-left: 1px solid var(--black);
+}
+
+.lang-btn.active {
+    background-color: var(--black);
+    color: var(--neon-yellow);
+}
+
+.lang-btn:not(.active):hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.lang-switch-mobile {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
 /* Mobile menu toggle */
 .menu-mobile-btn {
     display: none;
