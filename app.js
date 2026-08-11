@@ -16,7 +16,7 @@ const ARTWORKS_DATA = [
     },
     {
         id: 2,
-        title: "시간의 화분",
+        title: "The Flowerpot of Time (시간의 화분)",
         artist: "Rawfaw",
         image: "assets/still_life_vase.png",
         price: "$3,000",
@@ -28,7 +28,7 @@ const ARTWORKS_DATA = [
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
         shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)",
-        description: `"시간의 화분" (2023) is an oil on canvas work measuring 116.8 x 91.0cm.`
+        description: `"The Flowerpot of Time" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm.`
     },
     {
         id: 3,
