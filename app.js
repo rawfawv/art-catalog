@@ -27,7 +27,7 @@ const ARTWORKS_DATA = [
         dimensions: "116.8 x 91.0cm",
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
-        shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)",
+        shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.) / Shipping charged separately (framing is optional; selecting a frame will increase shipping cost).",
         description: `"The Flowerpot of Time" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm.`
     },
     {
@@ -315,14 +315,14 @@ function initEventListeners() {
     document.getElementById("btn-purchase-inquiry").addEventListener("click", () => {
         const title = detailSubtitle.textContent;
         const artist = detailTitle.textContent;
-        scrollToContactForm(`안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다.`);
+        scrollToContactForm(`안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다. (Hello, I would like to inquire about purchasing "${title}" by ${artist}.)`);
         closeDetailPanel();
     });
 
     document.getElementById("btn-sponsor-inquiry").addEventListener("click", () => {
         const title = detailSubtitle.textContent;
         const artist = detailTitle.textContent;
-        scrollToContactForm(`안녕하세요, ${artist} 작가의 "${title}" 작품 협찬/대여에 관해 문의드립니다.`);
+        scrollToContactForm(`안녕하세요, ${artist} 작가의 "${title}" 작품 협찬/대여에 관해 문의드립니다. (Hello, I would like to inquire about sponsorship/rental for "${title}" by ${artist}.)`);
         closeDetailPanel();
     });
 
@@ -331,7 +331,7 @@ function initEventListeners() {
         if (inquiryCart.length === 0) return;
         
         const artList = inquiryCart.map(item => `  - ${item.artist} : "${item.title}"`).join("\n");
-        const queryMsg = `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다.\n\n${artList}`;
+        const queryMsg = `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다. (Hello, I would like a combined quote and details for the following artworks on my inquiry list.)\n\n${artList}`;
         
         scrollToContactForm(queryMsg);
         closeCartDrawer();
@@ -349,7 +349,7 @@ function initEventListeners() {
             fileNameLabel.textContent = e.target.files[0].name;
             fileNameLabel.style.color = "var(--black)";
         } else {
-            fileNameLabel.textContent = "선택된 파일 없음";
+            fileNameLabel.textContent = "선택된 파일 없음 (No file selected)";
             fileNameLabel.style.color = "var(--text-muted-light)";
         }
     });
@@ -364,13 +364,13 @@ function initEventListeners() {
         const agree = document.getElementById("input-agree").checked;
 
         if (!name || !email || !phone || !agree) {
-            alert("필수 입력 값을 입력해 주세요.");
+            alert("필수 입력 값을 입력해 주세요. (Please fill in all required fields.)");
             return;
         }
 
-        alert(`감사합니다, ${name}님! 문의가 정상적으로 접수되었습니다. 담당 큐레이터가 빠르게 연락드리겠습니다.`);
+        alert(`감사합니다, ${name}님! 문의가 정상적으로 접수되었습니다. 담당 큐레이터가 빠르게 연락드리겠습니다. (Thank you, ${name}! Your inquiry has been received. A curator will contact you shortly.)`);
         inquiryForm.reset();
-        fileNameLabel.textContent = "선택된 파일 없음";
+        fileNameLabel.textContent = "선택된 파일 없음 (No file selected)";
         charCount.textContent = 0;
     });
 
@@ -613,7 +613,7 @@ function updateCartCount() {
 function renderCart() {
     cartItemsList.innerHTML = "";
     if (inquiryCart.length === 0) {
-        cartItemsList.innerHTML = '<div class="empty-cart-message">관심 목록에 추가된 작품이 없습니다.</div>';
+        cartItemsList.innerHTML = '<div class="empty-cart-message">관심 목록에 추가된 작품이 없습니다. (No artworks added yet.)</div>';
         return;
     }
 
@@ -626,7 +626,7 @@ function renderCart() {
                 <h4 class="cart-item-artist">${item.artist}</h4>
                 <p class="cart-item-title">${item.title}</p>
                 <div class="cart-item-price">${item.price}</div>
-                <button class="cart-item-remove" onclick="removeCartItem(${item.id})">제거</button>
+                <button class="cart-item-remove" onclick="removeCartItem(${item.id})">제거 (Remove)</button>
             </div>
         `;
         cartItemsList.appendChild(itemElement);

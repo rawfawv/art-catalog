@@ -105,8 +105,8 @@
             
             <!-- Empty state -->
             <div id="no-results" class="no-results-message hidden">
-                <p>검색 결과가 없습니다.</p>
-                <button id="reset-filters-btn">필터 초기화</button>
+                <p>검색 결과가 없습니다. (No results found.)</p>
+                <button id="reset-filters-btn">필터 초기화 (Reset Filters)</button>
             </div>
         </main>
 
@@ -120,40 +120,40 @@
             <form id="inquiry-form" class="inquiry-form">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="input-name">이름 <span class="required">*</span></label>
-                        <input type="text" id="input-name" name="name" required placeholder="이름을 입력해 주세요.">
+                        <label for="input-name">이름 (Name) <span class="required">*</span></label>
+                        <input type="text" id="input-name" name="name" required placeholder="이름을 입력해 주세요. (Please enter your name.)">
                     </div>
                     <div class="form-group">
-                        <label for="input-company">회사명</label>
-                        <input type="text" id="input-company" name="company" placeholder="회사명을 입력해 주세요.">
+                        <label for="input-company">회사명 (Company)</label>
+                        <input type="text" id="input-company" name="company" placeholder="회사명을 입력해 주세요. (Please enter your company name.)">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="input-email">이메일 <span class="required">*</span></label>
-                        <input type="email" id="input-email" name="email" required placeholder="이메일 주소를 입력해 주세요.">
+                        <label for="input-email">이메일 (Email) <span class="required">*</span></label>
+                        <input type="email" id="input-email" name="email" required placeholder="이메일 주소를 입력해 주세요. (Please enter your email address.)">
                     </div>
                     <div class="form-group">
-                        <label for="input-phone">전화번호 <span class="required">*</span></label>
-                        <input type="tel" id="input-phone" name="phone" required placeholder="'-' 없이 입력해 주세요.">
+                        <label for="input-phone">전화번호 (Phone) <span class="required">*</span></label>
+                        <input type="tel" id="input-phone" name="phone" required placeholder="'-' 없이 입력해 주세요. (Please enter numbers only, without '-'.)">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="textarea-header">
-                        <label for="input-message">문의내용 <span class="required">*</span></label>
+                        <label for="input-message">문의내용 (Message) <span class="required">*</span></label>
                         <span class="char-counter"><span id="char-count">0</span>/1000</span>
                     </div>
-                    <textarea id="input-message" name="message" maxlength="1000" required placeholder="1000자 이내로 작성해 주세요."></textarea>
+                    <textarea id="input-message" name="message" maxlength="1000" required placeholder="1000자 이내로 작성해 주세요. (Please write within 1000 characters.)"></textarea>
                 </div>
 
                 <!-- Custom Styled File Attachment (Reference Image 3) -->
                 <div class="form-group file-upload-group">
-                    <label>파일첨부</label>
+                    <label>파일첨부 (Attach File)</label>
                     <div class="file-upload-wrapper">
-                        <span class="file-name" id="file-name-label">선택된 파일 없음</span>
-                        <label for="input-file" class="file-upload-btn">파일첨부</label>
+                        <span class="file-name" id="file-name-label">선택된 파일 없음 (No file selected)</span>
+                        <label for="input-file" class="file-upload-btn">파일첨부 (Attach File)</label>
                         <input type="file" id="input-file" name="file" class="hidden-file-input">
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                     <label class="custom-checkbox">
                         <input type="checkbox" id="input-agree" required>
                         <span class="checkmark"></span>
-                        <span class="checkbox-text">개인정보 처리 방침에 동의합니다.</span>
+                        <span class="checkbox-text">개인정보 처리 방침에 동의합니다. (I agree to the Privacy Policy.)</span>
                     </label>
                 </div>
 
@@ -178,9 +178,9 @@
                 <a href="https://linkedin.com" target="_blank">LinkedIn</a>
             </div>
             <div class="footer-info">
-                <p>주식회사 루아스 | 대표자 김루아</p>
-                <p>사업자등록번호 123-88-02861 | 이메일 biz@luas.com</p>
-                <p>주소: 대구광역시 동구 동대구로 174, 2층</p>
+                <p>주식회사 루아스 (LUAS Inc.) | 대표자 (CEO) 김루아 (Kim Rua)</p>
+                <p>사업자등록번호 (Business Reg. No.) 123-88-02861 | 이메일 (Email) biz@luas.com</p>
+                <p>주소 (Address): 대구광역시 동구 동대구로 174, 2층 (2F, 174 Dongdaegu-ro, Dong-gu, Daegu, South Korea)</p>
                 <p class="copyright">Copyright &copy; 2026 RAWFAW Art All rights reserved.</p>
             </div>
         </footer>
@@ -198,7 +198,7 @@
                 <h3 class="detail-subtitle" id="detail-subtitle">The Orange Dress</h3>
                 
                 <div class="detail-info-block">
-                    <h4>작품 정보</h4>
+                    <h4>작품 정보 (Artwork Information)</h4>
                     <p id="detail-desc">"The Orange Dress" (1926) by British artist George Spencer Watson is a refined oil portrait...</p>
                 </div>
 
@@ -211,11 +211,11 @@
                 <!-- Inquiry buttons -->
                 <div class="detail-inquiry-grid">
                     <button class="inquiry-btn primary" id="btn-purchase-inquiry">
-                        <span class="btn-label">구매 문의</span>
+                        <span class="btn-label">구매 문의 (Purchase Inquiry)</span>
                         <span class="btn-sub">02) 0000-0000</span>
                     </button>
                     <button class="inquiry-btn secondary" id="btn-sponsor-inquiry">
-                        <span class="btn-label">협찬 문의</span>
+                        <span class="btn-label">협찬 문의 (Sponsorship Inquiry)</span>
                         <span class="btn-sub">02) 0000-0000</span>
                     </button>
                 </div>
@@ -239,15 +239,15 @@
             
             <div class="cart-body">
                 <h2>Inquiry Cart (<span id="cart-items-count">0</span>)</h2>
-                <p class="cart-subtitle">구매 또는 대여 문의를 보내실 작품 목록입니다.</p>
+                <p class="cart-subtitle">구매 또는 대여 문의를 보내실 작품 목록입니다. (Artworks you'd like to inquire about for purchase or rental.)</p>
 
                 <div class="cart-items-container" id="cart-items-list">
                     <!-- Dynamic items -->
-                    <div class="empty-cart-message">관심 목록에 추가된 작품이 없습니다.</div>
+                    <div class="empty-cart-message">관심 목록에 추가된 작품이 없습니다. (No artworks added yet.)</div>
                 </div>
 
                 <div class="cart-footer">
-                    <button class="cart-checkout-btn" id="cart-checkout-btn">선택한 작품 문의하기</button>
+                    <button class="cart-checkout-btn" id="cart-checkout-btn">선택한 작품 문의하기 (Inquire About Selected Items)</button>
                 </div>
             </div>
         </div>
@@ -256,8 +256,8 @@
     <!-- Fullscreen 404 Error Screen (Reference Image 3) -->
     <div id="error-screen" class="error-screen hidden">
         <div class="error-content">
-            <p class="error-warning">존재하지 않거나 사용할 수 없는 페이지입니다.</p>
-            <p class="error-instruction">입력하신 주소가 정확한지 다시 한 번 확인해 주세요.</p>
+            <p class="error-warning">존재하지 않거나 사용할 수 없는 페이지입니다. (This page does not exist or is unavailable.)</p>
+            <p class="error-instruction">입력하신 주소가 정확한지 다시 한 번 확인해 주세요. (Please check that you entered the correct address.)</p>
             
             <div class="error-code">404</div>
             
@@ -271,9 +271,9 @@
                     <a href="https://linkedin.com" target="_blank">LinkedIn</a>
                 </div>
                 <div class="error-info">
-                    <p>주식회사 루아스 | 대표자 김루아</p>
-                    <p>사업자등록번호 123-88-02861 | 이메일 biz@luas.com</p>
-                    <p>주소: 대구광역시 동구 동대구로 174, 2층</p>
+                    <p>주식회사 루아스 (LUAS Inc.) | 대표자 (CEO) 김루아 (Kim Rua)</p>
+                    <p>사업자등록번호 (Business Reg. No.) 123-88-02861 | 이메일 (Email) biz@luas.com</p>
+                    <p>주소 (Address): 대구광역시 동구 동대구로 174, 2층 (2F, 174 Dongdaegu-ro, Dong-gu, Daegu, South Korea)</p>
                     <p>Copyright &copy; 2025 RAWFAW Art All rights reserved.</p>
                 </div>
             </div>
