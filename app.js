@@ -3,18 +3,6 @@
 // ==========================================================================
 const ARTWORKS_DATA = [
     {
-        id: 1,
-        title: "The Orange Dress",
-        artist: "George Spencer Watson",
-        image: "assets/orange_dress.png",
-        price: "$45,000",
-        numericPrice: 45000,
-        category: "ORIGINAL",
-        color: "terracotta",
-        isNew: false,
-        description: `"The Orange Dress" (1926) by British artist George Spencer Watson is a refined oil portrait featuring a seated woman in a vivid orange dress. The work exemplifies Watson's classical style, influenced by the Italian Renaissance, with a strong emphasis on elegance and subtle emotion. The contrast between the luminous garment and the dark background creates a striking visual focus. Thought to possibly depict the artist's daughter, the painting is celebrated for its grace and timeless beauty.`
-    },
-    {
         id: 2,
         title: "The Flowerpot of Time (시간의 화분)",
         artist: "Rawfaw",
@@ -27,92 +15,8 @@ const ARTWORKS_DATA = [
         dimensions: "116.8 x 91.0cm",
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
-        shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.) / Shipping charged separately (framing is optional; selecting a frame will increase shipping cost).",
+        shippingNote: "Shipping charged separately. Framing is optional; selecting a frame will increase shipping cost.",
         description: `"The Flowerpot of Time" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm.`
-    },
-    {
-        id: 3,
-        title: "A White Cat",
-        artist: "John Frederick Herring",
-        image: "assets/white_cat.png",
-        price: "$28,000",
-        numericPrice: 28000,
-        category: "ORIGINAL",
-        color: "teal",
-        isNew: false,
-        description: `"A White Cat" by John Frederick Herring features an elegant, fluffy white cat resting on a luxurious velvet green cushion. The painting captures the fine details of the cat's fur and the soft, ambient lighting of a grand classical library. Herring's work is celebrated for its precise animal portraiture and rich textures.`
-    },
-    {
-        id: 4,
-        title: "The Four Seasons",
-        artist: "Christopher R. W. Nevinson",
-        image: "assets/cubist_seasons.png",
-        price: "$8,500",
-        numericPrice: 8500,
-        category: "LIMITED",
-        color: "mustard",
-        isNew: true,
-        description: `"The Four Seasons" is a cubist-futurist landscape painting by Christopher R. W. Nevinson. It features blocky geometric shapes depicting agricultural fields, seasonal trees, and a train moving through the valley. The work explores the industrial and natural cycles using contrasting colors and sharp, dynamic angles.`
-    },
-    {
-        id: 5,
-        title: "The Red Fan",
-        artist: "Francis Campbell Boileau Cadell",
-        image: "assets/red_fan.png",
-        price: "$15,000",
-        numericPrice: 15000,
-        category: "LIMITED",
-        color: "sage",
-        isNew: false,
-        description: `"The Red Fan" by Scottish Colorist Francis Campbell Boileau Cadell shows a glamorous woman in a black gown holding a large, vibrant red fan. With bold brushstrokes and strong light-shadow contrast, the piece displays the vibrant Scottish colorist movement's focus on pure, bright oil paint and elegant interior settings.`
-    },
-    {
-        id: 6,
-        title: "The Girl from California",
-        artist: "Helene Schjerfbeck",
-        image: "assets/girl_california.png",
-        price: "$3,200",
-        numericPrice: 3200,
-        category: "POSTER",
-        color: "purple",
-        isNew: true,
-        description: `"The Girl from California" by Helene Schjerfbeck is a minimalist expressionist portrait featuring soft peach, light rose, and sage green tones. Schjerfbeck's signature brushwork highlights the internal emotional state of the subject, creating an intimate and raw depiction of youth and introspection.`
-    },
-    {
-        id: 7,
-        title: "Composition",
-        artist: "Otto Freundlich",
-        image: "assets/abstract_red.png",
-        price: "$1,800",
-        numericPrice: 1800,
-        category: "POSTER",
-        color: "brown",
-        isNew: false,
-        description: `Otto Freundlich's abstract compositions are known for their heavy, blocky, and geometric structures. This piece showcases interlocking color blocks that construct a balanced architectural space, illustrating the intersection of cubism and early abstraction.`
-    },
-    {
-        id: 8,
-        title: "Zwei mit Katzen",
-        artist: "Ernst Ludwig Kirchner",
-        image: "assets/girl_california.png",
-        price: "$9,500",
-        numericPrice: 9500,
-        category: "LIMITED",
-        color: "slate",
-        isNew: false,
-        description: `"Zwei mit Katzen" by expressionist Ernst Ludwig Kirchner shows two figures interacting with cats in a highly stylized, colorful room. The composition utilizes sharp, aggressive brushstrokes and unnatural color combinations to express psychological intensity and modern alienation.`
-    },
-    {
-        id: 9,
-        title: "Bildnis Nikolaus",
-        artist: "Wilhelm Trübner",
-        image: "assets/orange_dress.png",
-        price: "$2,500",
-        numericPrice: 2500,
-        category: "POSTER",
-        color: "clay",
-        isNew: false,
-        description: `"Bildnis Nikolaus" by Wilhelm Trübner is a classic portrait painted with thick, confident brushstrokes and dark atmospheric tones. It captures the solemn character of the subject, focusing on the dramatic plays of light across facial features.`
     },
     {
         id: 10,
@@ -127,7 +31,7 @@ const ARTWORKS_DATA = [
         dimensions: "36.6x46.9cm",
         material: "판넬에 유화",
         year: "2024",
-        shippingNote: "배송비 별도 (액자는 선택사항이며, 선택 시 배송비가 추가됩니다.)",
+        shippingNote: "Shipping charged separately. Framing is optional; selecting a frame will increase shipping cost.",
         description: "Flowerpot of the Body\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world.\n\nThe body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions.\n\nBy placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence.\n\nThis work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity."
     },
     {
@@ -280,13 +184,11 @@ const I18N = {
     no_file_selected: { en: "No file selected", ko: "선택된 파일 없음" },
     privacy_agree: { en: "I agree to the Privacy Policy.", ko: "개인정보 처리 방침에 동의합니다." },
     submit_btn: { en: "Submit", ko: "보내기" },
-    footer_company: { en: "LUAS Inc. | CEO: Kim Rua", ko: "주식회사 루아스 | 대표자 김루아" },
-    footer_biz: { en: "Business Reg. No. 123-88-02861 | Email: biz@luas.com", ko: "사업자등록번호 123-88-02861 | 이메일 biz@luas.com" },
-    footer_address: { en: "Address: 2F, 174 Dongdaegu-ro, Dong-gu, Daegu, South Korea", ko: "주소: 대구광역시 동구 동대구로 174, 2층" },
+    footer_company: { en: "RAWFAW House", ko: "라파의 집" },
+    footer_biz: { en: "Business Reg. No. 150-09-02984", ko: "사업자등록번호 150-09-02984" },
+    footer_address: { en: "Address: Seongdong-gu, Seoul, South Korea", ko: "주소: 서울시 성동구" },
     artwork_info: { en: "Artwork Information", ko: "작품 정보" },
     estimated_price: { en: "Estimated Price:", ko: "예상 가격:" },
-    purchase_inquiry: { en: "Purchase Inquiry", ko: "구매 문의" },
-    sponsor_inquiry: { en: "Sponsorship Inquiry", ko: "협찬 문의" },
     add_to_inquiry: { en: "Add to Inquiry", ko: "관심 작품 목록에 추가" },
     remove_from_inquiry: { en: "Remove from Inquiry", ko: "관심 목록에서 제거" },
     inquiry_cart_heading: { en: "Inquiry Cart", ko: "문의 목록" },
@@ -501,21 +403,6 @@ function initEventListeners() {
     cartCloseBtn.addEventListener("click", closeCartDrawer);
     cartOverlay.addEventListener("click", closeCartDrawer);
 
-    // Inquiry Buttons in Details Panel
-    document.getElementById("btn-purchase-inquiry").addEventListener("click", () => {
-        const title = detailSubtitle.textContent;
-        const artist = detailTitle.textContent;
-        scrollToContactForm(purchaseInquiryMessage(artist, title));
-        closeDetailPanel();
-    });
-
-    document.getElementById("btn-sponsor-inquiry").addEventListener("click", () => {
-        const title = detailSubtitle.textContent;
-        const artist = detailTitle.textContent;
-        scrollToContactForm(sponsorInquiryMessage(artist, title));
-        closeDetailPanel();
-    });
-
     // Cart Checkout button
     cartCheckoutBtn.addEventListener("click", () => {
         if (inquiryCart.length === 0) return;
@@ -544,10 +431,10 @@ function initEventListeners() {
         }
     });
 
-    // Contact Form Submission
+    // Contact Form Submission (delivered via FormSubmit.co — see form's action= attribute)
     inquiryForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        
+
         const name = document.getElementById("input-name").value;
         const email = document.getElementById("input-email").value;
         const phone = document.getElementById("input-phone").value;
@@ -558,10 +445,35 @@ function initEventListeners() {
             return;
         }
 
-        alert(thankYouMessage(name));
-        inquiryForm.reset();
-        fileNameLabel.textContent = t("no_file_selected");
-        charCount.textContent = 0;
+        const submitBtn = inquiryForm.querySelector(".submit-btn");
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = currentLang === "ko" ? "전송 중..." : "Sending...";
+
+        const ajaxUrl = inquiryForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+        const formData = new FormData(inquiryForm);
+
+        fetch(ajaxUrl, {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: formData,
+        })
+            .then((res) => {
+                if (!res.ok) throw new Error("Submit failed");
+                alert(thankYouMessage(name));
+                inquiryForm.reset();
+                fileNameLabel.textContent = t("no_file_selected");
+                charCount.textContent = 0;
+            })
+            .catch(() => {
+                alert(currentLang === "ko"
+                    ? "문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요."
+                    : "Failed to send your inquiry. Please try again in a moment.");
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            });
     });
 
     // Demo 404 Pages

@@ -28,7 +28,6 @@
 
     /* Fonts */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-    --font-serif: 'Playfair Display', 'Times New Roman', Georgia, serif;
 
     /* Spacing & Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -160,7 +159,7 @@ button {
     display: flex;
     align-items: center;
     position: relative;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-style: italic;
     transition: var(--transition-smooth);
 }
@@ -258,7 +257,7 @@ button {
 }
 
 .mobile-nav-link {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-style: italic;
     font-size: 18px;
     font-weight: 500;
@@ -466,7 +465,7 @@ button {
 }
 
 #catalog-grid.view-grid .card-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: 16px;
     font-weight: 700;
     line-height: 1.3;
@@ -625,7 +624,7 @@ button {
 }
 
 #catalog-grid.view-poster .card-artist {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 8px;
@@ -657,14 +656,14 @@ button {
 }
 
 #catalog-grid.view-poster .card-price {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-style: italic;
     font-size: 18px;
     font-weight: 700;
 }
 
 #catalog-grid.view-poster .card-badge {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-style: italic;
     font-size: 11px;
     opacity: 0.9;
@@ -1095,7 +1094,7 @@ button {
 }
 
 .detail-subtitle {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: 16px;
     font-style: italic;
     font-weight: 400;
@@ -1151,59 +1150,6 @@ button {
     margin-top: -16px;
     margin-bottom: 24px;
     line-height: 1.5;
-}
-
-/* Detailed Inquiry Grid */
-.detail-inquiry-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.inquiry-btn {
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    text-align: left;
-    transition: var(--transition-smooth);
-}
-
-.inquiry-btn .btn-label {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.inquiry-btn .btn-sub {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.inquiry-btn.primary {
-    background-color: var(--black);
-    color: var(--white);
-    border-color: var(--black);
-}
-
-.inquiry-btn.primary .btn-sub {
-    color: var(--text-muted-light);
-}
-
-.inquiry-btn.primary:hover {
-    background-color: var(--neon-yellow);
-    color: var(--black);
-    border-color: var(--black);
-}
-
-.inquiry-btn.primary:hover .btn-sub {
-    color: var(--black);
-}
-
-.inquiry-btn.secondary:hover {
-    border-color: var(--black);
-    background-color: var(--light-bg);
 }
 
 .add-to-inquiry-cart-btn {
@@ -1301,7 +1247,7 @@ button {
 }
 
 .cart-item-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-style: italic;
     font-size: 14px;
     margin-bottom: 4px;

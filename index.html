@@ -7,7 +7,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -102,7 +102,10 @@
                 <p data-i18n="contact_intro">Hello, Our goal is to establish a virtuous cycle in the art industry by connecting various media industries, ultimately creating a vibrant world filled with diverse artworks. We are looking forward to having you join us.</p>
             </div>
 
-            <form id="inquiry-form" class="inquiry-form">
+            <form id="inquiry-form" class="inquiry-form" action="https://formsubmit.co/REPLACE_WITH_YOUR_EMAIL" method="POST">
+                <input type="hidden" name="_subject" value="New inquiry from RAWFAW Art website">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="input-name"><span data-i18n="label_name">Name</span> <span class="required">*</span></label>
@@ -163,9 +166,9 @@
                 <a href="https://linkedin.com" target="_blank">LinkedIn</a>
             </div>
             <div class="footer-info">
-                <p data-i18n="footer_company">LUAS Inc. | CEO: Kim Rua</p>
-                <p data-i18n="footer_biz">Business Reg. No. 123-88-02861 | Email: biz@luas.com</p>
-                <p data-i18n="footer_address">Address: 2F, 174 Dongdaegu-ro, Dong-gu, Daegu, South Korea</p>
+                <p data-i18n="footer_company">RAWFAW House</p>
+                <p data-i18n="footer_biz">Business Reg. No. 150-09-02984</p>
+                <p data-i18n="footer_address">Address: Seongdong-gu, Seoul, South Korea</p>
                 <p class="copyright">Copyright &copy; 2026 RAWFAW Art All rights reserved.</p>
             </div>
         </footer>
@@ -192,18 +195,6 @@
                     <span class="price-value" id="detail-price">$32,000</span>
                 </div>
                 <p class="detail-shipping-note hidden" id="detail-shipping-note"></p>
-
-                <!-- Inquiry buttons -->
-                <div class="detail-inquiry-grid">
-                    <button class="inquiry-btn primary" id="btn-purchase-inquiry">
-                        <span class="btn-label" data-i18n="purchase_inquiry">Purchase Inquiry</span>
-                        <span class="btn-sub">02) 0000-0000</span>
-                    </button>
-                    <button class="inquiry-btn secondary" id="btn-sponsor-inquiry">
-                        <span class="btn-label" data-i18n="sponsor_inquiry">Sponsorship Inquiry</span>
-                        <span class="btn-sub">02) 0000-0000</span>
-                    </button>
-                </div>
 
                 <button class="add-to-inquiry-cart-btn" id="btn-add-to-cart" data-i18n="add_to_inquiry">
                     Add to Inquiry
