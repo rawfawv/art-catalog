@@ -97,6 +97,22 @@ const ARTWORKS_DATA = [
         year: "2024",
         shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
         description: "Flowerpot of the Body I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot. Flowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world. The body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions. By placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence. This work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity."
+    },
+    {
+        id: 15,
+        title: "Room 223 | 223호의 여자",
+        artist: "Rawfaw",
+        image: "assets/room-223-223.png",
+        price: "2,800",
+        numericPrice: 2800,
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "116.8 x 91.0cm ",
+        material: "Oil on panel",
+        year: "2023",
+        shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
+        description: "Dart Human Series - Room 223\n\nThe Dart Human series began with a simple question:\n\nWhat if life is like throwing darts?\n\nEvery decision, attempt, failure, and dream is another dart thrown toward a target we can’t fully see.\n\nSome darts miss.\nSome land close.\nA few hit the center.\n\nBut no one reaches the target without throwing.\n\nThis woman has spent a long time climbing.\n\nStep by step, she built her life with her own strength.\nShe kept moving even when nobody was watching.\nEven when progress felt slow.\n\nNow, for the first time in a while, she pauses.\n\nShe looks back at the path she has climbed and realizes how far she has come.\n\nThere is no regret in her expression.\nNo doubt.\n\nOnly confidence.\n\nNot because her journey is finished,\nbut because she finally trusts herself.\n\nThe target is still ahead.\nThere are many more darts left to throw.\n\nBut wherever they land,\nshe knows she has the courage to keep aiming.\n\nMay her next dart fly even farther than the last.\nAnd may yours, too. 🎯✨"
     }
 ];
 
