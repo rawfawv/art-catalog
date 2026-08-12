@@ -113,6 +113,22 @@ const ARTWORKS_DATA = [
         year: "2023",
         shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
         description: "Dart Human Series - Room 223\n\nThe Dart Human series began with a simple question:\n\nWhat if life is like throwing darts?\n\nEvery decision, attempt, failure, and dream is another dart thrown toward a target we can’t fully see.\n\nSome darts miss.\nSome land close.\nA few hit the center.\n\nBut no one reaches the target without throwing.\n\nThis woman has spent a long time climbing.\n\nStep by step, she built her life with her own strength.\nShe kept moving even when nobody was watching.\nEven when progress felt slow.\n\nNow, for the first time in a while, she pauses.\n\nShe looks back at the path she has climbed and realizes how far she has come.\n\nThere is no regret in her expression.\nNo doubt.\n\nOnly confidence.\n\nNot because her journey is finished,\nbut because she finally trusts herself.\n\nThe target is still ahead.\nThere are many more darts left to throw.\n\nBut wherever they land,\nshe knows she has the courage to keep aiming.\n\nMay her next dart fly even farther than the last.\nAnd may yours, too. 🎯✨"
+    },
+    {
+        id: 16,
+        title: "Room 1017 | 1017호의 남자",
+        artist: "Rawfaw",
+        image: "assets/room-1017-1017.png",
+        price: "1,500",
+        numericPrice: 1500,
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "63.6 x 46.9cm",
+        material: "Oil on panel",
+        year: "2023",
+        shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
+        description: "This is one piece from my “Dart Human” series.\n\nI think life is about throwing darts toward the center of a target.\nWe keep walking forward, throwing darts toward the middle of our lives.\n\nMost of them miss.\nSometimes, maybe we barely hit the edge.\n\nBut I think that’s what life is.\n\nThis person is one of my friends.\nI painted this portrait while thinking about his life.\n\nHe quietly keeps walking his own path.\n\nEven when the road feels like a desert,\nhe never forgets to notice the beautiful cactus flowers along the way."
     }
 ];
 
