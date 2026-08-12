@@ -356,45 +356,6 @@ button {
    Pills Bar Tags (Reference Image 3)
    ========================================================================== */
 
-.pills-bar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 12px 24px;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--border-color);
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 8px;
-    scrollbar-width: none; /* Firefox */
-}
-
-.pills-bar::-webkit-scrollbar {
-    display: none; /* Safari/Chrome */
-}
-
-.pill-btn {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-muted);
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-    background-color: var(--white);
-    transition: var(--transition-smooth);
-    letter-spacing: -0.2px;
-}
-
-.pill-btn:hover {
-    border-color: var(--black);
-    color: var(--black);
-}
-
-.pill-btn.active {
-    background-color: var(--black);
-    color: var(--white);
-    border-color: var(--black);
-}
 
 /* ==========================================================================
    Catalog Container & Grid

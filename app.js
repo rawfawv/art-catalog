@@ -137,7 +137,6 @@ const ARTWORKS_DATA = [
 // ==========================================================================
 let currentView = "GRID"; // GRID, POSTER, COMPACT
 let activeCategory = "ALL"; // ALL, ORIGINAL, LIMITED, POSTER
-let activePillFilter = "ALL"; // ALL, NEW, ORIGINAL, LIMITED, POSTER
 let currentSearchQuery = "";
 let currentSort = "NEW"; // NEW, ARTIST, TITLE
 let inquiryCart = [];
@@ -146,7 +145,6 @@ let inquiryCart = [];
 const catalogGrid = document.getElementById("catalog-grid");
 const searchInput = document.getElementById("catalog-search-input");
 const searchClearBtn = document.getElementById("search-clear-btn");
-const pillsBar = document.querySelector(".pills-bar");
 const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
 const noResults = document.getElementById("no-results");
 const resetFiltersBtn = document.getElementById("reset-filters-btn");
@@ -210,10 +208,6 @@ const I18N = {
     nav_contact: { en: "Contact", ko: "문의하기" },
     nav_404: { en: "Demo 404", ko: "데모 404" },
     search_placeholder: { en: "Search artworks or artists...", ko: "작품명 또는 작가명으로 검색..." },
-    pill_all: { en: "All", ko: "전체보기" },
-    pill_original: { en: "Originals", ko: "오리지널" },
-    pill_limited: { en: "Limited Editions", ko: "리미티드 에디션" },
-    pill_poster: { en: "Art Posters", ko: "아트 포스터" },
     no_results: { en: "No results found.", ko: "검색 결과가 없습니다." },
     reset_filters: { en: "Reset Filters", ko: "필터 초기화" },
     contact_heading: { en: "Contact", ko: "문의하기" },
@@ -372,22 +366,6 @@ function initEventListeners() {
         searchInput.focus();
     });
 
-    // Pills Bar Filter (Reference Image 3 Tags)
-    pillsBar.addEventListener("click", (e) => {
-        const target = e.target.closest("button");
-        if (!target) return;
-
-        // Update active class
-        pillsBar.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
-        target.classList.add("active");
-
-        activePillFilter = target.dataset.filter;
-        
-        // Sync header nav navigation highlights if category matches
-        syncHeaderNav(activePillFilter);
-        renderCatalog();
-    });
-
     // Header Nav Filtering
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
@@ -405,14 +383,6 @@ function initEventListeners() {
                 }
             });
 
-            // Update pills bar selection
-            const matchingPill = pillsBar.querySelector(`button[data-filter="${activeCategory}"]`);
-            if (matchingPill) {
-                pillsBar.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
-                matchingPill.classList.add("active");
-                activePillFilter = activeCategory;
-            }
-
             // Close mobile menu if open
             mobileNavMenu.classList.remove("show");
             mobileNavMenu.style.display = "none";
@@ -427,14 +397,8 @@ function initEventListeners() {
         searchInput.value = "";
         currentSearchQuery = "";
         searchClearBtn.style.display = "none";
-        
+
         activeCategory = "ALL";
-        activePillFilter = "ALL";
-        
-        pillsBar.querySelectorAll("button").forEach(btn => {
-            if (btn.dataset.filter === "ALL") btn.classList.add("active");
-            else btn.classList.remove("active");
-        });
 
         navLinks.forEach(l => {
             if (l.dataset.category === "ALL") l.classList.add("active");
@@ -559,20 +523,6 @@ function initEventListeners() {
     });
 }
 
-// Helper: Sync Header Navigation with Pills Filtering
-function syncHeaderNav(filter) {
-    let targetCategory = filter;
-    if (filter === "NEW") targetCategory = "ALL"; // NEW is a tag filter, keep header at 'ALL' or equivalent
-    
-    navLinks.forEach(l => {
-        if (l.dataset.category === targetCategory) {
-            l.classList.add("active");
-        } else {
-            l.classList.remove("active");
-        }
-    });
-}
-
 // ==========================================================================
 // Catalog Rendering Logic
 // ==========================================================================
@@ -581,13 +531,6 @@ function renderCatalog() {
     let filteredArtworks = ARTWORKS_DATA.filter(art => {
         // Category check (from header nav / main category filter)
         if (activeCategory !== "ALL" && art.category !== activeCategory) {
-            return false;
-        }
-
-        // Pill filter check (from pills tags bar)
-        if (activePillFilter === "NEW" && !art.isNew) {
-            return false;
-        } else if (activePillFilter !== "ALL" && activePillFilter !== "NEW" && art.category !== activePillFilter) {
             return false;
         }
 
