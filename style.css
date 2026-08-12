@@ -436,25 +436,17 @@ button {
 #catalog-grid.view-grid .card-image-container {
     background-color: #F0F0F0;
     aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-color);
 }
 
-/* Image <-> description crossfade layers */
-#catalog-grid.view-grid .visual-image-layer,
-#catalog-grid.view-grid .visual-text-layer {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    transition: opacity 0.35s ease;
-}
-
-#catalog-grid.view-grid .visual-image-layer img {
+#catalog-grid.view-grid .card-image-container img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
@@ -462,33 +454,68 @@ button {
     transition: var(--transition-smooth);
 }
 
-#catalog-grid.view-grid .catalog-card:hover .visual-image-layer img {
+#catalog-grid.view-grid .catalog-card:hover .card-image-container img {
     transform: scale(1.03);
 }
 
-#catalog-grid.view-grid .visual-text-layer {
-    background-color: var(--white);
-    align-items: flex-start;
-    text-align: left;
-    overflow-y: auto;
+/* On hover, regular cards fully transform into the highlight-card look */
+#catalog-grid.view-grid .card-hover-highlight {
+    position: absolute;
+    inset: 0;
+    background-color: var(--neon-yellow);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 5;
 }
 
-#catalog-grid.view-grid .visual-text-layer p {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-muted);
-}
-
-/* Regular cards: image by default, description on hover */
-#catalog-grid.view-grid .catalog-card:hover .card-image-container .visual-text-layer {
+#catalog-grid.view-grid .catalog-card:hover .card-hover-highlight {
     opacity: 1;
     pointer-events: auto;
 }
 
-#catalog-grid.view-grid .catalog-card:hover .card-image-container .visual-image-layer {
-    opacity: 0;
+#catalog-grid.view-grid .card-hover-highlight .card-title {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--black);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+#catalog-grid.view-grid .card-hover-highlight .card-hover-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 12px;
+    overflow-y: auto;
+}
+
+#catalog-grid.view-grid .card-hover-highlight .card-meta {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#catalog-grid.view-grid .card-hover-highlight .card-price {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--black);
+}
+
+#catalog-grid.view-grid .card-hover-highlight .card-badge {
+    font-size: 10px;
+    font-weight: 700;
+    background-color: var(--black);
+    color: var(--neon-yellow);
+    padding: 2px 6px;
+    text-transform: uppercase;
 }
 
 #catalog-grid.view-grid .card-info {

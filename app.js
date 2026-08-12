@@ -585,15 +585,12 @@ function createCardHTML(art, index) {
     card.addEventListener("click", () => openDetailPanel(art));
 
     if (currentView === "GRID") {
-        // Highlight card keeps the original all-text layout (no image swap).
-        // Regular cards crossfade between the artwork image and its description on hover.
+        // Highlight card keeps the original all-text layout.
+        // Regular cards fully transform into that same highlight look on hover.
         const isHighlighted = card.classList.contains("card-highlight");
 
         card.innerHTML = `
-            ${isHighlighted ? '' : `<div class="card-image-container">
-                <div class="visual-image-layer"><img src="${art.image}" alt="${art.title}"></div>
-                <div class="visual-text-layer"><p>${art.description}</p></div>
-            </div>`}
+            ${isHighlighted ? '' : `<div class="card-image-container"><img src="${art.image}" alt="${art.title}"></div>`}
             <div class="card-info">
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
                 <p class="card-artist">${isHighlighted ? art.description : art.artist}</p>
@@ -602,6 +599,14 @@ function createCardHTML(art, index) {
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
                 </div>
             </div>
+            ${isHighlighted ? '' : `<div class="card-hover-highlight">
+                <h3 class="card-title">${art.title}: A MASTERPIECE BY ${art.artist}</h3>
+                <p class="card-hover-desc">${art.description}</p>
+                <div class="card-meta">
+                    <span class="card-price">${t('price_on_request')}</span>
+                    <span class="card-badge">${t('view_artwork')}</span>
+                </div>
+            </div>`}
         `;
     } else if (currentView === "POSTER") {
         // Style matching Image 1: colorful card, image frame, title, description, logo placeholder
