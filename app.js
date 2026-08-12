@@ -103,7 +103,7 @@ const ARTWORKS_DATA = [
         title: "Room 223 | 223호의 여자",
         artist: "Rawfaw",
         image: "assets/room-223-223.png",
-        price: "2,800",
+        price: "$2,800",
         numericPrice: 2800,
         category: "ORIGINAL",
         color: "terracotta",
@@ -144,8 +144,11 @@ const detailSubtitle = document.getElementById("detail-subtitle");
 const detailDesc = document.getElementById("detail-desc");
 const detailPrice = document.getElementById("detail-price");
 const detailShippingNote = document.getElementById("detail-shipping-note");
+const detailSpecs = document.getElementById("detail-specs");
 const detailImg = document.getElementById("detail-img");
 const btnAddToCart = document.getElementById("btn-add-to-cart");
+const paypalItemNameInput = document.getElementById("paypal-item-name");
+const paypalAmountInput = document.getElementById("paypal-amount");
 
 // Cart Elements
 const cartDrawer = document.getElementById("cart-drawer");
@@ -220,7 +223,20 @@ const I18N = {
     footer_biz: { en: "Business Reg. No. 150-09-02984", ko: "사업자등록번호 150-09-02984" },
     footer_address: { en: "Address: Seongdong-gu, Seoul, South Korea", ko: "주소: 서울시 성동구" },
     artwork_info: { en: "Artwork Information", ko: "작품 정보" },
+    spec_dimensions: { en: "Dimensions", ko: "실제규격" },
+    spec_material: { en: "Material", ko: "재질" },
+    spec_year: { en: "Year", ko: "제작연도" },
     estimated_price: { en: "Estimated Price:", ko: "예상 가격:" },
+    purchase_heading: { en: "Purchase Options", ko: "구매 방법" },
+    pay_with_paypal: { en: "Pay with PayPal", ko: "PayPal로 결제하기" },
+    bank_transfer_heading: { en: "Bank Transfer (Korea)", ko: "국내 계좌이체" },
+    bank_name_label: { en: "Bank", ko: "은행" },
+    bank_holder_label: { en: "Account Holder", ko: "예금주" },
+    bank_account_label: { en: "Account No.", ko: "계좌번호" },
+    bank_transfer_note: {
+        en: "After transferring, please contact us via the form below with your name and the artwork title so we can confirm your order.",
+        ko: "입금 후 아래 문의 폼에 성함과 작품명을 남겨주시면 주문을 확인해드립니다.",
+    },
     add_to_inquiry: { en: "Add to Inquiry", ko: "관심 작품 목록에 추가" },
     remove_from_inquiry: { en: "Remove from Inquiry", ko: "관심 목록에서 제거" },
     inquiry_cart_heading: { en: "Inquiry Cart", ko: "문의 목록" },
@@ -305,6 +321,7 @@ function applyLanguage(lang) {
         const currentId = parseInt(btnAddToCart.dataset.artId, 10);
         const inCart = inquiryCart.some((item) => item.id === currentId);
         btnAddToCart.textContent = inCart ? t("remove_from_inquiry") : t("add_to_inquiry");
+        if (currentDetailArt) renderDetailSpecs(currentDetailArt);
     }
 }
 
@@ -677,11 +694,34 @@ function createCardHTML(art, index) {
 // ==========================================================================
 // Side Panels (Detail & Cart) Actions
 // ==========================================================================
+let currentDetailArt = null;
+
+function renderDetailSpecs(art) {
+    const rows = [
+        { label: t("spec_dimensions"), value: art.dimensions },
+        { label: t("spec_material"), value: art.material },
+        { label: t("spec_year"), value: art.year },
+    ].filter((row) => row.value);
+
+    if (rows.length === 0) {
+        detailSpecs.innerHTML = "";
+        detailSpecs.classList.add("hidden");
+        return;
+    }
+
+    detailSpecs.innerHTML = rows
+        .map((row) => `<div class="detail-spec-row"><span class="spec-label">${row.label}</span><span class="spec-value">${row.value}</span></div>`)
+        .join("");
+    detailSpecs.classList.remove("hidden");
+}
+
 function openDetailPanel(art) {
+    currentDetailArt = art;
     detailTitle.textContent = art.artist;
     detailSubtitle.textContent = art.title;
     detailDesc.textContent = art.description;
     detailPrice.textContent = art.price;
+    renderDetailSpecs(art);
     if (art.shippingNote) {
         detailShippingNote.textContent = art.shippingNote;
         detailShippingNote.classList.remove("hidden");
@@ -691,6 +731,10 @@ function openDetailPanel(art) {
     }
     detailImg.src = art.image;
     detailImg.alt = art.title;
+
+    // PayPal "Buy Now" button — see form's business= field in index.html
+    paypalItemNameInput.value = art.title;
+    paypalAmountInput.value = art.numericPrice;
 
     // Configure Add to Cart button based on current inquiry list
     const inCart = inquiryCart.some(item => item.id === art.id);

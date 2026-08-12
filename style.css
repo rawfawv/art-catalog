@@ -1209,6 +1209,28 @@ button {
     color: var(--black);
 }
 
+.detail-specs {
+    margin-top: 12px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+}
+
+.detail-spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 4px 0;
+}
+
+.detail-spec-row .spec-label {
+    color: var(--text-muted);
+}
+
+.detail-spec-row .spec-value {
+    font-weight: 500;
+    text-align: right;
+}
+
 .detail-price-row {
     display: flex;
     align-items: center;
@@ -1237,6 +1259,65 @@ button {
     margin-top: -16px;
     margin-bottom: 24px;
     line-height: 1.5;
+}
+
+/* Purchase Options: PayPal + Korean bank transfer */
+.purchase-options {
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    padding: 16px;
+}
+
+.purchase-heading {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.paypal-form {
+    margin-bottom: 16px;
+}
+
+.paypal-buy-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #0070ba;
+    color: var(--white);
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.paypal-buy-btn:hover {
+    background-color: #005ea6;
+}
+
+.bank-transfer-box {
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.bank-transfer-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.bank-transfer-detail {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--black);
+}
+
+.bank-transfer-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-top: 8px;
 }
 
 .add-to-inquiry-cart-btn {
