@@ -26,12 +26,8 @@
             </div>
 
             <nav class="header-nav">
-                <a href="#" class="nav-link active" data-category="ALL" data-i18n="nav_all">All Artworks</a>
-                <a href="#" class="nav-link" data-category="ORIGINAL" data-i18n="nav_originals">Originals</a>
-                <a href="#" class="nav-link" data-category="LIMITED" data-i18n="nav_limited">Limited Editions</a>
-                <a href="#" class="nav-link" data-category="POSTER" data-i18n="nav_posters">Art Posters</a>
+                <a href="#bio-section" class="nav-link" data-i18n="nav_bio">Artist Bio</a>
                 <a href="#contact-section" class="nav-link" data-i18n="nav_contact">Contact</a>
-                <a href="#" class="nav-link" id="trigger-404" data-i18n="nav_404">Demo 404</a>
             </nav>
 
             <div class="header-right">
@@ -53,12 +49,8 @@
 
         <!-- Mobile Navigation Menu Dropdown -->
         <div class="mobile-nav-menu" id="mobile-nav-menu">
-            <a href="#" class="mobile-nav-link active" data-category="ALL" data-i18n="nav_all">All Artworks</a>
-            <a href="#" class="mobile-nav-link" data-category="ORIGINAL" data-i18n="nav_originals">Originals</a>
-            <a href="#" class="mobile-nav-link" data-category="LIMITED" data-i18n="nav_limited">Limited Editions</a>
-            <a href="#" class="mobile-nav-link" data-category="POSTER" data-i18n="nav_posters">Art Posters</a>
+            <a href="#bio-section" class="mobile-nav-link" data-i18n="nav_bio">Artist Bio</a>
             <a href="#contact-section" class="mobile-nav-link" data-i18n="nav_contact">Contact</a>
-            <a href="#" class="mobile-nav-link" id="trigger-404-mobile" data-i18n="nav_404">Demo 404</a>
             <div class="lang-switch lang-switch-mobile">
                 <button type="button" class="lang-btn active" data-lang="en">EN</button>
                 <button type="button" class="lang-btn" data-lang="ko">KO</button>
@@ -85,6 +77,30 @@
                 <button id="reset-filters-btn" data-i18n="reset_filters">Reset Filters</button>
             </div>
         </main>
+
+        <!-- Artist Bio Section -->
+        <section id="bio-section" class="bio-section">
+            <div class="bio-hero">
+                <!-- Add a portrait photo: assets/rawfaw-portrait.jpg (or .png), then
+                     uncomment the line below. Recommended: a square or portrait-oriented photo. -->
+                <!-- <img class="bio-portrait" src="assets/rawfaw-portrait.jpg" alt="Rawfaw"> -->
+                <h2 data-i18n="bio_heading">About RAWFAW</h2>
+            </div>
+
+            <div class="bio-block">
+                <p data-i18n="bio_para_1">I create paintings about the body, the mind, and the soul.</p>
+                <p data-i18n="bio_para_2">The flowerpots that appear throughout my work are metaphors for people. They represent the invisible boundaries we live within—our fears, expectations, environments, and identities that continue to shape us.</p>
+                <p data-i18n="bio_para_3">Each series explores a different part of what it means to be human. <strong>The Body Flowerpot</strong> reflects the physical self that experiences the world. <strong>The Mind Flowerpot</strong> questions the invisible limits that keep our thoughts rooted in place. <strong>The Soul Flowerpot</strong> imagines the possibility of finally becoming free.</p>
+                <p data-i18n="bio_para_4">Alongside these works, my <strong>Dart Human</strong> series views life as a journey of throwing darts toward an unseen target. Every choice, failure, hope, and dream becomes another throw. Missing is inevitable, but growth comes from continuing to aim.</p>
+                <p data-i18n="bio_para_5">Although my paintings use playful characters, bold colors, and graphic forms, they are rooted in questions about identity, independence, and the quiet hope of becoming who we truly are.</p>
+                <p data-i18n="bio_para_6">Rather than offering answers, I hope each painting leaves space for viewers to discover their own.</p>
+            </div>
+
+            <div class="bio-cta">
+                <a href="#catalog-grid" class="bio-cta-btn primary" data-i18n="bio_view_artworks">View Artworks</a>
+                <a href="#contact-section" class="bio-cta-btn secondary" data-i18n="bio_get_in_touch">Get in Touch</a>
+            </div>
+        </section>
 
         <!-- Contact Section (Reference Image 3) -->
         <section id="contact-section" class="contact-section">
@@ -238,33 +254,6 @@
 
                 <div class="cart-footer">
                     <button class="cart-checkout-btn" id="cart-checkout-btn" data-i18n="cart_checkout">Inquire About Selected Items</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fullscreen 404 Error Screen (Reference Image 3) -->
-    <div id="error-screen" class="error-screen hidden">
-        <div class="error-content">
-            <p class="error-warning" data-i18n="error_warning">This page does not exist or is unavailable.</p>
-            <p class="error-instruction" data-i18n="error_instruction">Please check that you entered the correct address.</p>
-
-            <div class="error-code">404</div>
-
-            <p class="error-detail" data-i18n="error_detail">That's an error. The requested URL was not found on this server. That's all we know.</p>
-
-            <button class="error-back-btn" id="error-back-btn" data-i18n="return_home">Return to Home</button>
-
-            <div class="error-footer">
-                <div class="error-social">
-                    <a href="https://instagram.com" target="_blank">Instagram</a>
-                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-                </div>
-                <div class="error-info">
-                    <p data-i18n="footer_company">LUAS Inc. | CEO: Kim Rua</p>
-                    <p data-i18n="footer_biz">Business Reg. No. 123-88-02861 | Email: biz@luas.com</p>
-                    <p data-i18n="footer_address">Address: 2F, 174 Dongdaegu-ro, Dong-gu, Daegu, South Korea</p>
-                    <p>Copyright &copy; 2025 RAWFAW Art All rights reserved.</p>
                 </div>
             </div>
         </div>

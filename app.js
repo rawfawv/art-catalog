@@ -136,7 +136,6 @@ const ARTWORKS_DATA = [
 // Application State
 // ==========================================================================
 let currentView = "GRID"; // GRID, POSTER, COMPACT
-let activeCategory = "ALL"; // ALL, ORIGINAL, LIMITED, POSTER
 let currentSearchQuery = "";
 let currentSort = "NEW"; // NEW, ARTIST, TITLE
 let inquiryCart = [];
@@ -174,12 +173,6 @@ const cartCountElement = document.getElementById("cart-count");
 const cartItemsCountElement = document.getElementById("cart-items-count");
 const cartCheckoutBtn = document.getElementById("cart-checkout-btn");
 
-// 404 Screen Elements
-const errorScreen = document.getElementById("error-screen");
-const trigger404 = document.getElementById("trigger-404");
-const trigger404Mobile = document.getElementById("trigger-404-mobile");
-const errorBackBtn = document.getElementById("error-back-btn");
-
 // Form Elements
 const inquiryForm = document.getElementById("inquiry-form");
 const inputMessage = document.getElementById("input-message");
@@ -201,12 +194,32 @@ const langButtons = document.querySelectorAll(".lang-btn");
 const I18N = {
     search: { en: "SEARCH", ko: "검색" },
     cart_label: { en: "CART", ko: "장바구니" },
-    nav_all: { en: "All Artworks", ko: "전체 작품" },
-    nav_originals: { en: "Originals", ko: "오리지널" },
-    nav_limited: { en: "Limited Editions", ko: "리미티드 에디션" },
-    nav_posters: { en: "Art Posters", ko: "아트 포스터" },
+    nav_bio: { en: "Artist Bio", ko: "작가약력" },
     nav_contact: { en: "Contact", ko: "문의하기" },
-    nav_404: { en: "Demo 404", ko: "데모 404" },
+    bio_heading: { en: "About RAWFAW", ko: "RAWFAW" },
+    bio_para_1: { en: "I create paintings about the body, the mind, and the soul.", ko: "저는 육체, 정신, 영혼에 대한 그림을 그립니다." },
+    bio_para_2: {
+        en: "The flowerpots that appear throughout my work are metaphors for people. They represent the invisible boundaries we live within—our fears, expectations, environments, and identities that continue to shape us.",
+        ko: "제 작업에 반복해서 등장하는 화분은 사람을 상징합니다. 그것은 두려움, 환경, 타인의 기대, 그리고 스스로 만든 한계처럼 우리를 둘러싸고 있는 보이지 않는 경계입니다.",
+    },
+    bio_para_3: {
+        en: "Each series explores a different part of what it means to be human. <strong>The Body Flowerpot</strong> reflects the physical self that experiences the world. <strong>The Mind Flowerpot</strong> questions the invisible limits that keep our thoughts rooted in place. <strong>The Soul Flowerpot</strong> imagines the possibility of finally becoming free.",
+        ko: "각 연작은 인간 존재의 서로 다른 측면을 탐구합니다. <strong>〈육체의 화분〉</strong>은 세상을 경험하는 육체를, <strong>〈정신의 화분〉</strong>은 정신을 붙잡고 있는 보이지 않는 한계를, <strong>〈영혼의 화분〉</strong>은 마침내 자유를 향해 나아가는 가능성을 이야기합니다.",
+    },
+    bio_para_4: {
+        en: "Alongside these works, my <strong>Dart Human</strong> series views life as a journey of throwing darts toward an unseen target. Every choice, failure, hope, and dream becomes another throw. Missing is inevitable, but growth comes from continuing to aim.",
+        ko: "또 다른 연작인 <strong>〈Dart Human〉</strong>은 인생을 보이지 않는 과녁을 향해 다트를 던지는 과정으로 바라봅니다. 선택과 실패, 희망과 꿈은 모두 또 하나의 다트가 되고, 빗나감은 피할 수 없지만 계속 던지는 과정 속에서 우리는 성장합니다.",
+    },
+    bio_para_5: {
+        en: "Although my paintings use playful characters, bold colors, and graphic forms, they are rooted in questions about identity, independence, and the quiet hope of becoming who we truly are.",
+        ko: "제 그림은 선명한 색과 유쾌한 형태를 가지고 있지만, 그 안에는 정체성, 독립, 그리고 진정한 자신이 되어가는 과정에 대한 질문이 담겨 있습니다.",
+    },
+    bio_para_6: {
+        en: "Rather than offering answers, I hope each painting leaves space for viewers to discover their own.",
+        ko: "저는 작품이 답을 제시하기보다, 보는 사람 각자가 자신의 이야기를 발견할 수 있는 공간이 되기를 바랍니다.",
+    },
+    bio_view_artworks: { en: "View Artworks", ko: "작품 보기" },
+    bio_get_in_touch: { en: "Get in Touch", ko: "문의하기" },
     search_placeholder: { en: "Search artworks or artists...", ko: "작품명 또는 작가명으로 검색..." },
     no_results: { en: "No results found.", ko: "검색 결과가 없습니다." },
     reset_filters: { en: "Reset Filters", ko: "필터 초기화" },
@@ -254,13 +267,6 @@ const I18N = {
     cart_empty: { en: "No artworks added yet.", ko: "관심 목록에 추가된 작품이 없습니다." },
     cart_checkout: { en: "Inquire About Selected Items", ko: "선택한 작품 문의하기" },
     cart_item_remove: { en: "Remove", ko: "제거" },
-    error_warning: { en: "This page does not exist or is unavailable.", ko: "존재하지 않거나 사용할 수 없는 페이지입니다." },
-    error_instruction: { en: "Please check that you entered the correct address.", ko: "입력하신 주소가 정확한지 다시 한 번 확인해 주세요." },
-    error_detail: {
-        en: "That's an error. The requested URL was not found on this server. That's all we know.",
-        ko: "오류가 발생했습니다. 요청하신 URL을 이 서버에서 찾을 수 없습니다.",
-    },
-    return_home: { en: "Return to Home", ko: "돌아가기" },
     price_on_request: { en: "Price on Request", ko: "가격 문의" },
     view_artwork: { en: "View Artwork", ko: "작품 보기" },
     badge_original: { en: "ORIGINAL", ko: "오리지널" },
@@ -318,7 +324,9 @@ function applyLanguage(lang) {
     });
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
-        el.textContent = t(el.dataset.i18n);
+        // innerHTML (not textContent) so translations may contain simple inline
+        // markup like <strong> (e.g. the artist bio's series names).
+        el.innerHTML = t(el.dataset.i18n);
     });
     document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
         el.placeholder = t(el.dataset.i18nPlaceholder);
@@ -366,29 +374,12 @@ function initEventListeners() {
         searchInput.focus();
     });
 
-    // Header Nav Filtering
+    // Header Nav: close the mobile menu after tapping a link (plain anchor scroll otherwise)
     navLinks.forEach(link => {
-        link.addEventListener("click", (e) => {
-            if (link.id.includes("trigger-404") || link.getAttribute("href") === "#contact-section") return;
-            e.preventDefault();
-
-            activeCategory = link.dataset.category;
-
-            // Update active states in header and mobile menus
-            navLinks.forEach(l => {
-                if (l.dataset.category === activeCategory) {
-                    l.classList.add("active");
-                } else {
-                    l.classList.remove("active");
-                }
-            });
-
-            // Close mobile menu if open
+        link.addEventListener("click", () => {
             mobileNavMenu.classList.remove("show");
             mobileNavMenu.style.display = "none";
             mobileMenuToggle.classList.remove("active");
-
-            renderCatalog();
         });
     });
 
@@ -397,13 +388,6 @@ function initEventListeners() {
         searchInput.value = "";
         currentSearchQuery = "";
         searchClearBtn.style.display = "none";
-
-        activeCategory = "ALL";
-
-        navLinks.forEach(l => {
-            if (l.dataset.category === "ALL") l.classList.add("active");
-            else l.classList.remove("active");
-        });
 
         renderCatalog();
     });
@@ -505,22 +489,6 @@ function initEventListeners() {
             });
     });
 
-    // Demo 404 Pages
-    trigger404.addEventListener("click", (e) => {
-        e.preventDefault();
-        errorScreen.classList.remove("hidden");
-    });
-
-    trigger404Mobile.addEventListener("click", (e) => {
-        e.preventDefault();
-        mobileNavMenu.style.display = "none";
-        mobileMenuToggle.classList.remove("active");
-        errorScreen.classList.remove("hidden");
-    });
-
-    errorBackBtn.addEventListener("click", () => {
-        errorScreen.classList.add("hidden");
-    });
 }
 
 // ==========================================================================
@@ -529,11 +497,6 @@ function initEventListeners() {
 function renderCatalog() {
     // 1. Filter Data
     let filteredArtworks = ARTWORKS_DATA.filter(art => {
-        // Category check (from header nav / main category filter)
-        if (activeCategory !== "ALL" && art.category !== activeCategory) {
-            return false;
-        }
-
         // Search text check
         if (currentSearchQuery.length > 0) {
             const matchTitle = art.title.toLowerCase().includes(currentSearchQuery);
