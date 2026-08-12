@@ -283,7 +283,6 @@ const I18N = {
     cart_empty: { en: "No artworks added yet.", ko: "관심 목록에 추가된 작품이 없습니다." },
     cart_checkout: { en: "Inquire About Selected Items", ko: "선택한 작품 문의하기" },
     cart_item_remove: { en: "Remove", ko: "제거" },
-    price_on_request: { en: "Price on Request", ko: "가격 문의" },
     view_artwork: { en: "View Artwork", ko: "작품 보기" },
     badge_original: { en: "ORIGINAL", ko: "오리지널" },
     badge_limited: { en: "LIMITED", ko: "리미티드" },
@@ -583,7 +582,7 @@ function createCardHTML(art, index) {
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
                 <p class="card-artist">${isHighlighted ? art.description : art.artist}</p>
                 <div class="card-meta">
-                    <span class="card-price">${isHighlighted ? t('price_on_request') : art.price}</span>
+                    <span class="card-price">${art.price}</span>
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
                 </div>
             </div>
@@ -593,7 +592,7 @@ function createCardHTML(art, index) {
                     <h3 class="card-title">${art.title}: A MASTERPIECE BY ${art.artist}</h3>
                     <p class="card-hover-desc">${art.description}</p>
                     <div class="card-meta">
-                        <span class="card-price">${t('price_on_request')}</span>
+                        <span class="card-price">${art.price}</span>
                         <span class="card-badge">${t('view_artwork')}</span>
                     </div>
                 </div>`}
