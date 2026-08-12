@@ -81,6 +81,22 @@ const ARTWORKS_DATA = [
         year: "2026",
         shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
         description: "I believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Winter) reflects on the passage of time within an unchanged state.\n\nWhile trapped inside the flowerpot, the seasons continue to pass. Winter fades, summer returns, and the cycle repeats endlessly. Although the world keeps changing, the mind often remains rooted in the same place.\n\nThis work asks what it means to remain emotionally or mentally confined while time moves forward without waiting.\n\nHow many seasons must pass before the mind can finally leave the flowerpot?\n\nThe changing seasons symbolize the flow of time, while the flowerpot represents the invisible boundaries that keep the mind from moving freely."
+    },
+    {
+        id: 14,
+        title: "The Flowerpot of the Body (Eyes) | 육체의 화분(눈알)",
+        artist: "Rawfaw",
+        image: "assets/the-flowerpot-of-the-body-eyes.png",
+        price: "$2,000",
+        numericPrice: 2000,
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "63.6 x 46.9cm ",
+        material: "Oil on panel",
+        year: "2024",
+        shippingNote: "Shipping not included. Framing is optional. Additional shipping charges apply for framed artworks.",
+        description: "Flowerpot of the Body I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot. Flowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world. The body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions. By placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence. This work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity."
     }
 ];
 
