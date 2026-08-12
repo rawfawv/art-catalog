@@ -436,17 +436,25 @@ button {
 #catalog-grid.view-grid .card-image-container {
     background-color: #F0F0F0;
     aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-color);
 }
 
-#catalog-grid.view-grid .card-image-container img {
+/* Image <-> description crossfade layers */
+#catalog-grid.view-grid .visual-image-layer,
+#catalog-grid.view-grid .visual-text-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    transition: opacity 0.35s ease;
+}
+
+#catalog-grid.view-grid .visual-image-layer img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
@@ -454,8 +462,59 @@ button {
     transition: var(--transition-smooth);
 }
 
-#catalog-grid.view-grid .catalog-card:hover .card-image-container img {
+#catalog-grid.view-grid .catalog-card:hover .visual-image-layer img {
     transform: scale(1.03);
+}
+
+#catalog-grid.view-grid .visual-text-layer {
+    background-color: var(--white);
+    align-items: flex-start;
+    text-align: left;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#catalog-grid.view-grid .visual-text-layer p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Regular cards: image by default, description on hover */
+#catalog-grid.view-grid .catalog-card:hover .card-image-container:not(.text-first) .visual-text-layer {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#catalog-grid.view-grid .catalog-card:hover .card-image-container:not(.text-first) .visual-image-layer {
+    opacity: 0;
+}
+
+/* Highlight card: description by default, image on hover */
+#catalog-grid.view-grid .card-image-container.text-first .visual-image-layer {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#catalog-grid.view-grid .card-image-container.text-first .visual-text-layer {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: var(--neon-yellow-dark);
+}
+
+#catalog-grid.view-grid .card-image-container.text-first .visual-text-layer p {
+    color: var(--black);
+}
+
+#catalog-grid.view-grid .catalog-card:hover .card-image-container.text-first .visual-image-layer {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#catalog-grid.view-grid .catalog-card:hover .card-image-container.text-first .visual-text-layer {
+    opacity: 0;
+    pointer-events: none;
 }
 
 #catalog-grid.view-grid .card-info {

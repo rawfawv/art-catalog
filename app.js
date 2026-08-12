@@ -585,14 +585,18 @@ function createCardHTML(art, index) {
     card.addEventListener("click", () => openDetailPanel(art));
 
     if (currentView === "GRID") {
-        // Highlight active card showing description text and a "View Product" trigger as in reference image 2
+        // Highlight card shows description text by default and swaps to the
+        // image on hover; regular cards do the reverse (image <-> description).
         const isHighlighted = card.classList.contains("card-highlight");
-        
+
         card.innerHTML = `
-            ${isHighlighted ? '' : `<div class="card-image-container"><img src="${art.image}" alt="${art.title}"></div>`}
+            <div class="card-image-container ${isHighlighted ? "text-first" : ""}">
+                <div class="visual-image-layer"><img src="${art.image}" alt="${art.title}"></div>
+                <div class="visual-text-layer"><p>${art.description}</p></div>
+            </div>
             <div class="card-info">
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
-                <p class="card-artist">${isHighlighted ? art.description : art.artist}</p>
+                ${isHighlighted ? '' : `<p class="card-artist">${art.artist}</p>`}
                 <div class="card-meta">
                     <span class="card-price">${isHighlighted ? t('price_on_request') : art.price}</span>
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
