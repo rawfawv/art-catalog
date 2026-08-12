@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Bio | RAWFAW Art</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Page Wrapper -->
+    <div id="app-wrapper">
+
+        <!-- Neon Header Banner -->
+        <header class="neon-header">
+            <div class="header-left">
+                <a href="index.html" class="logo" id="logo-btn">RAWFAW Art</a>
+                <button class="search-btn" id="search-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span data-i18n="search">SEARCH</span>
+                </button>
+            </div>
+
+            <nav class="header-nav">
+                <a href="bio.html" class="nav-link active" data-i18n="nav_bio">Artist Bio</a>
+                <a href="contact.html" class="nav-link" data-i18n="nav_contact">Contact</a>
+            </nav>
+
+            <div class="header-right">
+                <div class="lang-switch" id="lang-switch">
+                    <button type="button" class="lang-btn active" data-lang="en">EN</button>
+                    <button type="button" class="lang-btn" data-lang="ko">KO</button>
+                </div>
+                <button class="cart-btn" id="cart-toggle-btn">
+                    <span data-i18n="cart_label">CART</span> (<span id="cart-count">0</span>)
+                </button>
+                <!-- Mobile Hamburger Menu Button -->
+                <button class="menu-mobile-btn" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="bio.html" class="mobile-nav-link active" data-i18n="nav_bio">Artist Bio</a>
+            <a href="contact.html" class="mobile-nav-link" data-i18n="nav_contact">Contact</a>
+            <div class="lang-switch lang-switch-mobile">
+                <button type="button" class="lang-btn active" data-lang="en">EN</button>
+                <button type="button" class="lang-btn" data-lang="ko">KO</button>
+            </div>
+        </div>
+
+        <!-- Artist Bio Section -->
+        <section id="bio-section" class="bio-section">
+            <div class="bio-hero">
+                <img class="bio-portrait" src="assets/rawfaw-portrait.jpg" alt="Rawfaw">
+                <h2 data-i18n="bio_heading">About RAWFAW</h2>
+            </div>
+
+            <div class="bio-block">
+                <p data-i18n="bio_para_1">I create paintings about the body, the mind, and the soul.</p>
+                <p data-i18n="bio_para_2">The flowerpots that appear throughout my work are metaphors for people. They represent the invisible boundaries we live within—our fears, expectations, environments, and identities that continue to shape us.</p>
+                <p data-i18n="bio_para_3">Each series explores a different part of what it means to be human. <strong>The Body Flowerpot</strong> reflects the physical self that experiences the world. <strong>The Mind Flowerpot</strong> questions the invisible limits that keep our thoughts rooted in place. <strong>The Soul Flowerpot</strong> imagines the possibility of finally becoming free.</p>
+                <p data-i18n="bio_para_4">Alongside these works, my <strong>Dart Human</strong> series views life as a journey of throwing darts toward an unseen target. Every choice, failure, hope, and dream becomes another throw. Missing is inevitable, but growth comes from continuing to aim.</p>
+                <p data-i18n="bio_para_5">Although my paintings use playful characters, bold colors, and graphic forms, they are rooted in questions about identity, independence, and the quiet hope of becoming who we truly are.</p>
+                <p data-i18n="bio_para_6">Rather than offering answers, I hope each painting leaves space for viewers to discover their own.</p>
+            </div>
+
+            <div class="bio-cta">
+                <a href="index.html" class="bio-cta-btn primary" data-i18n="bio_view_artworks">View Artworks</a>
+                <a href="contact.html" class="bio-cta-btn secondary" data-i18n="bio_get_in_touch">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+            <div class="footer-info">
+                <p data-i18n="footer_company">RAWFAW House</p>
+                <p data-i18n="footer_biz">Business Reg. No. 150-09-02984</p>
+                <p data-i18n="footer_address">Address: Seongdong-gu, Seoul, South Korea</p>
+                <p class="copyright">Copyright &copy; 2026 RAWFAW Art All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="side-panel">
+        <div class="panel-overlay" id="cart-overlay"></div>
+        <div class="panel-content">
+            <button class="panel-close-btn" id="cart-close-btn">&times;</button>
+
+            <div class="cart-body">
+                <h2><span data-i18n="inquiry_cart_heading">Inquiry Cart</span> (<span id="cart-items-count">0</span>)</h2>
+                <p class="cart-subtitle" data-i18n="cart_subtitle">Artworks you'd like to inquire about for purchase or rental.</p>
+
+                <div class="cart-items-container" id="cart-items-list">
+                    <!-- Dynamic items -->
+                    <div class="empty-cart-message" data-i18n="cart_empty">No artworks added yet.</div>
+                </div>
+
+                <div class="cart-footer">
+                    <button class="cart-checkout-btn" id="cart-checkout-btn" data-i18n="cart_checkout">Inquire About Selected Items</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>

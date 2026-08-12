@@ -119,7 +119,7 @@ const ARTWORKS_DATA = [
         title: "Room 1017 | 1017호의 남자",
         artist: "Rawfaw",
         image: "assets/room-1017-1017.png",
-        price: "1,500",
+        price: "$1,500",
         numericPrice: 1500,
         category: "ORIGINAL",
         color: "terracotta",
@@ -139,6 +139,22 @@ let currentView = "GRID"; // GRID, POSTER, COMPACT
 let currentSearchQuery = "";
 let currentSort = "NEW"; // NEW, ARTIST, TITLE
 let inquiryCart = [];
+
+// The site is split across multiple pages (index/bio/contact) that all share
+// this one script, so the cart is persisted to localStorage to survive
+// navigating between them.
+function loadCart() {
+    try {
+        const stored = JSON.parse(localStorage.getItem("rawfaw_cart") || "[]");
+        inquiryCart = Array.isArray(stored) ? stored : [];
+    } catch (e) {
+        inquiryCart = [];
+    }
+}
+
+function saveCart() {
+    localStorage.setItem("rawfaw_cart", JSON.stringify(inquiryCart));
+}
 
 // DOM Elements
 const catalogGrid = document.getElementById("catalog-grid");
@@ -296,18 +312,6 @@ function thankYouMessage(name) {
         : `Thank you, ${name}! Your inquiry has been received. A curator will contact you shortly.`;
 }
 
-function purchaseInquiryMessage(artist, title) {
-    return currentLang === "ko"
-        ? `안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다.`
-        : `Hello, I would like to inquire about purchasing "${title}" by ${artist}.`;
-}
-
-function sponsorInquiryMessage(artist, title) {
-    return currentLang === "ko"
-        ? `안녕하세요, ${artist} 작가의 "${title}" 작품 협찬/대여에 관해 문의드립니다.`
-        : `Hello, I would like to inquire about sponsorship/rental for "${title}" by ${artist}.`;
-}
-
 function combinedInquiryMessage(artList) {
     return currentLang === "ko"
         ? `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다.\n\n${artList}`
@@ -332,10 +336,11 @@ function applyLanguage(lang) {
         el.placeholder = t(el.dataset.i18nPlaceholder);
     });
 
-    // Re-render dynamic pieces that carry translated text
-    renderCatalog();
-    if (cartDrawer.classList.contains("open")) renderCart();
-    if (detailPanel.classList.contains("open")) {
+    // Re-render dynamic pieces that carry translated text (guarded — not
+    // every page has a catalog, detail panel, or cart drawer in its DOM)
+    if (catalogGrid) renderCatalog();
+    if (cartDrawer && cartDrawer.classList.contains("open")) renderCart();
+    if (detailPanel && detailPanel.classList.contains("open")) {
         const currentId = parseInt(btnAddToCart.dataset.artId, 10);
         const inCart = inquiryCart.some((item) => item.id === currentId);
         btnAddToCart.textContent = inCart ? t("remove_from_inquiry") : t("add_to_inquiry");
@@ -347,34 +352,35 @@ function applyLanguage(lang) {
 // Initialization
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    loadCart();
     initEventListeners();
     applyLanguage(currentLang);
+    updateCartCount();
+    applyContactPrefill();
 });
 
 // ==========================================================================
 // Event Listeners Setup
 // ==========================================================================
 function initEventListeners() {
-    // Search input
-    searchInput.addEventListener("input", (e) => {
-        currentSearchQuery = e.target.value.trim().toLowerCase();
-        if (currentSearchQuery.length > 0) {
-            searchClearBtn.style.display = "block";
-        } else {
+    // Search input (index.html only)
+    if (searchInput && searchClearBtn) {
+        searchInput.addEventListener("input", (e) => {
+            currentSearchQuery = e.target.value.trim().toLowerCase();
+            searchClearBtn.style.display = currentSearchQuery.length > 0 ? "block" : "none";
+            renderCatalog();
+        });
+
+        searchClearBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            currentSearchQuery = "";
             searchClearBtn.style.display = "none";
-        }
-        renderCatalog();
-    });
+            renderCatalog();
+            searchInput.focus();
+        });
+    }
 
-    searchClearBtn.addEventListener("click", () => {
-        searchInput.value = "";
-        currentSearchQuery = "";
-        searchClearBtn.style.display = "none";
-        renderCatalog();
-        searchInput.focus();
-    });
-
-    // Header Nav: close the mobile menu after tapping a link (plain anchor scroll otherwise)
+    // Header Nav: close the mobile menu after tapping a link (plain page navigation otherwise)
     navLinks.forEach(link => {
         link.addEventListener("click", () => {
             mobileNavMenu.classList.remove("show");
@@ -383,14 +389,15 @@ function initEventListeners() {
         });
     });
 
-    // Reset Filters Button
-    resetFiltersBtn.addEventListener("click", () => {
-        searchInput.value = "";
-        currentSearchQuery = "";
-        searchClearBtn.style.display = "none";
-
-        renderCatalog();
-    });
+    // Reset Filters Button (index.html only)
+    if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            currentSearchQuery = "";
+            searchClearBtn.style.display = "none";
+            renderCatalog();
+        });
+    }
 
     // Language Switch (EN / KO)
     langButtons.forEach((btn) => {
@@ -407,94 +414,104 @@ function initEventListeners() {
         }
     });
 
-    // Detail Panel Close
-    detailCloseBtn.addEventListener("click", closeDetailPanel);
-    detailOverlay.addEventListener("click", closeDetailPanel);
+    // Detail Panel Close (index.html only)
+    if (detailPanel) {
+        detailCloseBtn.addEventListener("click", closeDetailPanel);
+        detailOverlay.addEventListener("click", closeDetailPanel);
+    }
 
-    // Cart Panel Toggle
-    cartToggleBtn.addEventListener("click", openCartDrawer);
-    cartCloseBtn.addEventListener("click", closeCartDrawer);
-    cartOverlay.addEventListener("click", closeCartDrawer);
+    // Cart Panel Toggle (every page — the cart drawer is duplicated on all of them)
+    if (cartDrawer) {
+        cartToggleBtn.addEventListener("click", openCartDrawer);
+        cartCloseBtn.addEventListener("click", closeCartDrawer);
+        cartOverlay.addEventListener("click", closeCartDrawer);
 
-    // Cart Checkout button
-    cartCheckoutBtn.addEventListener("click", () => {
-        if (inquiryCart.length === 0) return;
+        // Cart Checkout: stash the combined inquiry message and hand off to the
+        // standalone Contact page (each page is a separate document, so we can't
+        // just scrollIntoView anymore).
+        cartCheckoutBtn.addEventListener("click", () => {
+            if (inquiryCart.length === 0) return;
 
-        const artList = inquiryCart.map(item => `  - ${item.artist} : "${item.title}"`).join("\n");
-        const queryMsg = combinedInquiryMessage(artList);
+            const artList = inquiryCart.map(item => `  - ${item.artist} : "${item.title}"`).join("\n");
+            const queryMsg = combinedInquiryMessage(artList);
 
-        scrollToContactForm(queryMsg);
-        closeCartDrawer();
-    });
+            sessionStorage.setItem("rawfaw_contact_prefill", queryMsg);
+            window.location.href = "contact.html";
+        });
+    }
 
-    // Contact Form Textarea Character Counter
-    inputMessage.addEventListener("input", () => {
-        const len = inputMessage.value.length;
-        charCount.textContent = len;
-    });
+    // Contact form (contact.html only)
+    if (inquiryForm) {
+        // Textarea Character Counter
+        inputMessage.addEventListener("input", () => {
+            const len = inputMessage.value.length;
+            charCount.textContent = len;
+        });
 
-    // File Input Label updater
-    inputFile.addEventListener("change", (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            fileNameLabel.textContent = e.target.files[0].name;
-            fileNameLabel.style.color = "var(--black)";
-        } else {
-            fileNameLabel.textContent = t("no_file_selected");
-            fileNameLabel.style.color = "var(--text-muted-light)";
-        }
-    });
-
-    // Contact Form Submission (delivered via FormSubmit.co — see form's action= attribute)
-    inquiryForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById("input-name").value;
-        const email = document.getElementById("input-email").value;
-        const phone = document.getElementById("input-phone").value;
-        const agree = document.getElementById("input-agree").checked;
-
-        if (!name || !email || !phone || !agree) {
-            alert(t("required_field_alert"));
-            return;
-        }
-
-        const submitBtn = inquiryForm.querySelector(".submit-btn");
-        const originalBtnText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = currentLang === "ko" ? "전송 중..." : "Sending...";
-
-        const ajaxUrl = inquiryForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
-        const formData = new FormData(inquiryForm);
-
-        fetch(ajaxUrl, {
-            method: "POST",
-            headers: { Accept: "application/json" },
-            body: formData,
-        })
-            .then((res) => {
-                if (!res.ok) throw new Error("Submit failed");
-                alert(thankYouMessage(name));
-                inquiryForm.reset();
+        // File Input Label updater
+        inputFile.addEventListener("change", (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                fileNameLabel.textContent = e.target.files[0].name;
+                fileNameLabel.style.color = "var(--black)";
+            } else {
                 fileNameLabel.textContent = t("no_file_selected");
-                charCount.textContent = 0;
-            })
-            .catch(() => {
-                alert(currentLang === "ko"
-                    ? "문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요."
-                    : "Failed to send your inquiry. Please try again in a moment.");
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
-            });
-    });
+                fileNameLabel.style.color = "var(--text-muted-light)";
+            }
+        });
 
+        // Submission (delivered via FormSubmit.co — see form's action= attribute)
+        inquiryForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("input-name").value;
+            const email = document.getElementById("input-email").value;
+            const phone = document.getElementById("input-phone").value;
+            const agree = document.getElementById("input-agree").checked;
+
+            if (!name || !email || !phone || !agree) {
+                alert(t("required_field_alert"));
+                return;
+            }
+
+            const submitBtn = inquiryForm.querySelector(".submit-btn");
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentLang === "ko" ? "전송 중..." : "Sending...";
+
+            const ajaxUrl = inquiryForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+            const formData = new FormData(inquiryForm);
+
+            fetch(ajaxUrl, {
+                method: "POST",
+                headers: { Accept: "application/json" },
+                body: formData,
+            })
+                .then((res) => {
+                    if (!res.ok) throw new Error("Submit failed");
+                    alert(thankYouMessage(name));
+                    inquiryForm.reset();
+                    fileNameLabel.textContent = t("no_file_selected");
+                    charCount.textContent = 0;
+                })
+                .catch(() => {
+                    alert(currentLang === "ko"
+                        ? "문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요."
+                        : "Failed to send your inquiry. Please try again in a moment.");
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                });
+        });
+    }
 }
 
 // ==========================================================================
 // Catalog Rendering Logic
 // ==========================================================================
 function renderCatalog() {
+    if (!catalogGrid) return; // this page has no catalog (bio.html / contact.html)
+
     // 1. Filter Data
     let filteredArtworks = ARTWORKS_DATA.filter(art => {
         // Search text check
@@ -706,11 +723,13 @@ function toggleCartItem(art) {
         btnAddToCart.textContent = t("remove_from_inquiry");
         btnAddToCart.classList.add("in-cart");
     }
+    saveCart();
     updateCartCount();
 }
 
 function removeCartItem(id) {
     inquiryCart = inquiryCart.filter(item => item.id !== id);
+    saveCart();
     updateCartCount();
     renderCart();
 }
@@ -747,12 +766,16 @@ function renderCart() {
 // ==========================================================================
 // Form & Navigation Helpers
 // ==========================================================================
-function scrollToContactForm(messageText) {
-    const formSection = document.getElementById("contact-section");
-    if (!formSection) return;
+// If the cart checkout stashed a prefill message before redirecting here,
+// drop it into the message field (contact.html only) and clear it so a
+// refresh doesn't re-apply it.
+function applyContactPrefill() {
+    if (!inquiryForm) return;
 
-    inputMessage.value = messageText;
-    charCount.textContent = messageText.length;
-    
-    formSection.scrollIntoView({ behavior: 'smooth' });
+    const prefill = sessionStorage.getItem("rawfaw_contact_prefill");
+    if (!prefill) return;
+
+    inputMessage.value = prefill;
+    charCount.textContent = prefill.length;
+    sessionStorage.removeItem("rawfaw_contact_prefill");
 }

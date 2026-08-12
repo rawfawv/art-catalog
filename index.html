@@ -18,7 +18,7 @@
         <!-- Neon Header Banner (Reference Image 2 & 3) -->
         <header class="neon-header">
             <div class="header-left">
-                <a href="#" class="logo" id="logo-btn">RAWFAW Art</a>
+                <a href="index.html" class="logo" id="logo-btn">RAWFAW Art</a>
                 <button class="search-btn" id="search-btn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     <span data-i18n="search">SEARCH</span>
@@ -26,8 +26,8 @@
             </div>
 
             <nav class="header-nav">
-                <a href="#bio-section" class="nav-link" data-i18n="nav_bio">Artist Bio</a>
-                <a href="#contact-section" class="nav-link" data-i18n="nav_contact">Contact</a>
+                <a href="bio.html" class="nav-link" data-i18n="nav_bio">Artist Bio</a>
+                <a href="contact.html" class="nav-link" data-i18n="nav_contact">Contact</a>
             </nav>
 
             <div class="header-right">
@@ -49,8 +49,8 @@
 
         <!-- Mobile Navigation Menu Dropdown -->
         <div class="mobile-nav-menu" id="mobile-nav-menu">
-            <a href="#bio-section" class="mobile-nav-link" data-i18n="nav_bio">Artist Bio</a>
-            <a href="#contact-section" class="mobile-nav-link" data-i18n="nav_contact">Contact</a>
+            <a href="bio.html" class="mobile-nav-link" data-i18n="nav_bio">Artist Bio</a>
+            <a href="contact.html" class="mobile-nav-link" data-i18n="nav_contact">Contact</a>
             <div class="lang-switch lang-switch-mobile">
                 <button type="button" class="lang-btn active" data-lang="en">EN</button>
                 <button type="button" class="lang-btn" data-lang="ko">KO</button>
@@ -77,94 +77,6 @@
                 <button id="reset-filters-btn" data-i18n="reset_filters">Reset Filters</button>
             </div>
         </main>
-
-        <!-- Artist Bio Section -->
-        <section id="bio-section" class="bio-section">
-            <div class="bio-hero">
-                <!-- Add a portrait photo: assets/rawfaw-portrait.jpg (or .png), then
-                     uncomment the line below. Recommended: a square or portrait-oriented photo. -->
-                <!-- <img class="bio-portrait" src="assets/rawfaw-portrait.jpg" alt="Rawfaw"> -->
-                <h2 data-i18n="bio_heading">About RAWFAW</h2>
-            </div>
-
-            <div class="bio-block">
-                <p data-i18n="bio_para_1">I create paintings about the body, the mind, and the soul.</p>
-                <p data-i18n="bio_para_2">The flowerpots that appear throughout my work are metaphors for people. They represent the invisible boundaries we live within—our fears, expectations, environments, and identities that continue to shape us.</p>
-                <p data-i18n="bio_para_3">Each series explores a different part of what it means to be human. <strong>The Body Flowerpot</strong> reflects the physical self that experiences the world. <strong>The Mind Flowerpot</strong> questions the invisible limits that keep our thoughts rooted in place. <strong>The Soul Flowerpot</strong> imagines the possibility of finally becoming free.</p>
-                <p data-i18n="bio_para_4">Alongside these works, my <strong>Dart Human</strong> series views life as a journey of throwing darts toward an unseen target. Every choice, failure, hope, and dream becomes another throw. Missing is inevitable, but growth comes from continuing to aim.</p>
-                <p data-i18n="bio_para_5">Although my paintings use playful characters, bold colors, and graphic forms, they are rooted in questions about identity, independence, and the quiet hope of becoming who we truly are.</p>
-                <p data-i18n="bio_para_6">Rather than offering answers, I hope each painting leaves space for viewers to discover their own.</p>
-            </div>
-
-            <div class="bio-cta">
-                <a href="#catalog-grid" class="bio-cta-btn primary" data-i18n="bio_view_artworks">View Artworks</a>
-                <a href="#contact-section" class="bio-cta-btn secondary" data-i18n="bio_get_in_touch">Get in Touch</a>
-            </div>
-        </section>
-
-        <!-- Contact Section (Reference Image 3) -->
-        <section id="contact-section" class="contact-section">
-            <div class="contact-header">
-                <h2 data-i18n="contact_heading">Contact</h2>
-                <p data-i18n="contact_intro">Hello, Our goal is to establish a virtuous cycle in the art industry by connecting various media industries, ultimately creating a vibrant world filled with diverse artworks. We are looking forward to having you join us.</p>
-            </div>
-
-            <form id="inquiry-form" class="inquiry-form" action="https://formsubmit.co/jiwooon513@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New inquiry from RAWFAW Art website">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="input-name"><span data-i18n="label_name">Name</span> <span class="required">*</span></label>
-                        <input type="text" id="input-name" name="name" required data-i18n-placeholder="placeholder_name" placeholder="Please enter your name.">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-company" data-i18n="label_company">Company</label>
-                        <input type="text" id="input-company" name="company" data-i18n-placeholder="placeholder_company" placeholder="Please enter your company name.">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="input-email"><span data-i18n="label_email">Email</span> <span class="required">*</span></label>
-                        <input type="email" id="input-email" name="email" required data-i18n-placeholder="placeholder_email" placeholder="Please enter your email address.">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-phone"><span data-i18n="label_phone">Phone</span> <span class="required">*</span></label>
-                        <input type="tel" id="input-phone" name="phone" required data-i18n-placeholder="placeholder_phone" placeholder="Please enter numbers only, without '-'.">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="textarea-header">
-                        <label for="input-message"><span data-i18n="label_message">Message</span> <span class="required">*</span></label>
-                        <span class="char-counter"><span id="char-count">0</span>/1000</span>
-                    </div>
-                    <textarea id="input-message" name="message" maxlength="1000" required data-i18n-placeholder="placeholder_message" placeholder="Please write within 1000 characters."></textarea>
-                </div>
-
-                <!-- Custom Styled File Attachment (Reference Image 3) -->
-                <div class="form-group file-upload-group">
-                    <label data-i18n="label_attach">Attach File</label>
-                    <div class="file-upload-wrapper">
-                        <span class="file-name" id="file-name-label" data-i18n="no_file_selected">No file selected</span>
-                        <label for="input-file" class="file-upload-btn" data-i18n="label_attach">Attach File</label>
-                        <input type="file" id="input-file" name="file" class="hidden-file-input">
-                    </div>
-                </div>
-
-                <!-- Privacy Policy Consent Checkbox -->
-                <div class="form-group checkbox-group">
-                    <label class="custom-checkbox">
-                        <input type="checkbox" id="input-agree" required>
-                        <span class="checkmark"></span>
-                        <span class="checkbox-text" data-i18n="privacy_agree">I agree to the Privacy Policy.</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="submit-btn" data-i18n="submit_btn">Submit</button>
-            </form>
-        </section>
 
         <!-- Footer -->
         <footer class="main-footer">
