@@ -599,14 +599,16 @@ function createCardHTML(art, index) {
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
                 </div>
             </div>
-            ${isHighlighted ? '' : `<div class="card-hover-highlight">
-                <h3 class="card-title">${art.title}: A MASTERPIECE BY ${art.artist}</h3>
-                <p class="card-hover-desc">${art.description}</p>
-                <div class="card-meta">
-                    <span class="card-price">${t('price_on_request')}</span>
-                    <span class="card-badge">${t('view_artwork')}</span>
-                </div>
-            </div>`}
+            ${isHighlighted
+                ? `<div class="card-hover-image"><img src="${art.image}" alt="${art.title}"></div>`
+                : `<div class="card-hover-highlight">
+                    <h3 class="card-title">${art.title}: A MASTERPIECE BY ${art.artist}</h3>
+                    <p class="card-hover-desc">${art.description}</p>
+                    <div class="card-meta">
+                        <span class="card-price">${t('price_on_request')}</span>
+                        <span class="card-badge">${t('view_artwork')}</span>
+                    </div>
+                </div>`}
         `;
     } else if (currentView === "POSTER") {
         // Style matching Image 1: colorful card, image frame, title, description, logo placeholder
