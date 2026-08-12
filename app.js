@@ -585,18 +585,18 @@ function createCardHTML(art, index) {
     card.addEventListener("click", () => openDetailPanel(art));
 
     if (currentView === "GRID") {
-        // Highlight card shows description text by default and swaps to the
-        // image on hover; regular cards do the reverse (image <-> description).
+        // Highlight card keeps the original all-text layout (no image swap).
+        // Regular cards crossfade between the artwork image and its description on hover.
         const isHighlighted = card.classList.contains("card-highlight");
 
         card.innerHTML = `
-            <div class="card-image-container ${isHighlighted ? "text-first" : ""}">
+            ${isHighlighted ? '' : `<div class="card-image-container">
                 <div class="visual-image-layer"><img src="${art.image}" alt="${art.title}"></div>
                 <div class="visual-text-layer"><p>${art.description}</p></div>
-            </div>
+            </div>`}
             <div class="card-info">
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
-                ${isHighlighted ? '' : `<p class="card-artist">${art.artist}</p>`}
+                <p class="card-artist">${isHighlighted ? art.description : art.artist}</p>
                 <div class="card-meta">
                     <span class="card-price">${isHighlighted ? t('price_on_request') : art.price}</span>
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>

@@ -482,39 +482,13 @@ button {
 }
 
 /* Regular cards: image by default, description on hover */
-#catalog-grid.view-grid .catalog-card:hover .card-image-container:not(.text-first) .visual-text-layer {
+#catalog-grid.view-grid .catalog-card:hover .card-image-container .visual-text-layer {
     opacity: 1;
     pointer-events: auto;
 }
 
-#catalog-grid.view-grid .catalog-card:hover .card-image-container:not(.text-first) .visual-image-layer {
+#catalog-grid.view-grid .catalog-card:hover .card-image-container .visual-image-layer {
     opacity: 0;
-}
-
-/* Highlight card: description by default, image on hover */
-#catalog-grid.view-grid .card-image-container.text-first .visual-image-layer {
-    opacity: 0;
-    pointer-events: none;
-}
-
-#catalog-grid.view-grid .card-image-container.text-first .visual-text-layer {
-    opacity: 1;
-    pointer-events: auto;
-    background-color: var(--neon-yellow-dark);
-}
-
-#catalog-grid.view-grid .card-image-container.text-first .visual-text-layer p {
-    color: var(--black);
-}
-
-#catalog-grid.view-grid .catalog-card:hover .card-image-container.text-first .visual-image-layer {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-#catalog-grid.view-grid .catalog-card:hover .card-image-container.text-first .visual-text-layer {
-    opacity: 0;
-    pointer-events: none;
 }
 
 #catalog-grid.view-grid .card-info {
