@@ -166,6 +166,11 @@ const inputMessage = document.getElementById("input-message");
 const charCount = document.getElementById("char-count");
 const inputFile = document.getElementById("input-file");
 const fileNameLabel = document.getElementById("file-name-label");
+const inputPhone = document.getElementById("input-phone");
+const phoneRequiredTag = document.getElementById("phone-required-tag");
+const inquiryTypeGeneral = document.getElementById("inquiry-type-general");
+const inquiryTypePurchase = document.getElementById("inquiry-type-purchase");
+const purchaseOnlyFields = document.getElementById("purchase-only-fields");
 
 // Mobile Menu
 const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
@@ -214,6 +219,9 @@ const I18N = {
         en: "Hello, Our goal is to establish a virtuous cycle in the art industry by connecting various media industries, ultimately creating a vibrant world filled with diverse artworks. We are looking forward to having you join us.",
         ko: "안녕하세요, 저희의 목표는 다양한 미디어 산업을 연결하여 예술 산업에 선순환을 만드는 것입니다. 다채로운 작품으로 가득한 활기찬 세상을 만들어가고자 하며, 함께해 주시길 기대합니다.",
     },
+    label_inquiry_type: { en: "Inquiry Type", ko: "문의 유형" },
+    inquiry_type_general: { en: "General Inquiry", ko: "일반 문의" },
+    inquiry_type_purchase: { en: "Purchase Inquiry", ko: "구매 문의" },
     label_name: { en: "Name", ko: "이름" },
     placeholder_name: { en: "Please enter your name.", ko: "이름을 입력해 주세요." },
     label_company: { en: "Company", ko: "회사명" },
@@ -310,6 +318,25 @@ function applyLanguage(lang) {
     if (detailPanel && detailPanel.classList.contains("open") && currentDetailArt) {
         renderDetailSpecs(currentDetailArt);
     }
+    // Re-apply after the generic data-i18n loop above, which would otherwise
+    // reset the phone tag back to "(Optional)" regardless of inquiry type.
+    updatePhoneRequirement();
+}
+
+// Purchase Inquiry vs General Inquiry: phone becomes required, and the
+// shipping address / framing fields reveal themselves, only for a purchase
+// inquiry. (contact.html only; no-ops elsewhere.)
+function updatePhoneRequirement() {
+    if (!inputPhone || !inquiryTypePurchase) return;
+    const isPurchase = inquiryTypePurchase.checked;
+    inputPhone.required = isPurchase;
+    if (phoneRequiredTag) {
+        phoneRequiredTag.textContent = isPurchase ? "*" : t("optional_tag");
+        phoneRequiredTag.className = isPurchase ? "required" : "optional-tag";
+    }
+    if (purchaseOnlyFields) {
+        purchaseOnlyFields.classList.toggle("hidden", !isPurchase);
+    }
 }
 
 // ==========================================================================
@@ -395,6 +422,12 @@ function initEventListeners() {
 
     // Contact form (contact.html only)
     if (inquiryForm) {
+        // Phone is required only for Purchase Inquiry
+        [inquiryTypeGeneral, inquiryTypePurchase].forEach((radio) => {
+            radio.addEventListener("change", updatePhoneRequirement);
+        });
+        updatePhoneRequirement();
+
         // Textarea Character Counter
         inputMessage.addEventListener("input", () => {
             const len = inputMessage.value.length;
@@ -418,10 +451,11 @@ function initEventListeners() {
 
             const name = document.getElementById("input-name").value;
             const email = document.getElementById("input-email").value;
-            const phone = document.getElementById("input-phone").value;
+            const phone = inputPhone.value;
             const agree = document.getElementById("input-agree").checked;
+            const phoneMissing = inputPhone.required && !phone;
 
-            if (!name || !email || !phone || !agree) {
+            if (!name || !email || phoneMissing || !agree) {
                 alert(t("required_field_alert"));
                 return;
             }
@@ -646,4 +680,11 @@ function applyContactPrefill() {
     inputMessage.value = prefill;
     charCount.textContent = prefill.length;
     sessionStorage.removeItem("rawfaw_contact_prefill");
+
+    // Arriving here always means the visitor clicked "Send Purchase Inquiry"
+    // — default the inquiry type accordingly so phone becomes required.
+    if (inquiryTypePurchase) {
+        inquiryTypePurchase.checked = true;
+        updatePhoneRequirement();
+    }
 }

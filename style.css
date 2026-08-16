@@ -950,6 +950,28 @@ button {
     margin-left: 2px;
 }
 
+.inquiry-type-options {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: none;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: var(--black);
+}
+
 /* Custom Styled File Attachment (Reference Image 3) */
 .file-upload-wrapper {
     display: flex;
