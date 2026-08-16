@@ -942,7 +942,7 @@ button {
     flex-grow: 1;
 }
 
-.file-upload-btn {
+.file-upload-wrapper .file-upload-btn {
     font-size: 11px;
     font-weight: 700;
     background-color: var(--black);
@@ -950,9 +950,11 @@ button {
     padding: 4px 10px;
     cursor: pointer;
     transition: var(--transition-smooth);
+    text-transform: none;
+    margin-bottom: 0;
 }
 
-.file-upload-btn:hover {
+.file-upload-wrapper .file-upload-btn:hover {
     background-color: var(--neon-yellow);
     color: var(--black);
 }
