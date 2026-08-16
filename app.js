@@ -215,10 +215,6 @@ const I18N = {
     no_results: { en: "No results found.", ko: "검색 결과가 없습니다." },
     reset_filters: { en: "Reset Filters", ko: "필터 초기화" },
     contact_heading: { en: "Contact", ko: "문의하기" },
-    contact_intro: {
-        en: "Hello, Our goal is to establish a virtuous cycle in the art industry by connecting various media industries, ultimately creating a vibrant world filled with diverse artworks. We are looking forward to having you join us.",
-        ko: "안녕하세요, 저희의 목표는 다양한 미디어 산업을 연결하여 예술 산업에 선순환을 만드는 것입니다. 다채로운 작품으로 가득한 활기찬 세상을 만들어가고자 하며, 함께해 주시길 기대합니다.",
-    },
     label_inquiry_type: { en: "Inquiry Type", ko: "문의 유형" },
     inquiry_type_general: { en: "General Inquiry", ko: "일반 문의" },
     inquiry_type_purchase: { en: "Purchase Inquiry", ko: "구매 문의" },
@@ -238,9 +234,13 @@ const I18N = {
     frame_option_no: { en: "No frame", ko: "액자 없이" },
     frame_option_yes: { en: "With frame", ko: "액자 포함" },
     label_message: { en: "Message", ko: "문의내용" },
-    placeholder_message: {
+    placeholder_message_general: {
         en: "Any additional questions or requests? (Please write within 1000 characters.)",
         ko: "그 밖에 궁금한 점이나 요청사항이 있으신가요? (1000자 이내로 작성해 주세요.)",
+    },
+    placeholder_message_purchase: {
+        en: "Please include the artwork's title along with any other questions — we'll follow up with the details. (Please write within 1000 characters.)",
+        ko: "작품 이름과 그 밖에 궁금하신 내용을 적어주시면 안내해드리겠습니다. (1000자 이내로 작성해 주세요.)",
     },
     label_attach: { en: "Attach File", ko: "파일첨부" },
     no_file_selected: { en: "No file selected", ko: "선택된 파일 없음" },
@@ -336,6 +336,9 @@ function updatePhoneRequirement() {
     }
     if (purchaseOnlyFields) {
         purchaseOnlyFields.classList.toggle("hidden", !isPurchase);
+    }
+    if (inputMessage) {
+        inputMessage.placeholder = t(isPurchase ? "placeholder_message_purchase" : "placeholder_message_general");
     }
 }
 
