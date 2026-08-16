@@ -83,7 +83,47 @@
                     </div>
                     <div class="form-group">
                         <label for="input-phone"><span data-i18n="label_phone">Phone</span> <span class="required">*</span></label>
-                        <input type="tel" id="input-phone" name="phone" required data-i18n-placeholder="placeholder_phone" placeholder="Please enter numbers only, without '-'.">
+                        <div class="phone-field-row">
+                            <select id="phone-country-code" name="phone_country_code" class="phone-country-select">
+                                <option value="+82" selected>🇰🇷 +82</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+852">🇭🇰 +852</option>
+                                <option value="+886">🇹🇼 +886</option>
+                                <option value="+65">🇸🇬 +65</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+971">🇦🇪 +971</option>
+                                <option value="+84">🇻🇳 +84</option>
+                                <option value="+66">🇹🇭 +66</option>
+                                <option value="+62">🇮🇩 +62</option>
+                                <option value="+52">🇲🇽 +52</option>
+                            </select>
+                            <input type="tel" id="input-phone" name="phone" required data-i18n-placeholder="placeholder_phone" placeholder="Please enter numbers only, without '-'.">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="input-address"><span data-i18n="label_address">Shipping Address</span> <span class="optional-tag" data-i18n="optional_tag">(Optional)</span></label>
+                        <input type="text" id="input-address" name="shipping_address" data-i18n-placeholder="placeholder_address" placeholder="Where should we ship the artwork?">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-frame"><span data-i18n="label_frame">Framing</span> <span class="optional-tag" data-i18n="optional_tag">(Optional)</span></label>
+                        <select id="input-frame" name="framing">
+                            <option value="" data-i18n="frame_option_unset" selected>Not sure yet</option>
+                            <option value="no-frame" data-i18n="frame_option_no">No frame</option>
+                            <option value="with-frame" data-i18n="frame_option_yes">With frame</option>
+                        </select>
                     </div>
                 </div>
 
@@ -92,7 +132,7 @@
                         <label for="input-message"><span data-i18n="label_message">Message</span> <span class="required">*</span></label>
                         <span class="char-counter"><span id="char-count">0</span>/1000</span>
                     </div>
-                    <textarea id="input-message" name="message" maxlength="1000" required data-i18n-placeholder="placeholder_message" placeholder="Let us know your shipping address and whether you'd like a frame, and we'll confirm the total cost. (Please write within 1000 characters.)"></textarea>
+                    <textarea id="input-message" name="message" maxlength="1000" required data-i18n-placeholder="placeholder_message" placeholder="Any additional questions or requests? (Please write within 1000 characters.)"></textarea>
                 </div>
 
                 <!-- Custom Styled File Attachment -->

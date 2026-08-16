@@ -872,16 +872,46 @@ button {
 
 .form-group input[type="text"],
 .form-group input[type="email"],
-.form-group input[type="tel"] {
+.form-group input[type="tel"],
+.form-group select {
     font-size: 13px;
     padding: 8px 0;
     border-bottom: 1px solid var(--border-color);
     transition: var(--transition-smooth);
     background-color: transparent;
+    cursor: pointer;
 }
 
 .form-group input:focus {
     border-bottom-color: var(--black);
+}
+
+.phone-field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+}
+
+.phone-field-row:focus-within {
+    border-bottom-color: var(--black);
+}
+
+.phone-country-select {
+    font-size: 13px;
+    padding: 8px 8px 8px 0;
+    border: none;
+    border-right: 1px solid var(--border-color);
+    background-color: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.phone-field-row input[type="tel"] {
+    flex: 1;
+    min-width: 0;
+    border-bottom: none;
 }
 
 .textarea-header {
@@ -910,6 +940,13 @@ button {
 
 .required {
     color: red;
+    margin-left: 2px;
+}
+
+.optional-tag {
+    color: var(--text-muted);
+    font-weight: 400;
+    text-transform: none;
     margin-left: 2px;
 }
 
