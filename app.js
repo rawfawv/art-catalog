@@ -235,8 +235,8 @@ const I18N = {
     frame_option_yes: { en: "With frame", ko: "액자 포함" },
     label_message: { en: "Message", ko: "문의내용" },
     placeholder_message_general: {
-        en: "Any additional questions or requests? (Please write within 1000 characters.)",
-        ko: "그 밖에 궁금한 점이나 요청사항이 있으신가요? (1000자 이내로 작성해 주세요.)",
+        en: "Questions or requests? (Please write within 1000 characters.)",
+        ko: "궁금한 점이나 요청사항이 있으신가요? (1000자 이내로 작성해 주세요.)",
     },
     placeholder_message_purchase: {
         en: "Please include the artwork's title along with any other questions — we'll follow up with the details. (Please write within 1000 characters.)",
