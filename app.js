@@ -16,7 +16,7 @@ const ARTWORKS_DATA = [
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is optional; selecting a frame will increase shipping cost.",
-        description: "\"The Flowerpot of Time\" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm."
+        description: "I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nThe plants in my paintings represent people who long to discover their own identity, yet still feel rooted within invisible boundaries.\n\nFlowerpot of Time reflects on the experience of remaining in the same place while time continues to move forward. Seasons change, years pass, and life quietly moves on, yet the flowerpot remains where it has always been.\n\nThe flowerpot symbolizes the invisible limitations that keep us from taking root on our own, while the passing seasons represent the relentless flow of time. Although growth continues, true independence has not yet been reached.\n\nThrough this work, I ask a simple question: How much time must pass before we are finally ready to leave the flowerpot?"
     },
     {
         id: 10,
