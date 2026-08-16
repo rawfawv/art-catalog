@@ -35,9 +35,6 @@
                     <button type="button" class="lang-btn active" data-lang="en">EN</button>
                     <button type="button" class="lang-btn" data-lang="ko">KO</button>
                 </div>
-                <button class="cart-btn" id="cart-toggle-btn">
-                    <span data-i18n="cart_label">CART</span> (<span id="cart-count">0</span>)
-                </button>
                 <!-- Mobile Hamburger Menu Button -->
                 <button class="menu-mobile-btn" id="mobile-menu-toggle">
                     <span></span>
@@ -82,8 +79,7 @@
         <!-- Footer -->
         <footer class="main-footer">
             <div class="footer-links">
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/racacafa.art/" target="_blank">Instagram</a>
             </div>
             <div class="footer-info">
                 <p data-i18n="footer_company">RAWFAW House</p>
@@ -95,27 +91,6 @@
 
     </div>
 
-    <!-- Cart Drawer -->
-    <div id="cart-drawer" class="side-panel">
-        <div class="panel-overlay" id="cart-overlay"></div>
-        <div class="panel-content">
-            <button class="panel-close-btn" id="cart-close-btn">&times;</button>
-
-            <div class="cart-body">
-                <h2><span data-i18n="inquiry_cart_heading">Inquiry Cart</span> (<span id="cart-items-count">0</span>)</h2>
-                <p class="cart-subtitle" data-i18n="cart_subtitle">Artworks you'd like to inquire about for purchase or rental.</p>
-
-                <div class="cart-items-container" id="cart-items-list">
-                    <!-- Dynamic items -->
-                    <div class="empty-cart-message" data-i18n="cart_empty">No artworks added yet.</div>
-                </div>
-
-                <div class="cart-footer">
-                    <button class="cart-checkout-btn" id="cart-checkout-btn" data-i18n="cart_checkout">Inquire About Selected Items</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Application Script -->
     <script src="app.js"></script>

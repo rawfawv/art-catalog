@@ -178,20 +178,6 @@ button {
     background-color: var(--black);
 }
 
-.cart-btn {
-    font-family: var(--font-sans);
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    padding: 6px 12px;
-    border: 1px solid var(--black);
-    transition: var(--transition-smooth);
-}
-
-.cart-btn:hover {
-    background-color: var(--black);
-    color: var(--neon-yellow);
-}
 
 /* Language Switch (EN / KO) */
 .lang-switch {
@@ -1053,7 +1039,7 @@ button {
 }
 
 /* ==========================================================================
-   Slide-over Panels & Overlay (Detail Panel & Cart Drawer)
+   Slide-over Panel & Overlay (Detail Panel)
    ========================================================================== */
 
 .side-panel {
@@ -1263,23 +1249,6 @@ button {
     color: var(--black);
 }
 
-.add-to-inquiry-cart-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--white);
-    border: 1px solid var(--black);
-    font-size: 13px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 24px;
-    transition: var(--transition-smooth);
-}
-
-.add-to-inquiry-cart-btn:hover {
-    background-color: var(--black);
-    color: var(--white);
-}
-
 .detail-image-wrapper {
     width: 100%;
     margin-top: 12px;
@@ -1297,109 +1266,6 @@ button {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Cart Body */
-.cart-body {
-    padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.cart-body h2 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.cart-subtitle {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-}
-
-.cart-items-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.empty-cart-message {
-    padding: 48px 0;
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted-light);
-}
-
-.cart-item {
-    display: flex;
-    gap: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.cart-item-img {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border: 1px solid var(--border-color);
-}
-
-.cart-item-details {
-    flex-grow: 1;
-}
-
-.cart-item-artist {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.cart-item-title {
-    font-family: var(--font-sans);
-    font-style: italic;
-    font-size: 14px;
-    margin-bottom: 4px;
-}
-
-.cart-item-price {
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.cart-item-remove {
-    font-size: 11px;
-    color: var(--text-muted);
-    text-decoration: underline;
-    margin-top: 4px;
-}
-
-.cart-item-remove:hover {
-    color: red;
-}
-
-.cart-footer {
-    padding-top: 16px;
-    border-top: 1.5px solid var(--black);
-}
-
-.cart-checkout-btn {
-    width: 100%;
-    padding: 16px;
-    background-color: var(--black);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 14px;
-    transition: var(--transition-smooth);
-    border: 1.5px solid var(--black);
-}
-
-.cart-checkout-btn:hover {
-    background-color: var(--white);
-    color: var(--black);
-}
 
 /* ==========================================================================
    Artist Bio Section

@@ -138,23 +138,6 @@ const ARTWORKS_DATA = [
 let currentView = "GRID"; // GRID, POSTER, COMPACT
 let currentSearchQuery = "";
 let currentSort = "NEW"; // NEW, ARTIST, TITLE
-let inquiryCart = [];
-
-// The site is split across multiple pages (index/bio/contact) that all share
-// this one script, so the cart is persisted to localStorage to survive
-// navigating between them.
-function loadCart() {
-    try {
-        const stored = JSON.parse(localStorage.getItem("rawfaw_cart") || "[]");
-        inquiryCart = Array.isArray(stored) ? stored : [];
-    } catch (e) {
-        inquiryCart = [];
-    }
-}
-
-function saveCart() {
-    localStorage.setItem("rawfaw_cart", JSON.stringify(inquiryCart));
-}
 
 // DOM Elements
 const catalogGrid = document.getElementById("catalog-grid");
@@ -175,18 +158,7 @@ const detailPrice = document.getElementById("detail-price");
 const detailShippingNote = document.getElementById("detail-shipping-note");
 const detailSpecs = document.getElementById("detail-specs");
 const detailImg = document.getElementById("detail-img");
-const btnAddToCart = document.getElementById("btn-add-to-cart");
 const btnEmailInquiry = document.getElementById("btn-email-inquiry");
-
-// Cart Elements
-const cartDrawer = document.getElementById("cart-drawer");
-const cartToggleBtn = document.getElementById("cart-toggle-btn");
-const cartCloseBtn = document.getElementById("cart-close-btn");
-const cartOverlay = document.getElementById("cart-overlay");
-const cartItemsList = document.getElementById("cart-items-list");
-const cartCountElement = document.getElementById("cart-count");
-const cartItemsCountElement = document.getElementById("cart-items-count");
-const cartCheckoutBtn = document.getElementById("cart-checkout-btn");
 
 // Form Elements
 const inquiryForm = document.getElementById("inquiry-form");
@@ -208,7 +180,6 @@ const langButtons = document.querySelectorAll(".lang-btn");
 // ==========================================================================
 const I18N = {
     search: { en: "SEARCH", ko: "검색" },
-    cart_label: { en: "CART", ko: "장바구니" },
     nav_bio: { en: "Artist Bio", ko: "작가약력" },
     nav_contact: { en: "Contact", ko: "문의하기" },
     bio_heading: { en: "About RAWFAW", ko: "RAWFAW" },
@@ -274,13 +245,6 @@ const I18N = {
         ko: "이 작품이 마음에 드셨나요? 언제든 편하게 문의해주세요. 메일함은 매일 확인하고 있어서 빠르게 답장드리겠습니다.",
     },
     send_purchase_inquiry: { en: "Send Purchase Inquiry", ko: "구매 문의 보내기" },
-    add_to_inquiry: { en: "Add to Inquiry", ko: "관심 작품 목록에 추가" },
-    remove_from_inquiry: { en: "Remove from Inquiry", ko: "관심 목록에서 제거" },
-    inquiry_cart_heading: { en: "Inquiry Cart", ko: "문의 목록" },
-    cart_subtitle: { en: "Artworks you'd like to inquire about for purchase or rental.", ko: "구매 또는 대여 문의를 보내실 작품 목록입니다." },
-    cart_empty: { en: "No artworks added yet.", ko: "관심 목록에 추가된 작품이 없습니다." },
-    cart_checkout: { en: "Inquire About Selected Items", ko: "선택한 작품 문의하기" },
-    cart_item_remove: { en: "Remove", ko: "제거" },
     view_artwork: { en: "View Artwork", ko: "작품 보기" },
     badge_original: { en: "ORIGINAL", ko: "오리지널" },
     badge_limited: { en: "LIMITED", ko: "리미티드" },
@@ -309,12 +273,6 @@ function thankYouMessage(name) {
         : `Thank you, ${name}! Your inquiry has been received. A curator will contact you shortly.`;
 }
 
-function combinedInquiryMessage(artList) {
-    return currentLang === "ko"
-        ? `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다.\n\n${artList}`
-        : `Hello, I would like a combined quote and details for the following artworks on my inquiry list.\n\n${artList}`;
-}
-
 function purchaseInquiryMessage(artist, title) {
     return currentLang === "ko"
         ? `안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다.`
@@ -340,14 +298,10 @@ function applyLanguage(lang) {
     });
 
     // Re-render dynamic pieces that carry translated text (guarded — not
-    // every page has a catalog, detail panel, or cart drawer in its DOM)
+    // every page has a catalog or detail panel in its DOM)
     if (catalogGrid) renderCatalog();
-    if (cartDrawer && cartDrawer.classList.contains("open")) renderCart();
-    if (detailPanel && detailPanel.classList.contains("open")) {
-        const currentId = parseInt(btnAddToCart.dataset.artId, 10);
-        const inCart = inquiryCart.some((item) => item.id === currentId);
-        btnAddToCart.textContent = inCart ? t("remove_from_inquiry") : t("add_to_inquiry");
-        if (currentDetailArt) renderDetailSpecs(currentDetailArt);
+    if (detailPanel && detailPanel.classList.contains("open") && currentDetailArt) {
+        renderDetailSpecs(currentDetailArt);
     }
 }
 
@@ -355,10 +309,8 @@ function applyLanguage(lang) {
 // Initialization
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-    loadCart();
     initEventListeners();
     applyLanguage(currentLang);
-    updateCartCount();
     applyContactPrefill();
 });
 
@@ -424,32 +376,12 @@ function initEventListeners() {
     }
 
     // Purchase Inquiry button: stash a prefilled message and hand off to the
-    // standalone Contact page, same handoff pattern as the cart checkout.
+    // standalone Contact page.
     if (btnEmailInquiry) {
         btnEmailInquiry.addEventListener("click", () => {
             if (!currentDetailArt) return;
             const msg = purchaseInquiryMessage(currentDetailArt.artist, currentDetailArt.title);
             sessionStorage.setItem("rawfaw_contact_prefill", msg);
-            window.location.href = "contact.html";
-        });
-    }
-
-    // Cart Panel Toggle (every page — the cart drawer is duplicated on all of them)
-    if (cartDrawer) {
-        cartToggleBtn.addEventListener("click", openCartDrawer);
-        cartCloseBtn.addEventListener("click", closeCartDrawer);
-        cartOverlay.addEventListener("click", closeCartDrawer);
-
-        // Cart Checkout: stash the combined inquiry message and hand off to the
-        // standalone Contact page (each page is a separate document, so we can't
-        // just scrollIntoView anymore).
-        cartCheckoutBtn.addEventListener("click", () => {
-            if (inquiryCart.length === 0) return;
-
-            const artList = inquiryCart.map(item => `  - ${item.artist} : "${item.title}"`).join("\n");
-            const queryMsg = combinedInquiryMessage(artList);
-
-            sessionStorage.setItem("rawfaw_contact_prefill", queryMsg);
             window.location.href = "contact.html";
         });
     }
@@ -645,7 +577,7 @@ function createCardHTML(art, index) {
 }
 
 // ==========================================================================
-// Side Panels (Detail & Cart) Actions
+// Detail Panel Actions
 // ==========================================================================
 let currentDetailArt = null;
 
@@ -685,22 +617,6 @@ function openDetailPanel(art) {
     detailImg.src = art.image;
     detailImg.alt = art.title;
 
-    // Configure Add to Cart button based on current inquiry list
-    const inCart = inquiryCart.some(item => item.id === art.id);
-    if (inCart) {
-        btnAddToCart.textContent = t("remove_from_inquiry");
-        btnAddToCart.classList.add("in-cart");
-    } else {
-        btnAddToCart.textContent = t("add_to_inquiry");
-        btnAddToCart.classList.remove("in-cart");
-    }
-
-    // Set dataset ID on the button
-    btnAddToCart.dataset.artId = art.id;
-
-    // Reset button click event
-    btnAddToCart.onclick = () => toggleCartItem(art);
-
     detailPanel.classList.add("open");
 }
 
@@ -708,76 +624,11 @@ function closeDetailPanel() {
     detailPanel.classList.remove("open");
 }
 
-function openCartDrawer() {
-    renderCart();
-    cartDrawer.classList.add("open");
-}
-
-function closeCartDrawer() {
-    cartDrawer.classList.remove("open");
-}
-
-// ==========================================================================
-// Inquiry Cart Logic
-// ==========================================================================
-function toggleCartItem(art) {
-    const idx = inquiryCart.findIndex(item => item.id === art.id);
-    if (idx > -1) {
-        // Remove
-        inquiryCart.splice(idx, 1);
-        btnAddToCart.textContent = t("add_to_inquiry");
-        btnAddToCart.classList.remove("in-cart");
-    } else {
-        // Add
-        inquiryCart.push(art);
-        btnAddToCart.textContent = t("remove_from_inquiry");
-        btnAddToCart.classList.add("in-cart");
-    }
-    saveCart();
-    updateCartCount();
-}
-
-function removeCartItem(id) {
-    inquiryCart = inquiryCart.filter(item => item.id !== id);
-    saveCart();
-    updateCartCount();
-    renderCart();
-}
-
-function updateCartCount() {
-    const count = inquiryCart.length;
-    cartCountElement.textContent = count;
-    cartItemsCountElement.textContent = count;
-}
-
-function renderCart() {
-    cartItemsList.innerHTML = "";
-    if (inquiryCart.length === 0) {
-        cartItemsList.innerHTML = `<div class="empty-cart-message">${t("cart_empty")}</div>`;
-        return;
-    }
-
-    inquiryCart.forEach(item => {
-        const itemElement = document.createElement("div");
-        itemElement.className = "cart-item";
-        itemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.title}" class="cart-item-img">
-            <div class="cart-item-details">
-                <h4 class="cart-item-artist">${item.artist}</h4>
-                <p class="cart-item-title">${item.title}</p>
-                <div class="cart-item-price">${item.price}</div>
-                <button class="cart-item-remove" onclick="removeCartItem(${item.id})">${t("cart_item_remove")}</button>
-            </div>
-        `;
-        cartItemsList.appendChild(itemElement);
-    });
-}
-
 // ==========================================================================
 // Form & Navigation Helpers
 // ==========================================================================
-// If the cart checkout stashed a prefill message before redirecting here,
-// drop it into the message field (contact.html only) and clear it so a
+// If the purchase inquiry button stashed a prefill message before redirecting
+// here, drop it into the message field (contact.html only) and clear it so a
 // refresh doesn't re-apply it.
 function applyContactPrefill() {
     if (!inquiryForm) return;
