@@ -16,7 +16,7 @@ const ARTWORKS_DATA = [
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is optional; selecting a frame will increase shipping cost.",
-        description: "\"The Flowerpot of Time\" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm. [TEST_EDIT_MARKER]"
+        description: "\"The Flowerpot of Time\" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm."
     },
     {
         id: 10,
