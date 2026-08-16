@@ -38,7 +38,7 @@ const ARTWORKS_DATA = [
         id: 11,
         title: "Flowerpot of the Soul | 영혼의화분",
         artist: "Rawfaw",
-        image: "assets/flowerpot-of-the-soul.png",
+        image: "assets/flowerpot-of-the-soul-2.png",
         price: "$2,000",
         numericPrice: 2000,
         category: "ORIGINAL",
