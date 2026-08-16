@@ -1,13 +1,17 @@
 // ==========================================================================
-// LUAS Art Catalog — Local Admin Upload Server
+// RAWFAW Art Catalog — Local Admin Server
 //
 // Run with:  node admin/server.js
 // Then open the printed http://127.0.0.1:PORT/ address in a browser.
 //
-// What it does when you submit the form:
-//   1. Saves the uploaded image into ../assets/
-//   2. Appends a new artwork entry into ../app.js (ARTWORKS_DATA)
-//   3. Runs `git add -A && git commit && git push` so the live site updates
+// Two things you can do from the page:
+//   1. Add a new artwork — saves the image into ../assets/ and appends a new
+//      entry to ../app.js (ARTWORKS_DATA)
+//   2. Edit an existing artwork — change its title, price, description,
+//      dimensions, etc. (and optionally replace its image)
+//
+// Either way, after saving it runs `git add -A && git commit && git push`
+// so the live site updates automatically.
 //
 // This server only listens on 127.0.0.1 (your own machine) — it is not
 // reachable from the network or the internet.
@@ -41,11 +45,6 @@ function slugify(text) {
     return base || "artwork";
 }
 
-function nextId(content) {
-    const ids = [...content.matchAll(/id:\s*(\d+)/g)].map((m) => parseInt(m[1], 10));
-    return ids.length ? Math.max(...ids) + 1 : 1;
-}
-
 function uniqueAssetPath(baseName, ext) {
     let candidate = `${baseName}.${ext}`;
     let n = 2;
@@ -56,17 +55,35 @@ function uniqueAssetPath(baseName, ext) {
     return candidate;
 }
 
-function insertArtwork(entry) {
-    const content = fs.readFileSync(APP_JS_PATH, "utf8");
+// --------------------------------------------------------------------------
+// Reading / writing ARTWORKS_DATA
+//
+// We regenerate the whole array every time (rather than trying to find/
+// replace one entry's text in place) — it's simpler and can't get confused
+// by braces or quotes inside a description.
+// --------------------------------------------------------------------------
+
+function findArtworksBlock(content) {
     const startIdx = content.indexOf("const ARTWORKS_DATA");
     if (startIdx === -1) throw new Error("Could not find ARTWORKS_DATA in app.js");
+    const openIdx = content.indexOf("[", startIdx);
     const closeIdx = content.indexOf("\n];", startIdx);
-    if (closeIdx === -1) throw new Error("Could not find the end of ARTWORKS_DATA in app.js");
+    if (openIdx === -1 || closeIdx === -1) throw new Error("Could not find the ARTWORKS_DATA array bounds in app.js");
+    return { startIdx, openIdx, closeIdx: closeIdx + 3 }; // include "];"
+}
 
-    const before = content.slice(0, closeIdx);
-    const after = content.slice(closeIdx);
+function readArtworks() {
+    const content = fs.readFileSync(APP_JS_PATH, "utf8");
+    const { startIdx, closeIdx } = findArtworksBlock(content);
+    const arrayLiteralCode = content.slice(startIdx, closeIdx).replace(/^const ARTWORKS_DATA\s*=\s*/, "return ");
+    // Evaluated locally, on the artist's own trusted file — never reachable
+    // from the network (server binds to 127.0.0.1 only).
+    const getArtworks = new Function(arrayLiteralCode);
+    return getArtworks();
+}
 
-    const lines = [
+function serializeArtwork(entry) {
+    return [
         "    {",
         `        id: ${entry.id},`,
         `        title: ${JSON.stringify(entry.title)},`,
@@ -84,9 +101,23 @@ function insertArtwork(entry) {
         `        description: ${JSON.stringify(entry.description)}`,
         "    }",
     ].join("\n");
+}
 
-    const newContent = `${before},\n${lines}${after}`;
-    fs.writeFileSync(APP_JS_PATH, newContent, "utf8");
+function writeArtworks(artworks) {
+    const content = fs.readFileSync(APP_JS_PATH, "utf8");
+    const { startIdx, closeIdx } = findArtworksBlock(content);
+
+    const before = content.slice(0, startIdx);
+    const after = content.slice(closeIdx);
+
+    const newBlock = `const ARTWORKS_DATA = [\n${artworks.map(serializeArtwork).join(",\n")}\n];`;
+
+    fs.writeFileSync(APP_JS_PATH, `${before}${newBlock}${after}`, "utf8");
+}
+
+function nextId(artworks) {
+    const ids = artworks.map((a) => a.id);
+    return ids.length ? Math.max(...ids) + 1 : 1;
 }
 
 function runGit(commitMessage) {
@@ -112,6 +143,73 @@ function sendJson(res, status, obj) {
     res.end(body);
 }
 
+function readRequestBody(req, maxBytes) {
+    return new Promise((resolve, reject) => {
+        let chunks = [];
+        let size = 0;
+        req.on("data", (chunk) => {
+            size += chunk.length;
+            if (size > maxBytes) {
+                req.destroy();
+                reject(new Error("TOO_LARGE"));
+                return;
+            }
+            chunks.push(chunk);
+        });
+        req.on("end", () => {
+            if (size > maxBytes) return; // already rejected above
+            resolve(Buffer.concat(chunks).toString("utf8"));
+        });
+        req.on("error", reject);
+    });
+}
+
+function saveImageIfProvided(imageBase64, imageMimeType, titleForName) {
+    if (!imageBase64 || !imageMimeType) return null;
+    const ext = MIME_TO_EXT[imageMimeType];
+    if (!ext) throw new Error(`지원하지 않는 이미지 형식입니다: ${imageMimeType}`);
+    if (!fs.existsSync(ASSETS_DIR)) fs.mkdirSync(ASSETS_DIR, { recursive: true });
+    const assetFileName = uniqueAssetPath(slugify(titleForName), ext);
+    fs.writeFileSync(path.join(ASSETS_DIR, assetFileName), Buffer.from(imageBase64, "base64"));
+    return `assets/${assetFileName}`;
+}
+
+function fieldsFromPayload(data) {
+    const {
+        title,
+        artist,
+        price,
+        category,
+        color,
+        isNew,
+        dimensions,
+        material,
+        year,
+        shippingNote,
+        description,
+    } = data;
+
+    if (!title || !title.trim()) throw new Error("작품제목을 입력해주세요.");
+    if (!price || !price.trim()) throw new Error("가격을 입력해주세요.");
+
+    const numericPrice = parseInt(String(price).replace(/[^0-9]/g, ""), 10) || 0;
+
+    return {
+        title: title.trim(),
+        artist: (artist && artist.trim()) || "Rawfaw",
+        price: price.trim(),
+        numericPrice,
+        category: category || "ORIGINAL",
+        color: color || "terracotta",
+        isNew: !!isNew,
+        dimensions: dimensions || "",
+        material: material || "",
+        year: year || "",
+        shippingNote: shippingNote || "",
+        description: description || "",
+    };
+}
+
 const server = http.createServer((req, res) => {
     if (req.method === "GET" && (req.url === "/" || req.url === "/index.html")) {
         const html = fs.readFileSync(ADMIN_HTML_PATH, "utf8");
@@ -120,107 +218,126 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // Serve saved artwork images so the edit form can preview them
+    // (e.g. GET /assets/foo.png -> ../assets/foo.png)
+    if (req.method === "GET" && req.url.startsWith("/assets/")) {
+        const requested = decodeURIComponent(req.url.slice("/assets/".length).split("?")[0]);
+        const filePath = path.join(ASSETS_DIR, requested);
+        if (!filePath.startsWith(ASSETS_DIR) || !fs.existsSync(filePath)) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("Not found");
+            return;
+        }
+        const ext = path.extname(filePath).toLowerCase();
+        const contentType =
+            { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif" }[ext] ||
+            "application/octet-stream";
+        res.writeHead(200, { "Content-Type": contentType });
+        fs.createReadStream(filePath).pipe(res);
+        return;
+    }
+
+    if (req.method === "GET" && req.url === "/artworks") {
+        try {
+            const artworks = readArtworks().sort((a, b) => a.id - b.id);
+            sendJson(res, 200, { ok: true, artworks });
+        } catch (err) {
+            sendJson(res, 500, { ok: false, error: err.message });
+        }
+        return;
+    }
+
     if (req.method === "POST" && req.url === "/add-artwork") {
-        let chunks = [];
-        let size = 0;
         const MAX_BYTES = 20 * 1024 * 1024; // 20MB safety cap (base64 image + fields)
-
-        req.on("data", (chunk) => {
-            size += chunk.length;
-            if (size > MAX_BYTES) {
-                req.destroy();
-                return;
-            }
-            chunks.push(chunk);
-        });
-
-        req.on("end", () => {
-            if (size > MAX_BYTES) {
-                sendJson(res, 413, { ok: false, error: "이미지가 너무 큽니다 (최대 약 15MB)." });
-                return;
-            }
-            let data;
-            try {
-                data = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-            } catch (e) {
-                sendJson(res, 400, { ok: false, error: "잘못된 요청 형식입니다." });
-                return;
-            }
-
-            try {
-                const {
-                    title,
-                    artist,
-                    price,
-                    category,
-                    color,
-                    isNew,
-                    dimensions,
-                    material,
-                    year,
-                    shippingNote,
-                    description,
-                    imageBase64,
-                    imageMimeType,
-                } = data;
-
-                if (!title || !title.trim()) throw new Error("작품제목을 입력해주세요.");
-                if (!price || !price.trim()) throw new Error("가격을 입력해주세요.");
-                if (!imageBase64 || !imageMimeType) throw new Error("이미지를 선택해주세요.");
-
-                const ext = MIME_TO_EXT[imageMimeType];
-                if (!ext) throw new Error(`지원하지 않는 이미지 형식입니다: ${imageMimeType}`);
-
-                if (!fs.existsSync(ASSETS_DIR)) fs.mkdirSync(ASSETS_DIR, { recursive: true });
-
-                const assetFileName = uniqueAssetPath(slugify(title), ext);
-                const assetFullPath = path.join(ASSETS_DIR, assetFileName);
-                fs.writeFileSync(assetFullPath, Buffer.from(imageBase64, "base64"));
-
-                const appJsContent = fs.readFileSync(APP_JS_PATH, "utf8");
-                const id = nextId(appJsContent);
-
-                const numericPrice = parseInt(String(price).replace(/[^0-9]/g, ""), 10) || 0;
-
-                const entry = {
-                    id,
-                    title: title.trim(),
-                    artist: (artist && artist.trim()) || "Rawfaw",
-                    image: `assets/${assetFileName}`,
-                    price: price.trim(),
-                    numericPrice,
-                    category: category || "ORIGINAL",
-                    color: color || "terracotta",
-                    isNew: !!isNew,
-                    dimensions: dimensions || "",
-                    material: material || "",
-                    year: year || "",
-                    shippingNote: shippingNote || "",
-                    description: description || "",
-                };
-
-                insertArtwork(entry);
-
-                let gitOutput = "";
-                let pushed = true;
+        readRequestBody(req, MAX_BYTES)
+            .then((raw) => {
+                let data;
                 try {
-                    gitOutput = runGit(`Add artwork: ${entry.title}`);
-                } catch (gitErr) {
-                    pushed = false;
-                    gitOutput = (gitErr.stderr || gitErr.stdout || gitErr.message || "").toString();
+                    data = JSON.parse(raw);
+                } catch (e) {
+                    sendJson(res, 400, { ok: false, error: "잘못된 요청 형식입니다." });
+                    return;
                 }
 
-                sendJson(res, 200, {
-                    ok: true,
-                    id,
-                    image: entry.image,
-                    pushed,
-                    gitOutput,
-                });
-            } catch (err) {
-                sendJson(res, 400, { ok: false, error: err.message });
-            }
-        });
+                try {
+                    const { imageBase64, imageMimeType } = data;
+                    if (!imageBase64 || !imageMimeType) throw new Error("이미지를 선택해주세요.");
+
+                    const fields = fieldsFromPayload(data);
+                    const image = saveImageIfProvided(imageBase64, imageMimeType, fields.title);
+
+                    const artworks = readArtworks();
+                    const id = nextId(artworks);
+                    const entry = { id, image, ...fields };
+                    artworks.push(entry);
+                    writeArtworks(artworks);
+
+                    let gitOutput = "";
+                    let pushed = true;
+                    try {
+                        gitOutput = runGit(`Add artwork: ${entry.title}`);
+                    } catch (gitErr) {
+                        pushed = false;
+                        gitOutput = (gitErr.stderr || gitErr.stdout || gitErr.message || "").toString();
+                    }
+
+                    sendJson(res, 200, { ok: true, id, image: entry.image, pushed, gitOutput });
+                } catch (err) {
+                    sendJson(res, 400, { ok: false, error: err.message });
+                }
+            })
+            .catch(() => {
+                sendJson(res, 413, { ok: false, error: "이미지가 너무 큽니다 (최대 약 15MB)." });
+            });
+        return;
+    }
+
+    if (req.method === "POST" && req.url === "/update-artwork") {
+        const MAX_BYTES = 20 * 1024 * 1024;
+        readRequestBody(req, MAX_BYTES)
+            .then((raw) => {
+                let data;
+                try {
+                    data = JSON.parse(raw);
+                } catch (e) {
+                    sendJson(res, 400, { ok: false, error: "잘못된 요청 형식입니다." });
+                    return;
+                }
+
+                try {
+                    const id = parseInt(data.id, 10);
+                    if (!id) throw new Error("수정할 작품을 선택해주세요.");
+
+                    const artworks = readArtworks();
+                    const idx = artworks.findIndex((a) => a.id === id);
+                    if (idx === -1) throw new Error(`id ${id} 작품을 찾을 수 없습니다.`);
+
+                    const fields = fieldsFromPayload(data);
+                    const { imageBase64, imageMimeType } = data;
+                    const newImage = saveImageIfProvided(imageBase64, imageMimeType, fields.title);
+
+                    const existing = artworks[idx];
+                    const updated = { id, image: newImage || existing.image, ...fields };
+                    artworks[idx] = updated;
+                    writeArtworks(artworks);
+
+                    let gitOutput = "";
+                    let pushed = true;
+                    try {
+                        gitOutput = runGit(`Update artwork: ${updated.title}`);
+                    } catch (gitErr) {
+                        pushed = false;
+                        gitOutput = (gitErr.stderr || gitErr.stdout || gitErr.message || "").toString();
+                    }
+
+                    sendJson(res, 200, { ok: true, id, image: updated.image, pushed, gitOutput });
+                } catch (err) {
+                    sendJson(res, 400, { ok: false, error: err.message });
+                }
+            })
+            .catch(() => {
+                sendJson(res, 413, { ok: false, error: "이미지가 너무 큽니다 (최대 약 15MB)." });
+            });
         return;
     }
 
@@ -229,5 +346,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, "127.0.0.1", () => {
-    console.log(`\n  LUAS Admin Upload running at: http://127.0.0.1:${PORT}/\n`);
+    console.log(`\n  RAWFAW Admin running at: http://127.0.0.1:${PORT}/\n`);
 });

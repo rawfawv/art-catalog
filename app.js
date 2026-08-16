@@ -16,7 +16,7 @@ const ARTWORKS_DATA = [
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is optional; selecting a frame will increase shipping cost.",
-        description: `"The Flowerpot of Time" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm.`
+        description: "\"The Flowerpot of Time\" (시간의 화분, 2023) is an oil on canvas work measuring 116.8 x 91.0cm. [TEST_EDIT_MARKER]"
     },
     {
         id: 10,
@@ -176,8 +176,7 @@ const detailShippingNote = document.getElementById("detail-shipping-note");
 const detailSpecs = document.getElementById("detail-specs");
 const detailImg = document.getElementById("detail-img");
 const btnAddToCart = document.getElementById("btn-add-to-cart");
-const paypalItemNameInput = document.getElementById("paypal-item-name");
-const paypalAmountInput = document.getElementById("paypal-amount");
+const btnEmailInquiry = document.getElementById("btn-email-inquiry");
 
 // Cart Elements
 const cartDrawer = document.getElementById("cart-drawer");
@@ -266,16 +265,12 @@ const I18N = {
     spec_material: { en: "Material", ko: "재질" },
     spec_year: { en: "Year", ko: "제작연도" },
     estimated_price: { en: "Estimated Price:", ko: "예상 가격:" },
-    purchase_heading: { en: "Purchase Options", ko: "구매 방법" },
-    pay_with_paypal: { en: "Pay with PayPal", ko: "PayPal로 결제하기" },
-    bank_transfer_heading: { en: "Bank Transfer (Korea)", ko: "국내 계좌이체" },
-    bank_name_label: { en: "Bank", ko: "은행" },
-    bank_holder_label: { en: "Account Holder", ko: "예금주" },
-    bank_account_label: { en: "Account No.", ko: "계좌번호" },
-    bank_transfer_note: {
-        en: "After transferring, please contact us via the form below with your name and the artwork title so we can confirm your order.",
-        ko: "입금 후 아래 문의 폼에 성함과 작품명을 남겨주시면 주문을 확인해드립니다.",
+    purchase_heading: { en: "Purchase Inquiry", ko: "구매 문의" },
+    purchase_inquiry_text: {
+        en: "Interested in this piece? I'd love to hear from you — I check my inbox every single day, so send a quick note and I'll get back to you soon.",
+        ko: "이 작품이 마음에 드셨나요? 언제든 편하게 문의해주세요. 메일함은 매일 확인하고 있어서 빠르게 답장드리겠습니다.",
     },
+    send_purchase_inquiry: { en: "Send Purchase Inquiry", ko: "구매 문의 보내기" },
     add_to_inquiry: { en: "Add to Inquiry", ko: "관심 작품 목록에 추가" },
     remove_from_inquiry: { en: "Remove from Inquiry", ko: "관심 목록에서 제거" },
     inquiry_cart_heading: { en: "Inquiry Cart", ko: "문의 목록" },
@@ -315,6 +310,12 @@ function combinedInquiryMessage(artList) {
     return currentLang === "ko"
         ? `안녕하세요, 관심 등록한 아래 작품들의 견적 및 상세 내용에 관한 통합 문의 드립니다.\n\n${artList}`
         : `Hello, I would like a combined quote and details for the following artworks on my inquiry list.\n\n${artList}`;
+}
+
+function purchaseInquiryMessage(artist, title) {
+    return currentLang === "ko"
+        ? `안녕하세요, ${artist} 작가의 "${title}" 작품 구매에 관해 문의드립니다.`
+        : `Hello, I would like to inquire about purchasing "${title}" by ${artist}.`;
 }
 
 function applyLanguage(lang) {
@@ -417,6 +418,17 @@ function initEventListeners() {
     if (detailPanel) {
         detailCloseBtn.addEventListener("click", closeDetailPanel);
         detailOverlay.addEventListener("click", closeDetailPanel);
+    }
+
+    // Purchase Inquiry button: stash a prefilled message and hand off to the
+    // standalone Contact page, same handoff pattern as the cart checkout.
+    if (btnEmailInquiry) {
+        btnEmailInquiry.addEventListener("click", () => {
+            if (!currentDetailArt) return;
+            const msg = purchaseInquiryMessage(currentDetailArt.artist, currentDetailArt.title);
+            sessionStorage.setItem("rawfaw_contact_prefill", msg);
+            window.location.href = "contact.html";
+        });
     }
 
     // Cart Panel Toggle (every page — the cart drawer is duplicated on all of them)
@@ -669,10 +681,6 @@ function openDetailPanel(art) {
     }
     detailImg.src = art.image;
     detailImg.alt = art.title;
-
-    // PayPal "Buy Now" button — see form's business= field in index.html
-    paypalItemNameInput.value = art.title;
-    paypalAmountInput.value = art.numericPrice;
 
     // Configure Add to Cart button based on current inquiry list
     const inCart = inquiryCart.some(item => item.id === art.id);

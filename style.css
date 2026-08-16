@@ -1222,8 +1222,8 @@ button {
     line-height: 1.5;
 }
 
-/* Purchase Options: PayPal + Korean bank transfer */
-.purchase-options {
+/* Purchase Inquiry CTA */
+.purchase-inquiry-cta {
     margin-bottom: 16px;
     border: 1px solid var(--border-color);
     padding: 16px;
@@ -1237,14 +1237,17 @@ button {
     margin-bottom: 12px;
 }
 
-.paypal-form {
-    margin-bottom: 16px;
+.purchase-inquiry-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 14px;
 }
 
-.paypal-buy-btn {
+.email-inquiry-btn {
     width: 100%;
     padding: 12px;
-    background-color: #0070ba;
+    background-color: var(--black);
     color: var(--white);
     border: none;
     font-size: 14px;
@@ -1253,32 +1256,9 @@ button {
     transition: var(--transition-smooth);
 }
 
-.paypal-buy-btn:hover {
-    background-color: #005ea6;
-}
-
-.bank-transfer-box {
-    border-top: 1px solid var(--border-color);
-    padding-top: 16px;
-}
-
-.bank-transfer-label {
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.bank-transfer-detail {
-    font-size: 13px;
-    line-height: 1.7;
+.email-inquiry-btn:hover {
+    background-color: var(--neon-yellow);
     color: var(--black);
-}
-
-.bank-transfer-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.5;
-    margin-top: 8px;
 }
 
 .add-to-inquiry-cart-btn {

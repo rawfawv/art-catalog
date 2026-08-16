@@ -116,26 +116,10 @@
                 </div>
                 <p class="detail-shipping-note hidden" id="detail-shipping-note"></p>
 
-                <div class="purchase-options">
-                    <h4 class="purchase-heading" data-i18n="purchase_heading">Purchase Options</h4>
-
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="paypal-form" class="paypal-form">
-                        <input type="hidden" name="cmd" value="_xclick">
-                        <input type="hidden" name="business" value="REPLACE_WITH_YOUR_PAYPAL_EMAIL">
-                        <input type="hidden" name="item_name" id="paypal-item-name" value="">
-                        <input type="hidden" name="amount" id="paypal-amount" value="">
-                        <input type="hidden" name="currency_code" value="USD">
-                        <input type="hidden" name="no_shipping" value="0">
-                        <button type="submit" class="paypal-buy-btn" data-i18n="pay_with_paypal">Pay with PayPal</button>
-                    </form>
-
-                    <div class="bank-transfer-box">
-                        <p class="bank-transfer-label" data-i18n="bank_transfer_heading">Bank Transfer (Korea)</p>
-                        <p class="bank-transfer-detail"><span data-i18n="bank_name_label">Bank</span>: <strong>REPLACE_WITH_BANK_NAME</strong></p>
-                        <p class="bank-transfer-detail"><span data-i18n="bank_holder_label">Account Holder</span>: <strong>REPLACE_WITH_ACCOUNT_HOLDER</strong></p>
-                        <p class="bank-transfer-detail"><span data-i18n="bank_account_label">Account No.</span>: <strong>REPLACE_WITH_ACCOUNT_NUMBER</strong></p>
-                        <p class="bank-transfer-note" data-i18n="bank_transfer_note">After transferring, please contact us via the form below with your name and the artwork title so we can confirm your order.</p>
-                    </div>
+                <div class="purchase-inquiry-cta">
+                    <h4 class="purchase-heading" data-i18n="purchase_heading">Purchase Inquiry</h4>
+                    <p class="purchase-inquiry-text" data-i18n="purchase_inquiry_text">Interested in this piece? I'd love to hear from you — I check my inbox every single day, so send a quick note and I'll get back to you soon.</p>
+                    <button type="button" class="email-inquiry-btn" id="btn-email-inquiry" data-i18n="send_purchase_inquiry">Send Purchase Inquiry</button>
                 </div>
 
                 <button class="add-to-inquiry-cart-btn" id="btn-add-to-cart" data-i18n="add_to_inquiry">
