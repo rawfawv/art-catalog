@@ -29,7 +29,7 @@ const ARTWORKS_DATA = [
         color: "terracotta",
         isNew: true,
         dimensions: "63.6 x 46.9cm ",
-        material: "판넬에 유화",
+        material: "판넬에 유화 (Oil on panel)",
         year: "2024",
         shippingNote: "Shipping charged separately. Framing is optional; selecting a frame will increase shipping cost.",
         description: "Flowerpot of the Body\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world.\n\nThe body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions.\n\nBy placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence.\n\nThis work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity."
