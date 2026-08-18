@@ -6,7 +6,7 @@ const ARTWORKS_DATA = [
         id: 2,
         title: "The Flowerpot of Time | 시간의 화분",
         artist: "Rawfaw",
-        image: "assets/the-flowerpot-of-time.png",
+        image: "assets/the-flowerpot-of-time-2.png",
         price: "$2,300",
         numericPrice: 2300,
         category: "ORIGINAL",
