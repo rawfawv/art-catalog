@@ -190,6 +190,7 @@ const inputMessage = document.getElementById("input-message");
 const charCount = document.getElementById("char-count");
 const inputFile = document.getElementById("input-file");
 const fileNameLabel = document.getElementById("file-name-label");
+const formNextUrlInput = document.getElementById("form-next-url");
 const inputPhone = document.getElementById("input-phone");
 const phoneRequiredTag = document.getElementById("phone-required-tag");
 const inquiryTypeGeneral = document.getElementById("inquiry-type-general");
@@ -419,9 +420,14 @@ function badgeLabel(category) {
 }
 
 function thankYouMessage(name) {
-    return currentLang === "ko"
-        ? `감사합니다, ${name}님! 문의가 정상적으로 접수되었습니다. 담당 큐레이터가 빠르게 연락드리겠습니다.`
-        : `Thank you, ${name}! Your inquiry has been received. A curator will contact you shortly.`;
+    // name is blank when this runs after the page reload from a native (non-AJAX)
+    // form submission — see the attachment path in initEventListeners().
+    const greeting = name
+        ? (currentLang === "ko" ? `감사합니다, ${name}님! ` : `Thank you, ${name}! `)
+        : "";
+    return greeting + (currentLang === "ko"
+        ? "문의가 정상적으로 접수되었습니다. 담당 큐레이터가 빠르게 연락드리겠습니다."
+        : "Your inquiry has been received. A curator will contact you shortly.");
 }
 
 function purchaseInquiryMessage(artist, title) {
@@ -489,6 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initEventListeners();
     applyLanguage(currentLang);
     applyContactPrefill();
+    checkFormSentFlag();
     // Only pages that actually display a price need to look up region/currency.
     if (catalogGrid || detailPanel) detectRegionAndCurrency();
 });
@@ -591,9 +598,15 @@ function initEventListeners() {
         });
 
         // Submission (delivered via FormSubmit.co — see form's action= attribute)
+        //
+        // FormSubmit's AJAX endpoint (formsubmit.co/ajax/...) silently drops
+        // file attachments — only a normal, full-page multipart POST actually
+        // delivers them. So when a file is attached, we let the browser
+        // submit the form natively (no preventDefault, no fetch) instead of
+        // going through the no-reload AJAX path used otherwise. `_next`
+        // brings the visitor back here with `?sent=1` so they still see a
+        // confirmation message, just after a brief page reload.
         inquiryForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-
             const name = document.getElementById("input-name").value;
             const email = document.getElementById("input-email").value;
             const phone = inputPhone.value;
@@ -601,6 +614,7 @@ function initEventListeners() {
             const phoneMissing = inputPhone.required && !phone;
 
             if (!name || !email || phoneMissing || !agree) {
+                e.preventDefault();
                 alert(t("required_field_alert"));
                 return;
             }
@@ -609,6 +623,16 @@ function initEventListeners() {
             const originalBtnText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = currentLang === "ko" ? "전송 중..." : "Sending...";
+
+            const hasAttachment = inputFile && inputFile.files && inputFile.files.length > 0;
+            if (hasAttachment) {
+                if (formNextUrlInput) {
+                    formNextUrlInput.value = window.location.origin + window.location.pathname + "?sent=1";
+                }
+                return; // let the native (non-AJAX) submission proceed as-is
+            }
+
+            e.preventDefault();
 
             const ajaxUrl = inquiryForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
             const formData = new FormData(inquiryForm);
@@ -832,4 +856,16 @@ function applyContactPrefill() {
         inquiryTypePurchase.checked = true;
         updatePhoneRequirement();
     }
+}
+
+// Landing back on contact.html after a native (non-AJAX) form submission —
+// see the attachment path in initEventListeners() — shows up as `?sent=1`.
+// Confirm to the visitor and strip the flag from the URL.
+function checkFormSentFlag() {
+    if (!inquiryForm) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("sent") !== "1") return;
+
+    alert(thankYouMessage(""));
+    window.history.replaceState({}, "", window.location.pathname);
 }

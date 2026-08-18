@@ -60,10 +60,11 @@
                 <h2 data-i18n="contact_heading">Contact</h2>
             </div>
 
-            <form id="inquiry-form" class="inquiry-form" action="https://formsubmit.co/jiwooon513@gmail.com" method="POST">
+            <form id="inquiry-form" class="inquiry-form" action="https://formsubmit.co/jiwooon513@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_subject" value="New inquiry from RAWFAW Art website">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" id="form-next-url" value="">
 
                 <div class="form-group">
                     <label data-i18n="label_inquiry_type">Inquiry Type</label>
@@ -145,7 +146,7 @@
                     <div class="file-upload-wrapper">
                         <span class="file-name" id="file-name-label" data-i18n="no_file_selected">No file selected</span>
                         <label for="input-file" class="file-upload-btn" data-i18n="label_attach">Attach File</label>
-                        <input type="file" id="input-file" name="file" class="hidden-file-input">
+                        <input type="file" id="input-file" name="attachment" class="hidden-file-input">
                     </div>
                 </div>
 
