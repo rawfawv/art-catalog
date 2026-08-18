@@ -150,6 +150,7 @@ const ARTWORKS_DATA = [
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is not included.",
         description: "This is one piece from my “Dart Human” series.\n\nI think life is about throwing darts toward the center of a target.\nWe keep walking forward, throwing darts toward the middle of our lives.\n\nMost of them miss.\nSometimes, maybe we barely hit the edge.\n\nBut I think that’s what life is.\n\nThis person is one of my friends.\nI painted this portrait while thinking about his life.\n\nHe quietly keeps walking his own path.\n\nEven when the road feels like a desert,\nhe never forgets to notice the beautiful cactus flowers along the way.",
+        priceKrw: "1,200,000원",
         descriptionKo: "이 작품은 저의 〈Dart Human〉 연작 중 하나입니다.\n\n저는 인생이 과녁의 중심을 향해 다트를 던지는 것과 같다고 생각합니다.\n우리는 계속 앞으로 걸어가며, 삶의 한가운데를 향해 다트를 던집니다.\n\n대부분은 빗나갑니다.\n어쩌다 겨우 가장자리에 닿을 때도 있습니다.\n\n하지만 저는 그것이 바로 인생이라고 생각합니다.\n\n이 사람은 제 친구 중 한 명입니다.\n저는 그의 삶을 생각하며 이 초상화를 그렸습니다.\n\n그는 조용히 자신만의 길을 걸어갑니다.\n\n그 길이 마치 사막처럼 느껴질 때조차,\n그는 길가에 핀 아름다운 선인장 꽃을 알아보는 것을 잊지 않습니다.",
         shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     }
