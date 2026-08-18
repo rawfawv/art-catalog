@@ -83,25 +83,32 @@ function readArtworks() {
 }
 
 function serializeArtwork(entry) {
-    return [
-        "    {",
-        `        id: ${entry.id},`,
-        `        title: ${JSON.stringify(entry.title)},`,
-        `        artist: ${JSON.stringify(entry.artist)},`,
-        `        image: ${JSON.stringify(entry.image)},`,
-        `        price: ${JSON.stringify(entry.price)},`,
-        `        numericPrice: ${entry.numericPrice},`,
-        `        category: ${JSON.stringify(entry.category)},`,
-        `        color: ${JSON.stringify(entry.color)},`,
-        `        isNew: ${entry.isNew ? "true" : "false"},`,
-        `        dimensions: ${JSON.stringify(entry.dimensions)},`,
-        `        material: ${JSON.stringify(entry.material)},`,
-        `        year: ${JSON.stringify(entry.year)},`,
-        `        shippingNote: ${JSON.stringify(entry.shippingNote)},`,
-        `        description: ${JSON.stringify(entry.description)}${entry.descriptionKo ? "," : ""}`,
-        ...(entry.descriptionKo ? [`        descriptionKo: ${JSON.stringify(entry.descriptionKo)}`] : []),
-        "    }",
-    ].join("\n");
+    // Built as a list of [key, alreadySerializedValue] pairs so optional
+    // trailing fields (priceKrw, descriptionKo) can be appended without
+    // fragile "is this the last field?" comma bookkeeping.
+    const fields = [
+        ["id", entry.id],
+        ["title", JSON.stringify(entry.title)],
+        ["artist", JSON.stringify(entry.artist)],
+        ["image", JSON.stringify(entry.image)],
+        ["price", JSON.stringify(entry.price)],
+        ["numericPrice", entry.numericPrice],
+        ["category", JSON.stringify(entry.category)],
+        ["color", JSON.stringify(entry.color)],
+        ["isNew", entry.isNew ? "true" : "false"],
+        ["dimensions", JSON.stringify(entry.dimensions)],
+        ["material", JSON.stringify(entry.material)],
+        ["year", JSON.stringify(entry.year)],
+        ["shippingNote", JSON.stringify(entry.shippingNote)],
+        ["description", JSON.stringify(entry.description)],
+    ];
+    // priceKrw: the artist's own hand-set domestic (KRW) price. When present
+    // it takes over from the automatic live-exchange-rate conversion.
+    if (entry.priceKrw) fields.push(["priceKrw", JSON.stringify(entry.priceKrw)]);
+    if (entry.descriptionKo) fields.push(["descriptionKo", JSON.stringify(entry.descriptionKo)]);
+
+    const lines = fields.map(([key, value]) => `        ${key}: ${value}`);
+    return ["    {", lines.join(",\n"), "    }"].join("\n");
 }
 
 function writeArtworks(artworks) {
@@ -180,6 +187,7 @@ function fieldsFromPayload(data) {
         title,
         artist,
         price,
+        priceKrw,
         category,
         color,
         isNew,
@@ -200,6 +208,7 @@ function fieldsFromPayload(data) {
         title: title.trim(),
         artist: (artist && artist.trim()) || "Rawfaw",
         price: price.trim(),
+        priceKrw: (priceKrw && priceKrw.trim()) || "",
         numericPrice,
         category: category || "ORIGINAL",
         color: color || "terracotta",

@@ -313,9 +313,16 @@ let isKoreanVisitor = false;
 let krwRate = null; // 1 USD in KRW
 
 function formatPrice(art) {
-    if (isKoreanVisitor && krwRate) {
-        const krw = Math.round((art.numericPrice * krwRate) / 10000) * 10000; // round to nearest 만원
-        return "≈ ₩" + krw.toLocaleString("ko-KR");
+    if (isKoreanVisitor) {
+        // priceKrw is a domestic price the artist sets by hand in the admin
+        // tool — when present it's the real price, not an estimate, so it's
+        // shown exactly as entered (no "≈"). Only falls back to the live
+        // exchange-rate conversion when no domestic price has been set.
+        if (art.priceKrw) return art.priceKrw;
+        if (krwRate) {
+            const krw = Math.round((art.numericPrice * krwRate) / 10000) * 10000; // round to nearest 만원
+            return "≈ ₩" + krw.toLocaleString("ko-KR");
+        }
     }
     return art.price;
 }

@@ -212,7 +212,7 @@
 
         <div class="row">
             <div class="field">
-                <label for="price">가격 *</label>
+                <label for="price">가격 (달러) *</label>
                 <input type="text" id="price" placeholder="예: $3,000" required>
             </div>
             <div class="field">
@@ -223,6 +223,11 @@
                     <option value="POSTER">POSTER (아트 포스터)</option>
                 </select>
             </div>
+        </div>
+
+        <div class="field">
+            <label for="priceKrw">국내 판매가 (원화, 선택)</label>
+            <input type="text" id="priceKrw" placeholder="예: ₩3,000,000 (비워두면 실시간 환율로 자동 환산된 가격이 표시됩니다)">
         </div>
 
         <div class="field">
@@ -349,6 +354,7 @@ function fillFormFromArtwork(art) {
     document.getElementById("dimensions").value = art.dimensions || "";
     document.getElementById("material").value = art.material || "";
     document.getElementById("price").value = art.price || "";
+    document.getElementById("priceKrw").value = art.priceKrw || "";
     document.getElementById("category").value = art.category || "ORIGINAL";
     document.getElementById("color").value = art.color || "terracotta";
     document.getElementById("isNew").checked = !!art.isNew;
@@ -414,6 +420,7 @@ form.addEventListener("submit", async (e) => {
         dimensions: document.getElementById("dimensions").value,
         material: document.getElementById("material").value,
         price: document.getElementById("price").value,
+        priceKrw: document.getElementById("priceKrw").value,
         category: document.getElementById("category").value,
         color: document.getElementById("color").value,
         isNew: document.getElementById("isNew").checked,
