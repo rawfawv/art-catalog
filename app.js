@@ -74,7 +74,7 @@ const ARTWORKS_DATA = [
         year: "2025",
         shippingNote: "Shipping charged separately. Framing is not included.",
         description: "Flowerpot of the Mind (Summer)\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Summer) explores the paradox of growth without freedom.\n\nSummer brings warmth, light, and abundant life. Everything appears to flourish, yet the mind remains inside the same flowerpot.\n\nEven when conditions seem perfect for growth, we can still find ourselves unable to move beyond the invisible boundaries we have lived within for so long.\n\nThis work asks whether true growth is possible without independence.\n\nCan the mind truly grow if it never leaves the flowerpot?\n\nSummer symbolizes vitality and possibility, while the flowerpot represents the limitations that continue to shape the mind.",
-        priceKrw: "3,500,000원",
+        priceKrw: "3,800,000원",
         descriptionKo: "정신의 화분 (여름)\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈정신의 화분 (여름)〉은 자유 없는 성장이라는 역설을 탐구합니다.\n\n여름은 따뜻함과 빛, 그리고 풍요로운 생명력을 가져다줍니다. 모든 것이 활짝 피어나는 듯 보이지만, 정신은 여전히 같은 화분 안에 머물러 있습니다.\n\n성장하기에 완벽한 조건처럼 보일 때조차, 우리는 여전히 오랫동안 살아온 보이지 않는 경계를 넘어서지 못하는 자신을 발견하곤 합니다.\n\n이 작품은 독립 없이도 진정한 성장이 가능한지를 묻습니다.\n\n화분을 떠나지 않고도 정신은 정말로 자랄 수 있을까요?\n\n여름은 생명력과 가능성을 상징하고, 화분은 정신을 계속해서 형성하는 한계를 상징합니다.",
         shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
