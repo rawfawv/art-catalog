@@ -98,7 +98,8 @@ function serializeArtwork(entry) {
         `        material: ${JSON.stringify(entry.material)},`,
         `        year: ${JSON.stringify(entry.year)},`,
         `        shippingNote: ${JSON.stringify(entry.shippingNote)},`,
-        `        description: ${JSON.stringify(entry.description)}`,
+        `        description: ${JSON.stringify(entry.description)}${entry.descriptionKo ? "," : ""}`,
+        ...(entry.descriptionKo ? [`        descriptionKo: ${JSON.stringify(entry.descriptionKo)}`] : []),
         "    }",
     ].join("\n");
 }
@@ -187,6 +188,7 @@ function fieldsFromPayload(data) {
         year,
         shippingNote,
         description,
+        descriptionKo,
     } = data;
 
     if (!title || !title.trim()) throw new Error("작품제목을 입력해주세요.");
@@ -207,6 +209,7 @@ function fieldsFromPayload(data) {
         year: year || "",
         shippingNote: shippingNote || "",
         description: description || "",
+        descriptionKo: descriptionKo || "",
     };
 }
 

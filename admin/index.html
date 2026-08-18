@@ -251,8 +251,13 @@
         </div>
 
         <div class="field">
-            <label for="description">작품 설명 (선택)</label>
-            <textarea id="description" placeholder="작품에 대한 간단한 설명을 입력하세요."></textarea>
+            <label for="description">작품 설명 - 영어 (선택)</label>
+            <textarea id="description" placeholder="작품에 대한 설명을 영어로 입력하세요. (사이트 기본 언어)"></textarea>
+        </div>
+
+        <div class="field">
+            <label for="descriptionKo">작품 설명 - 한국어 (선택)</label>
+            <textarea id="descriptionKo" placeholder="작품 설명의 한국어 번역을 입력하세요. 비워두면 사이트를 한국어로 볼 때도 영어 설명이 그대로 표시됩니다."></textarea>
         </div>
 
         <button type="submit" id="submit-btn">업로드</button>
@@ -349,6 +354,7 @@ function fillFormFromArtwork(art) {
     document.getElementById("isNew").checked = !!art.isNew;
     document.getElementById("shippingNote").value = art.shippingNote || "";
     document.getElementById("description").value = art.description || "";
+    document.getElementById("descriptionKo").value = art.descriptionKo || "";
 
     // Show current image as preview (not re-uploaded unless the artist picks a new one)
     imageBase64 = null;
@@ -413,6 +419,7 @@ form.addEventListener("submit", async (e) => {
         isNew: document.getElementById("isNew").checked,
         shippingNote: document.getElementById("shippingNote").value,
         description: document.getElementById("description").value,
+        descriptionKo: document.getElementById("descriptionKo").value,
         imageBase64,
         imageMimeType,
     };
