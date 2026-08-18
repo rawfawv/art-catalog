@@ -106,6 +106,7 @@ function serializeArtwork(entry) {
     // it takes over from the automatic live-exchange-rate conversion.
     if (entry.priceKrw) fields.push(["priceKrw", JSON.stringify(entry.priceKrw)]);
     if (entry.descriptionKo) fields.push(["descriptionKo", JSON.stringify(entry.descriptionKo)]);
+    if (entry.shippingNoteKo) fields.push(["shippingNoteKo", JSON.stringify(entry.shippingNoteKo)]);
 
     const lines = fields.map(([key, value]) => `        ${key}: ${value}`);
     return ["    {", lines.join(",\n"), "    }"].join("\n");
@@ -195,6 +196,7 @@ function fieldsFromPayload(data) {
         material,
         year,
         shippingNote,
+        shippingNoteKo,
         description,
         descriptionKo,
     } = data;
@@ -217,6 +219,7 @@ function fieldsFromPayload(data) {
         material: material || "",
         year: year || "",
         shippingNote: shippingNote || "",
+        shippingNoteKo: shippingNoteKo || "",
         description: description || "",
         descriptionKo: descriptionKo || "",
     };

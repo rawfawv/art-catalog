@@ -251,8 +251,13 @@
         </div>
 
         <div class="field">
-            <label for="shippingNote">배송/액자 안내 (선택)</label>
-            <input type="text" id="shippingNote" placeholder="예: Shipping charged separately.">
+            <label for="shippingNote">배송 안내 - 영어 (선택)</label>
+            <input type="text" id="shippingNote" placeholder="예: Shipping charged separately. Framing is not included.">
+        </div>
+
+        <div class="field">
+            <label for="shippingNoteKo">배송 안내 - 한국어 (선택)</label>
+            <input type="text" id="shippingNoteKo" placeholder="예: 배송비는 별도이며, 액자는 포함되지 않습니다.">
         </div>
 
         <div class="field">
@@ -359,6 +364,7 @@ function fillFormFromArtwork(art) {
     document.getElementById("color").value = art.color || "terracotta";
     document.getElementById("isNew").checked = !!art.isNew;
     document.getElementById("shippingNote").value = art.shippingNote || "";
+    document.getElementById("shippingNoteKo").value = art.shippingNoteKo || "";
     document.getElementById("description").value = art.description || "";
     document.getElementById("descriptionKo").value = art.descriptionKo || "";
 
@@ -425,6 +431,7 @@ form.addEventListener("submit", async (e) => {
         color: document.getElementById("color").value,
         isNew: document.getElementById("isNew").checked,
         shippingNote: document.getElementById("shippingNote").value,
+        shippingNoteKo: document.getElementById("shippingNoteKo").value,
         description: document.getElementById("description").value,
         descriptionKo: document.getElementById("descriptionKo").value,
         imageBase64,
