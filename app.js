@@ -93,7 +93,7 @@ const ARTWORKS_DATA = [
         year: "2026",
         shippingNote: "Shipping charged separately. Framing is not included.",
         description: "I believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Winter) reflects on the passage of time within an unchanged state.\n\nWhile trapped inside the flowerpot, the seasons continue to pass. Winter fades, summer returns, and the cycle repeats endlessly. Although the world keeps changing, the mind often remains rooted in the same place.\n\nThis work asks what it means to remain emotionally or mentally confined while time moves forward without waiting.\n\nHow many seasons must pass before the mind can finally leave the flowerpot?\n\nThe changing seasons symbolize the flow of time, while the flowerpot represents the invisible boundaries that keep the mind from moving freely.",
-        priceKrw: "3,500,000원",
+        priceKrw: "3,800,000원",
         descriptionKo: "저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈정신의 화분 (겨울)〉은 변하지 않는 상태 속에서 흘러가는 시간을 돌아봅니다.\n\n화분 안에 갇혀 있는 동안에도 계절은 계속 지나갑니다. 겨울이 저물고 여름이 다시 찾아오며, 이 순환은 끝없이 반복됩니다. 세상은 계속 변해가지만, 정신은 종종 같은 자리에 그대로 뿌리내려 있습니다.\n\n이 작품은 시간이 기다려주지 않고 흘러가는 동안 정서적으로 혹은 정신적으로 갇혀 있다는 것이 무엇을 의미하는지를 묻습니다.\n\n정신이 마침내 화분을 떠나기까지, 얼마나 많은 계절이 지나야 할까요?\n\n계절의 변화는 시간의 흐름을, 화분은 정신이 자유롭게 움직이지 못하게 하는 보이지 않는 경계를 상징합니다.",
         shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
