@@ -275,7 +275,14 @@ const I18N = {
     required_field_alert: { en: "Please fill in all required fields.", ko: "필수 입력 값을 입력해 주세요." },
 };
 
-let currentLang = localStorage.getItem("rawfaw_lang") || "en";
+// First-time visitors get their language auto-detected from the browser's
+// locale (navigator.language). Once they've been here before — or once they
+// toggle EN/KO themselves — the saved preference in localStorage always wins.
+let currentLang = localStorage.getItem("rawfaw_lang");
+if (!currentLang) {
+    const browserLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+    currentLang = browserLang.startsWith("ko") ? "ko" : "en";
+}
 
 function t(key) {
     const entry = I18N[key];
@@ -290,6 +297,92 @@ function t(key) {
 function getDescription(art) {
     if (currentLang === "ko" && art.descriptionKo) return art.descriptionKo;
     return art.description;
+}
+
+// ==========================================================================
+// Currency: visitors in Korea see an approximate KRW price (live exchange
+// rate); everyone else sees the exact USD price as always. Geolocation +
+// exchange rate are looked up once per day (cached in localStorage) so we're
+// not hitting free public APIs on every page view, and if either lookup
+// fails for any reason we just silently keep showing USD.
+// ==========================================================================
+const GEO_CACHE_KEY = "rawfaw_geo_cache";
+const GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+let isKoreanVisitor = false;
+let krwRate = null; // 1 USD in KRW
+
+function formatPrice(art) {
+    if (isKoreanVisitor && krwRate) {
+        const krw = Math.round((art.numericPrice * krwRate) / 10000) * 10000; // round to nearest 만원
+        return "≈ ₩" + krw.toLocaleString("ko-KR");
+    }
+    return art.price;
+}
+
+function readGeoCache() {
+    try {
+        const raw = localStorage.getItem(GEO_CACHE_KEY);
+        if (!raw) return null;
+        const cached = JSON.parse(raw);
+        if (!cached || typeof cached.timestamp !== "number") return null;
+        if (Date.now() - cached.timestamp > GEO_CACHE_TTL_MS) return null;
+        return cached;
+    } catch {
+        return null;
+    }
+}
+
+function writeGeoCache(data) {
+    try {
+        localStorage.setItem(GEO_CACHE_KEY, JSON.stringify({ ...data, timestamp: Date.now() }));
+    } catch {
+        // localStorage unavailable (private browsing, etc.) — just skip caching.
+    }
+}
+
+function refreshPriceDisplays() {
+    if (catalogGrid) renderCatalog();
+    if (detailPanel && detailPanel.classList.contains("open") && currentDetailArt) {
+        detailPrice.textContent = formatPrice(currentDetailArt);
+    }
+}
+
+async function detectRegionAndCurrency() {
+    const cached = readGeoCache();
+    if (cached) {
+        isKoreanVisitor = !!cached.isKorean;
+        krwRate = cached.krwRate || null;
+        if (isKoreanVisitor && krwRate) refreshPriceDisplays();
+        return;
+    }
+
+    try {
+        const geoRes = await fetch("https://ipwho.is/");
+        const geo = await geoRes.json();
+        // A rate-limited or otherwise failed lookup comes back as
+        // {success: false, ...} with no country_code — that's a shrug, not a
+        // "not Korean" answer, so don't cache it. Just retry on the next visit.
+        if (!geo || geo.success === false) return;
+
+        if (geo.country_code !== "KR") {
+            writeGeoCache({ isKorean: false, krwRate: null });
+            return;
+        }
+
+        const rateRes = await fetch("https://open.er-api.com/v6/latest/USD");
+        const rateData = await rateRes.json();
+        const rate = rateData && rateData.result === "success" && rateData.rates && rateData.rates.KRW;
+
+        if (!rate) return; // exchange-rate API hiccup — leave it, retry next visit
+
+        writeGeoCache({ isKorean: true, krwRate: rate });
+        isKoreanVisitor = true;
+        krwRate = rate;
+        refreshPriceDisplays();
+    } catch {
+        // Geolocation/exchange-rate API unreachable — quietly keep USD, don't cache the failure.
+    }
 }
 
 function badgeLabel(category) {
@@ -367,6 +460,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initEventListeners();
     applyLanguage(currentLang);
     applyContactPrefill();
+    // Only pages that actually display a price need to look up region/currency.
+    if (catalogGrid || detailPanel) detectRegionAndCurrency();
 });
 
 // ==========================================================================
@@ -591,7 +686,7 @@ function createCardHTML(art, index) {
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
                 <p class="card-artist">${isHighlighted ? getDescription(art) : art.artist}</p>
                 <div class="card-meta">
-                    <span class="card-price">${art.price}</span>
+                    <span class="card-price">${formatPrice(art)}</span>
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
                 </div>
             </div>
@@ -601,7 +696,7 @@ function createCardHTML(art, index) {
                     <h3 class="card-title">${art.title}: A MASTERPIECE BY ${art.artist}</h3>
                     <p class="card-hover-desc">${getDescription(art)}</p>
                     <div class="card-meta">
-                        <span class="card-price">${art.price}</span>
+                        <span class="card-price">${formatPrice(art)}</span>
                         <span class="card-badge">${t('view_artwork')}</span>
                     </div>
                 </div>`}
@@ -617,7 +712,7 @@ function createCardHTML(art, index) {
                 <h4 class="card-artist">${art.artist}</h4>
                 <p class="card-description">${getDescription(art)}</p>
                 <div class="card-meta">
-                    <span class="card-price">${art.price}</span>
+                    <span class="card-price">${formatPrice(art)}</span>
                     <span class="card-badge"># ${badgeLabel(art.category)}</span>
                 </div>
             </div>
@@ -667,7 +762,7 @@ function openDetailPanel(art) {
     detailTitle.textContent = art.artist;
     detailSubtitle.textContent = art.title;
     detailDesc.textContent = getDescription(art);
-    detailPrice.textContent = art.price;
+    detailPrice.textContent = formatPrice(art);
     renderDetailSpecs(art);
     if (art.shippingNote) {
         detailShippingNote.textContent = art.shippingNote;
