@@ -112,6 +112,7 @@ const ARTWORKS_DATA = [
         year: "2024",
         shippingNote: "Shipping charged separately. Framing is not included.",
         description: "Flowerpot of the Body I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot. Flowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world. The body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions. By placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence. This work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity.",
+        priceKrw: "1,200,000원",
         descriptionKo: "육체의 화분. 저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다. 제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다. 〈육체의 화분〉은 인간 존재의 물리적인 측면을 나타냅니다. 화분 안에는 눈알이 담겨 있는데, 이는 우리가 세상을 처음 인식하고 경험하는 매개체로서의 몸을 상징합니다. 몸은 우리가 주변을 보고 만지고 상호작용할 수 있게 해주지만, 동시에 신체적 한계와 외부 조건에 의해 형태 지어지고 갇히기도 합니다. 눈을 화분 안에 배치함으로써, 저는 몸을 여전히 뿌리내린 채 독립의 가능성을 향해 성장해가는 존재로 시각화합니다. 이 작품은 몸, 마음, 영혼을 서로 구분되지만 연결된 인간 정체성의 측면들로 탐구하는 연작의 일부입니다.",
         shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
