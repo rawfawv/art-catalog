@@ -16,9 +16,9 @@ const ARTWORKS_DATA = [
         material: "캔버스에 유화 (Oil on canvas)",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nThe plants in my paintings represent people who long to discover their own identity, yet still feel rooted within invisible boundaries.\n\nFlowerpot of Time reflects on the experience of remaining in the same place while time continues to move forward. Seasons change, years pass, and life quietly moves on, yet the flowerpot remains where it has always been.\n\nThe flowerpot symbolizes the invisible limitations that keep us from taking root on our own, while the passing seasons represent the relentless flow of time. Although growth continues, true independence has not yet been reached.\n\nThrough this work, I ask a simple question: How much time must pass before we are finally ready to leave the flowerpot?",
-        descriptionKo: "저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다. 제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n그림 속 식물들은 자신만의 정체성을 찾고 싶어하면서도, 여전히 보이지 않는 경계 안에 뿌리내린 채 살아가는 사람들을 상징합니다.\n\n〈시간의 화분〉은 시간이 계속 흘러가는 동안에도 같은 자리에 머물러 있는 경험을 담고 있습니다. 계절이 바뀌고 세월이 흐르며 삶은 조용히 나아가지만, 화분은 늘 있던 그 자리에 그대로 남아 있습니다.\n\n화분은 스스로 뿌리내리지 못하게 하는 보이지 않는 한계를, 지나가는 계절은 멈추지 않는 시간의 흐름을 상징합니다. 성장은 계속되지만, 진정한 독립에는 아직 이르지 못했습니다.\n\n이 작품을 통해 저는 하나의 질문을 던집니다: 우리가 마침내 화분을 떠날 준비가 되기까지, 얼마나 많은 시간이 흘러야 할까요?"
+        descriptionKo: "저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다. 제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n그림 속 식물들은 자신만의 정체성을 찾고 싶어하면서도, 여전히 보이지 않는 경계 안에 뿌리내린 채 살아가는 사람들을 상징합니다.\n\n〈시간의 화분〉은 시간이 계속 흘러가는 동안에도 같은 자리에 머물러 있는 경험을 담고 있습니다. 계절이 바뀌고 세월이 흐르며 삶은 조용히 나아가지만, 화분은 늘 있던 그 자리에 그대로 남아 있습니다.\n\n화분은 스스로 뿌리내리지 못하게 하는 보이지 않는 한계를, 지나가는 계절은 멈추지 않는 시간의 흐름을 상징합니다. 성장은 계속되지만, 진정한 독립에는 아직 이르지 못했습니다.\n\n이 작품을 통해 저는 하나의 질문을 던집니다: 우리가 마침내 화분을 떠날 준비가 되기까지, 얼마나 많은 시간이 흘러야 할까요?",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 10,
@@ -34,9 +34,10 @@ const ARTWORKS_DATA = [
         material: "판넬에 유화 (Oil on panel)",
         year: "2024",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "Flowerpot of the Body\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world.\n\nThe body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions.\n\nBy placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence.\n\nThis work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity.",
-        descriptionKo: "육체의 화분\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈육체의 화분〉은 인간 존재의 물리적인 측면을 나타냅니다. 화분 안에는 눈알이 담겨 있는데, 이는 우리가 세상을 처음 인식하고 경험하는 매개체로서의 몸을 상징합니다.\n\n몸은 우리가 주변을 보고, 만지고, 상호작용할 수 있게 해주지만, 동시에 신체적 한계와 외부 조건에 의해 형태 지어지고 갇히기도 합니다.\n\n눈을 화분 안에 배치함으로써, 저는 몸을 여전히 뿌리내린 채 독립의 가능성을 향해 성장해가는 존재로 시각화합니다.\n\n이 작품은 몸, 마음, 영혼을 서로 구분되지만 연결된 인간 정체성의 측면들로 탐구하는 연작의 일부입니다."
+        priceKrw: "1,200,000원",
+        descriptionKo: "육체의 화분\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈육체의 화분〉은 인간 존재의 물리적인 측면을 나타냅니다. 화분 안에는 눈알이 담겨 있는데, 이는 우리가 세상을 처음 인식하고 경험하는 매개체로서의 몸을 상징합니다.\n\n몸은 우리가 주변을 보고, 만지고, 상호작용할 수 있게 해주지만, 동시에 신체적 한계와 외부 조건에 의해 형태 지어지고 갇히기도 합니다.\n\n눈을 화분 안에 배치함으로써, 저는 몸을 여전히 뿌리내린 채 독립의 가능성을 향해 성장해가는 존재로 시각화합니다.\n\n이 작품은 몸, 마음, 영혼을 서로 구분되지만 연결된 인간 정체성의 측면들로 탐구하는 연작의 일부입니다.",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 11,
@@ -52,9 +53,9 @@ const ARTWORKS_DATA = [
         material: "Oil on panel",
         year: "2025",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "Flowerpot of the Soul\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Soul explores the question of whether the soul can ever become truly free.\n\nThe soul is often considered the deepest and most essential part of who we are. Yet it is easily confined by fear, desire, memory, and the expectations of the world.\n\nThe flowerpot represents those invisible boundaries that keep the soul rooted in one place.\n\nThrough this work, I ask a simple question:\n\nCan my soul leave the flowerpot and take root in the earth?\n\nRather than offering an answer, the work leaves that question open, inviting viewers to reflect on the possibility of spiritual independence and growth.",
-        descriptionKo: "영혼의 화분\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈영혼의 화분〉은 영혼이 과연 진정으로 자유로워질 수 있는가라는 질문을 탐구합니다.\n\n영혼은 흔히 우리 존재의 가장 깊고 본질적인 부분으로 여겨지지만, 두려움과 욕망, 기억, 그리고 세상의 기대에 의해 쉽게 갇히곤 합니다.\n\n화분은 영혼을 한 곳에 뿌리내리게 하는 보이지 않는 경계를 상징합니다.\n\n이 작품을 통해 저는 하나의 단순한 질문을 던집니다:\n\n제 영혼은 화분을 떠나 땅에 뿌리내릴 수 있을까요?\n\n이 작품은 답을 제시하기보다, 그 질문을 열어둔 채 보는 이들이 영적 독립과 성장의 가능성에 대해 스스로 생각해보도록 초대합니다."
+        descriptionKo: "영혼의 화분\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈영혼의 화분〉은 영혼이 과연 진정으로 자유로워질 수 있는가라는 질문을 탐구합니다.\n\n영혼은 흔히 우리 존재의 가장 깊고 본질적인 부분으로 여겨지지만, 두려움과 욕망, 기억, 그리고 세상의 기대에 의해 쉽게 갇히곤 합니다.\n\n화분은 영혼을 한 곳에 뿌리내리게 하는 보이지 않는 경계를 상징합니다.\n\n이 작품을 통해 저는 하나의 단순한 질문을 던집니다:\n\n제 영혼은 화분을 떠나 땅에 뿌리내릴 수 있을까요?\n\n이 작품은 답을 제시하기보다, 그 질문을 열어둔 채 보는 이들이 영적 독립과 성장의 가능성에 대해 스스로 생각해보도록 초대합니다.",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 12,
@@ -70,9 +71,9 @@ const ARTWORKS_DATA = [
         material: "Oil on panel",
         year: "2025",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "Flowerpot of the Mind (Summer)\n\nI believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Summer) explores the paradox of growth without freedom.\n\nSummer brings warmth, light, and abundant life. Everything appears to flourish, yet the mind remains inside the same flowerpot.\n\nEven when conditions seem perfect for growth, we can still find ourselves unable to move beyond the invisible boundaries we have lived within for so long.\n\nThis work asks whether true growth is possible without independence.\n\nCan the mind truly grow if it never leaves the flowerpot?\n\nSummer symbolizes vitality and possibility, while the flowerpot represents the limitations that continue to shape the mind.",
-        descriptionKo: "정신의 화분 (여름)\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈정신의 화분 (여름)〉은 자유 없는 성장이라는 역설을 탐구합니다.\n\n여름은 따뜻함과 빛, 그리고 풍요로운 생명력을 가져다줍니다. 모든 것이 활짝 피어나는 듯 보이지만, 정신은 여전히 같은 화분 안에 머물러 있습니다.\n\n성장하기에 완벽한 조건처럼 보일 때조차, 우리는 여전히 오랫동안 살아온 보이지 않는 경계를 넘어서지 못하는 자신을 발견하곤 합니다.\n\n이 작품은 독립 없이도 진정한 성장이 가능한지를 묻습니다.\n\n화분을 떠나지 않고도 정신은 정말로 자랄 수 있을까요?\n\n여름은 생명력과 가능성을 상징하고, 화분은 정신을 계속해서 형성하는 한계를 상징합니다."
+        descriptionKo: "정신의 화분 (여름)\n\n저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈정신의 화분 (여름)〉은 자유 없는 성장이라는 역설을 탐구합니다.\n\n여름은 따뜻함과 빛, 그리고 풍요로운 생명력을 가져다줍니다. 모든 것이 활짝 피어나는 듯 보이지만, 정신은 여전히 같은 화분 안에 머물러 있습니다.\n\n성장하기에 완벽한 조건처럼 보일 때조차, 우리는 여전히 오랫동안 살아온 보이지 않는 경계를 넘어서지 못하는 자신을 발견하곤 합니다.\n\n이 작품은 독립 없이도 진정한 성장이 가능한지를 묻습니다.\n\n화분을 떠나지 않고도 정신은 정말로 자랄 수 있을까요?\n\n여름은 생명력과 가능성을 상징하고, 화분은 정신을 계속해서 형성하는 한계를 상징합니다.",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 13,
@@ -88,9 +89,9 @@ const ARTWORKS_DATA = [
         material: "Oil on panel",
         year: "2026",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "I believe that a person is made up of three elements: the body, the mind, and the soul.\n\nThe central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nFlowerpot of the Mind (Winter) reflects on the passage of time within an unchanged state.\n\nWhile trapped inside the flowerpot, the seasons continue to pass. Winter fades, summer returns, and the cycle repeats endlessly. Although the world keeps changing, the mind often remains rooted in the same place.\n\nThis work asks what it means to remain emotionally or mentally confined while time moves forward without waiting.\n\nHow many seasons must pass before the mind can finally leave the flowerpot?\n\nThe changing seasons symbolize the flow of time, while the flowerpot represents the invisible boundaries that keep the mind from moving freely.",
-        descriptionKo: "저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈정신의 화분 (겨울)〉은 변하지 않는 상태 속에서 흘러가는 시간을 돌아봅니다.\n\n화분 안에 갇혀 있는 동안에도 계절은 계속 지나갑니다. 겨울이 저물고 여름이 다시 찾아오며, 이 순환은 끝없이 반복됩니다. 세상은 계속 변해가지만, 정신은 종종 같은 자리에 그대로 뿌리내려 있습니다.\n\n이 작품은 시간이 기다려주지 않고 흘러가는 동안 정서적으로 혹은 정신적으로 갇혀 있다는 것이 무엇을 의미하는지를 묻습니다.\n\n정신이 마침내 화분을 떠나기까지, 얼마나 많은 계절이 지나야 할까요?\n\n계절의 변화는 시간의 흐름을, 화분은 정신이 자유롭게 움직이지 못하게 하는 보이지 않는 경계를 상징합니다."
+        descriptionKo: "저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다.\n\n제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n〈정신의 화분 (겨울)〉은 변하지 않는 상태 속에서 흘러가는 시간을 돌아봅니다.\n\n화분 안에 갇혀 있는 동안에도 계절은 계속 지나갑니다. 겨울이 저물고 여름이 다시 찾아오며, 이 순환은 끝없이 반복됩니다. 세상은 계속 변해가지만, 정신은 종종 같은 자리에 그대로 뿌리내려 있습니다.\n\n이 작품은 시간이 기다려주지 않고 흘러가는 동안 정서적으로 혹은 정신적으로 갇혀 있다는 것이 무엇을 의미하는지를 묻습니다.\n\n정신이 마침내 화분을 떠나기까지, 얼마나 많은 계절이 지나야 할까요?\n\n계절의 변화는 시간의 흐름을, 화분은 정신이 자유롭게 움직이지 못하게 하는 보이지 않는 경계를 상징합니다.",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 14,
@@ -106,9 +107,9 @@ const ARTWORKS_DATA = [
         material: "Oil on panel",
         year: "2024",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "Flowerpot of the Body I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot. Flowerpot of the Body represents the physical aspect of human existence. The flowerpot contains an eyeball, symbolizing the body as the medium through which we first perceive and experience the world. The body allows us to see, touch, and interact with our surroundings, yet it is also shaped and confined by physical limitations and external conditions. By placing the eye inside a flowerpot, I visualize the body as something that is still rooted, growing toward the possibility of independence. This work is part of an ongoing series exploring the body, the mind, and the soul as separate yet interconnected aspects of human identity.",
-        descriptionKo: "육체의 화분. 저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다. 제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다. 〈육체의 화분〉은 인간 존재의 물리적인 측면을 나타냅니다. 화분 안에는 눈알이 담겨 있는데, 이는 우리가 세상을 처음 인식하고 경험하는 매개체로서의 몸을 상징합니다. 몸은 우리가 주변을 보고 만지고 상호작용할 수 있게 해주지만, 동시에 신체적 한계와 외부 조건에 의해 형태 지어지고 갇히기도 합니다. 눈을 화분 안에 배치함으로써, 저는 몸을 여전히 뿌리내린 채 독립의 가능성을 향해 성장해가는 존재로 시각화합니다. 이 작품은 몸, 마음, 영혼을 서로 구분되지만 연결된 인간 정체성의 측면들로 탐구하는 연작의 일부입니다."
+        descriptionKo: "육체의 화분. 저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다. 제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다. 〈육체의 화분〉은 인간 존재의 물리적인 측면을 나타냅니다. 화분 안에는 눈알이 담겨 있는데, 이는 우리가 세상을 처음 인식하고 경험하는 매개체로서의 몸을 상징합니다. 몸은 우리가 주변을 보고 만지고 상호작용할 수 있게 해주지만, 동시에 신체적 한계와 외부 조건에 의해 형태 지어지고 갇히기도 합니다. 눈을 화분 안에 배치함으로써, 저는 몸을 여전히 뿌리내린 채 독립의 가능성을 향해 성장해가는 존재로 시각화합니다. 이 작품은 몸, 마음, 영혼을 서로 구분되지만 연결된 인간 정체성의 측면들로 탐구하는 연작의 일부입니다.",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 15,
@@ -124,9 +125,9 @@ const ARTWORKS_DATA = [
         material: "Oil on panel",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "Dart Human Series - Room 223\n\nThe Dart Human series began with a simple question:\n\nWhat if life is like throwing darts?\n\nEvery decision, attempt, failure, and dream is another dart thrown toward a target we can’t fully see.\n\nSome darts miss.\nSome land close.\nA few hit the center.\n\nBut no one reaches the target without throwing.\n\nThis woman has spent a long time climbing.\n\nStep by step, she built her life with her own strength.\nShe kept moving even when nobody was watching.\nEven when progress felt slow.\n\nNow, for the first time in a while, she pauses.\n\nShe looks back at the path she has climbed and realizes how far she has come.\n\nThere is no regret in her expression.\nNo doubt.\n\nOnly confidence.\n\nNot because her journey is finished,\nbut because she finally trusts herself.\n\nThe target is still ahead.\nThere are many more darts left to throw.\n\nBut wherever they land,\nshe knows she has the courage to keep aiming.\n\nMay her next dart fly even farther than the last.\nAnd may yours, too. 🎯✨",
-        descriptionKo: "Dart Human 연작 - 223호의 여자\n\n〈Dart Human〉 연작은 하나의 단순한 질문에서 시작되었습니다:\n\n인생이 다트를 던지는 것과 같다면 어떨까?\n\n모든 선택과 시도, 실패와 꿈은 완전히 보이지 않는 과녁을 향해 던지는 또 하나의 다트가 됩니다.\n\n어떤 다트는 빗나가고,\n어떤 다트는 근처에 떨어지고,\n몇몇 다트만이 중심에 꽂힙니다.\n\n하지만 던지지 않고서는 누구도 과녁에 닿을 수 없습니다.\n\n이 여자는 오랫동안 오르막을 걸어왔습니다.\n\n한 걸음씩, 그녀는 자신의 힘으로 삶을 쌓아 올렸습니다.\n아무도 지켜보지 않을 때도 계속 나아갔습니다.\n속도가 더디게 느껴질 때도요.\n\n이제, 오랜만에 그녀는 잠시 멈춰 섭니다.\n\n자신이 올라온 길을 돌아보며, 얼마나 멀리 왔는지를 깨닫습니다.\n\n그녀의 표정에는 후회가 없습니다.\n의심도 없습니다.\n\n오직 확신뿐입니다.\n\n여정이 끝나서가 아니라,\n마침내 스스로를 믿게 되었기 때문입니다.\n\n과녁은 아직 저 앞에 있습니다.\n던져야 할 다트는 아직 많이 남아 있습니다.\n\n하지만 다트가 어디에 떨어지든,\n그녀는 계속 겨눌 용기가 있다는 것을 압니다.\n\n그녀의 다음 다트가 지난번보다 더 멀리 날아가기를.\n그리고 당신의 다트도요. 🎯✨"
+        descriptionKo: "Dart Human 연작 - 223호의 여자\n\n〈Dart Human〉 연작은 하나의 단순한 질문에서 시작되었습니다:\n\n인생이 다트를 던지는 것과 같다면 어떨까?\n\n모든 선택과 시도, 실패와 꿈은 완전히 보이지 않는 과녁을 향해 던지는 또 하나의 다트가 됩니다.\n\n어떤 다트는 빗나가고,\n어떤 다트는 근처에 떨어지고,\n몇몇 다트만이 중심에 꽂힙니다.\n\n하지만 던지지 않고서는 누구도 과녁에 닿을 수 없습니다.\n\n이 여자는 오랫동안 오르막을 걸어왔습니다.\n\n한 걸음씩, 그녀는 자신의 힘으로 삶을 쌓아 올렸습니다.\n아무도 지켜보지 않을 때도 계속 나아갔습니다.\n속도가 더디게 느껴질 때도요.\n\n이제, 오랜만에 그녀는 잠시 멈춰 섭니다.\n\n자신이 올라온 길을 돌아보며, 얼마나 멀리 왔는지를 깨닫습니다.\n\n그녀의 표정에는 후회가 없습니다.\n의심도 없습니다.\n\n오직 확신뿐입니다.\n\n여정이 끝나서가 아니라,\n마침내 스스로를 믿게 되었기 때문입니다.\n\n과녁은 아직 저 앞에 있습니다.\n던져야 할 다트는 아직 많이 남아 있습니다.\n\n하지만 다트가 어디에 떨어지든,\n그녀는 계속 겨눌 용기가 있다는 것을 압니다.\n\n그녀의 다음 다트가 지난번보다 더 멀리 날아가기를.\n그리고 당신의 다트도요. 🎯✨",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     },
     {
         id: 16,
@@ -142,9 +143,9 @@ const ARTWORKS_DATA = [
         material: "Oil on panel",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is not included.",
-        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다.",
         description: "This is one piece from my “Dart Human” series.\n\nI think life is about throwing darts toward the center of a target.\nWe keep walking forward, throwing darts toward the middle of our lives.\n\nMost of them miss.\nSometimes, maybe we barely hit the edge.\n\nBut I think that’s what life is.\n\nThis person is one of my friends.\nI painted this portrait while thinking about his life.\n\nHe quietly keeps walking his own path.\n\nEven when the road feels like a desert,\nhe never forgets to notice the beautiful cactus flowers along the way.",
-        descriptionKo: "이 작품은 저의 〈Dart Human〉 연작 중 하나입니다.\n\n저는 인생이 과녁의 중심을 향해 다트를 던지는 것과 같다고 생각합니다.\n우리는 계속 앞으로 걸어가며, 삶의 한가운데를 향해 다트를 던집니다.\n\n대부분은 빗나갑니다.\n어쩌다 겨우 가장자리에 닿을 때도 있습니다.\n\n하지만 저는 그것이 바로 인생이라고 생각합니다.\n\n이 사람은 제 친구 중 한 명입니다.\n저는 그의 삶을 생각하며 이 초상화를 그렸습니다.\n\n그는 조용히 자신만의 길을 걸어갑니다.\n\n그 길이 마치 사막처럼 느껴질 때조차,\n그는 길가에 핀 아름다운 선인장 꽃을 알아보는 것을 잊지 않습니다."
+        descriptionKo: "이 작품은 저의 〈Dart Human〉 연작 중 하나입니다.\n\n저는 인생이 과녁의 중심을 향해 다트를 던지는 것과 같다고 생각합니다.\n우리는 계속 앞으로 걸어가며, 삶의 한가운데를 향해 다트를 던집니다.\n\n대부분은 빗나갑니다.\n어쩌다 겨우 가장자리에 닿을 때도 있습니다.\n\n하지만 저는 그것이 바로 인생이라고 생각합니다.\n\n이 사람은 제 친구 중 한 명입니다.\n저는 그의 삶을 생각하며 이 초상화를 그렸습니다.\n\n그는 조용히 자신만의 길을 걸어갑니다.\n\n그 길이 마치 사막처럼 느껴질 때조차,\n그는 길가에 핀 아름다운 선인장 꽃을 알아보는 것을 잊지 않습니다.",
+        shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
     }
 ];
 
