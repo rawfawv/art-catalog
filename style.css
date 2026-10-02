@@ -1513,3 +1513,8 @@ button {
         padding: 24px;
     }
 }
+
+/* Sold-out works: dim the artwork image on cards */
+.catalog-card.sold-out .card-image-container img {
+    opacity: 0.45;
+}

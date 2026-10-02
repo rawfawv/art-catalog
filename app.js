@@ -13,10 +13,11 @@ const ARTWORKS_DATA = [
         color: "dustyrose",
         isNew: true,
         dimensions: "116.8 x 91.0cm",
-        material: "캔버스에 유화 (Oil on canvas)",
+        material: "판넬에 유화 (Oil on panel)",
         year: "2023",
         shippingNote: "Shipping charged separately. Framing is not included.",
         description: "I believe that a person is made up of three elements: the body, the mind, and the soul. The central aim of my practice is to imagine these three elements becoming independent from one another, symbolized through the form of a flowerpot.\n\nThe plants in my paintings represent people who long to discover their own identity, yet still feel rooted within invisible boundaries.\n\nFlowerpot of Time reflects on the experience of remaining in the same place while time continues to move forward. Seasons change, years pass, and life quietly moves on, yet the flowerpot remains where it has always been.\n\nThe flowerpot symbolizes the invisible limitations that keep us from taking root on our own, while the passing seasons represent the relentless flow of time. Although growth continues, true independence has not yet been reached.\n\nThrough this work, I ask a simple question: How much time must pass before we are finally ready to leave the flowerpot?",
+        soldOut: true,
         priceKrw: "2,300,000원",
         descriptionKo: "저는 사람이 몸, 마음, 영혼이라는 세 가지 요소로 이루어져 있다고 믿습니다. 제 작업의 핵심은 이 세 요소가 서로 독립된 존재가 되어가는 모습을 화분이라는 형태로 상상해보는 것입니다.\n\n그림 속 식물들은 자신만의 정체성을 찾고 싶어하면서도, 여전히 보이지 않는 경계 안에 뿌리내린 채 살아가는 사람들을 상징합니다.\n\n〈시간의 화분〉은 시간이 계속 흘러가는 동안에도 같은 자리에 머물러 있는 경험을 담고 있습니다. 계절이 바뀌고 세월이 흐르며 삶은 조용히 나아가지만, 화분은 늘 있던 그 자리에 그대로 남아 있습니다.\n\n화분은 스스로 뿌리내리지 못하게 하는 보이지 않는 한계를, 지나가는 계절은 멈추지 않는 시간의 흐름을 상징합니다. 성장은 계속되지만, 진정한 독립에는 아직 이르지 못했습니다.\n\n이 작품을 통해 저는 하나의 질문을 던집니다: 우리가 마침내 화분을 떠날 준비가 되기까지, 얼마나 많은 시간이 흘러야 할까요?",
         shippingNoteKo: "배송비는 별도이며, 액자는 포함되지 않습니다."
@@ -183,6 +184,7 @@ const detailShippingNote = document.getElementById("detail-shipping-note");
 const detailSpecs = document.getElementById("detail-specs");
 const detailImg = document.getElementById("detail-img");
 const btnEmailInquiry = document.getElementById("btn-email-inquiry");
+const purchaseInquiryCta = document.querySelector(".purchase-inquiry-cta");
 
 // Form Elements
 const inquiryForm = document.getElementById("inquiry-form");
@@ -281,6 +283,7 @@ const I18N = {
         ko: "이 작품이 마음에 드셨나요? 언제든 편하게 문의해주세요. 메일함은 매일 확인하고 있어서 빠르게 답장드리겠습니다.",
     },
     send_purchase_inquiry: { en: "Send Purchase Inquiry", ko: "구매 문의 보내기" },
+    sold_out: { en: "SOLD OUT", ko: "품절" },
     view_artwork: { en: "View Artwork", ko: "작품 보기" },
     badge_original: { en: "ORIGINAL", ko: "오리지널" },
     badge_limited: { en: "LIMITED", ko: "리미티드" },
@@ -333,6 +336,7 @@ let isKoreanVisitor = false;
 let krwRate = null; // 1 USD in KRW
 
 function formatPrice(art) {
+    if (art.soldOut) return t("sold_out");
     if (isKoreanVisitor) {
         // priceKrw is a domestic price the artist sets by hand in the admin
         // tool — when present it's the real price, not an estimate, so it's
@@ -459,8 +463,9 @@ function applyLanguage(lang) {
     if (catalogGrid) renderCatalog();
     if (detailPanel && detailPanel.classList.contains("open") && currentDetailArt) {
         detailDesc.textContent = getDescription(currentDetailArt);
+        detailPrice.textContent = formatPrice(currentDetailArt);
         renderDetailSpecs(currentDetailArt);
-        if (currentDetailArt.shippingNote) {
+        if (currentDetailArt.shippingNote && !currentDetailArt.soldOut) {
             detailShippingNote.textContent = getShippingNote(currentDetailArt);
         }
     }
@@ -715,6 +720,7 @@ function createCardHTML(art, index) {
     const card = document.createElement("div");
     card.className = "catalog-card";
     card.dataset.id = art.id;
+    if (art.soldOut) card.classList.add("sold-out");
 
     // Poster mode needs background color data-attribute
     if (currentView === "POSTER") {
@@ -817,7 +823,9 @@ function openDetailPanel(art) {
     detailDesc.textContent = getDescription(art);
     detailPrice.textContent = formatPrice(art);
     renderDetailSpecs(art);
-    if (art.shippingNote) {
+    // Sold-out works have nothing left to inquire about — hide the purchase CTA.
+    if (purchaseInquiryCta) purchaseInquiryCta.classList.toggle("hidden", !!art.soldOut);
+    if (art.shippingNote && !art.soldOut) {
         detailShippingNote.textContent = getShippingNote(art);
         detailShippingNote.classList.remove("hidden");
     } else {

@@ -250,6 +250,11 @@
             <label for="isNew">NEW 배지 표시</label>
         </div>
 
+        <div class="checkbox-field">
+            <input type="checkbox" id="soldOut">
+            <label for="soldOut">SOLD OUT (품절) 표시</label>
+        </div>
+
         <div class="field">
             <label for="shippingNote">배송 안내 - 영어 (선택)</label>
             <input type="text" id="shippingNote" placeholder="예: Shipping charged separately. Framing is not included.">
@@ -363,6 +368,7 @@ function fillFormFromArtwork(art) {
     document.getElementById("category").value = art.category || "ORIGINAL";
     document.getElementById("color").value = art.color || "terracotta";
     document.getElementById("isNew").checked = !!art.isNew;
+    document.getElementById("soldOut").checked = !!art.soldOut;
     document.getElementById("shippingNote").value = art.shippingNote || "";
     document.getElementById("shippingNoteKo").value = art.shippingNoteKo || "";
     document.getElementById("description").value = art.description || "";
@@ -430,6 +436,7 @@ form.addEventListener("submit", async (e) => {
         category: document.getElementById("category").value,
         color: document.getElementById("color").value,
         isNew: document.getElementById("isNew").checked,
+        soldOut: document.getElementById("soldOut").checked,
         shippingNote: document.getElementById("shippingNote").value,
         shippingNoteKo: document.getElementById("shippingNoteKo").value,
         description: document.getElementById("description").value,

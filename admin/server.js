@@ -104,6 +104,7 @@ function serializeArtwork(entry) {
     ];
     // priceKrw: the artist's own hand-set domestic (KRW) price. When present
     // it takes over from the automatic live-exchange-rate conversion.
+    if (entry.soldOut) fields.push(["soldOut", "true"]);
     if (entry.priceKrw) fields.push(["priceKrw", JSON.stringify(entry.priceKrw)]);
     if (entry.descriptionKo) fields.push(["descriptionKo", JSON.stringify(entry.descriptionKo)]);
     if (entry.shippingNoteKo) fields.push(["shippingNoteKo", JSON.stringify(entry.shippingNoteKo)]);
@@ -192,6 +193,7 @@ function fieldsFromPayload(data) {
         category,
         color,
         isNew,
+        soldOut,
         dimensions,
         material,
         year,
@@ -215,6 +217,7 @@ function fieldsFromPayload(data) {
         category: category || "ORIGINAL",
         color: color || "terracotta",
         isNew: !!isNew,
+        soldOut: !!soldOut,
         dimensions: dimensions || "",
         material: material || "",
         year: year || "",
