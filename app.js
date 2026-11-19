@@ -1,6 +1,8 @@
 // ==========================================================================
 // Artwork Dataset
 // ==========================================================================
+const SHOW_ARTWORK_PRICES = false;
+
 const ARTWORKS_DATA = [
     {
         id: 17,
@@ -292,6 +294,7 @@ const I18N = {
     spec_dimensions: { en: "Dimensions", ko: "실제규격" },
     spec_material: { en: "Material", ko: "재질" },
     spec_year: { en: "Year", ko: "제작연도" },
+    pricing_inquiry: { en: "For artwork pricing, please get in touch by <a href=\"mailto:jiwooon513@gmail.com\">email</a> or <a href=\"https://www.instagram.com/racacafa.art/\">Instagram DM</a>.", ko: "작품 가격이 궁금하신 분은 <a href=\"mailto:jiwooon513@gmail.com\">메일</a>이나 <a href=\"https://www.instagram.com/racacafa.art/\">인스타그램 DM</a>으로 문의해 주세요." },
     estimated_price: { en: "Estimated Price:", ko: "예상 가격:" },
     purchase_heading: { en: "Purchase Inquiry", ko: "구매 문의" },
     purchase_inquiry_text: {
@@ -353,6 +356,7 @@ let krwRate = null; // 1 USD in KRW
 
 function formatPrice(art) {
     if (art.soldOut) return t("sold_out");
+    if (!SHOW_ARTWORK_PRICES) return "";
     if (!art.numericPrice) return currentLang === "ko" ? (art.priceKrw || art.price) : art.price;
     if (isKoreanVisitor) {
         // priceKrw is a domestic price the artist sets by hand in the admin
@@ -519,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyContactPrefill();
     checkFormSentFlag();
     // Only pages that actually display a price need to look up region/currency.
-    if (catalogGrid || detailPanel) detectRegionAndCurrency();
+    if (SHOW_ARTWORK_PRICES && (catalogGrid || detailPanel)) detectRegionAndCurrency();
 });
 
 // ==========================================================================
@@ -762,7 +766,7 @@ function createCardHTML(art, index) {
                 <h3 class="card-title">${isHighlighted ? `${art.title}: A MASTERPIECE BY ${art.artist}` : art.title}</h3>
                 <p class="card-artist">${isHighlighted ? getDescription(art) : art.artist}</p>
                 <div class="card-meta">
-                    <span class="card-price">${formatPrice(art)}</span>
+                    ${SHOW_ARTWORK_PRICES || art.soldOut ? `<span class="card-price">${formatPrice(art)}</span>` : ""}
                     <span class="card-badge">${isHighlighted ? t('view_artwork') : badgeLabel(art.category)}</span>
                 </div>
             </div>
@@ -772,7 +776,7 @@ function createCardHTML(art, index) {
                     <h3 class="card-title">${art.title}: A MASTERPIECE BY ${art.artist}</h3>
                     <p class="card-hover-desc">${getDescription(art)}</p>
                     <div class="card-meta">
-                        <span class="card-price">${formatPrice(art)}</span>
+                        ${SHOW_ARTWORK_PRICES || art.soldOut ? `<span class="card-price">${formatPrice(art)}</span>` : ""}
                         <span class="card-badge">${t('view_artwork')}</span>
                     </div>
                 </div>`}
@@ -788,7 +792,7 @@ function createCardHTML(art, index) {
                 <h4 class="card-artist">${art.artist}</h4>
                 <p class="card-description">${getDescription(art)}</p>
                 <div class="card-meta">
-                    <span class="card-price">${formatPrice(art)}</span>
+                    ${SHOW_ARTWORK_PRICES || art.soldOut ? `<span class="card-price">${formatPrice(art)}</span>` : ""}
                     <span class="card-badge"># ${badgeLabel(art.category)}</span>
                 </div>
             </div>
@@ -839,6 +843,7 @@ function openDetailPanel(art) {
     detailSubtitle.textContent = art.title;
     detailDesc.textContent = getDescription(art);
     detailPrice.textContent = formatPrice(art);
+    detailPrice.closest(".detail-price-row").classList.toggle("hidden", !SHOW_ARTWORK_PRICES && !art.soldOut);
     renderDetailSpecs(art);
     // Sold-out works have nothing left to inquire about — hide the purchase CTA.
     if (purchaseInquiryCta) purchaseInquiryCta.classList.toggle("hidden", !!art.soldOut);

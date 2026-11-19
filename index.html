@@ -64,6 +64,7 @@
 
         <!-- Main Catalog Grid Container -->
         <main class="catalog-container">
+            <p data-i18n="pricing_inquiry">For artwork pricing, please get in touch by <a href="mailto:jiwooon513@gmail.com">email</a> or <a href="https://www.instagram.com/racacafa.art/">Instagram DM</a>.</p>
             <div id="catalog-grid" class="view-grid">
                 <!-- Dynamically populated cards via JS -->
             </div>
@@ -105,13 +106,13 @@
 
                 <div class="detail-price-row">
                     <span class="price-label" data-i18n="estimated_price">Estimated Price:</span>
-                    <span class="price-value" id="detail-price">$32,000</span>
+                    <span class="price-value" id="detail-price"></span>
                 </div>
                 <p class="detail-shipping-note hidden" id="detail-shipping-note"></p>
 
                 <div class="purchase-inquiry-cta">
                     <h4 class="purchase-heading" data-i18n="purchase_heading">Purchase Inquiry</h4>
-                    <p class="purchase-inquiry-text" data-i18n="purchase_inquiry_text">Interested in this piece? I'd love to hear from you — I check my inbox every single day, so send a quick note and I'll get back to you soon.</p>
+                    <p class="purchase-inquiry-text" data-i18n="pricing_inquiry">For artwork pricing, please get in touch by <a href="mailto:jiwooon513@gmail.com">email</a> or <a href="https://www.instagram.com/racacafa.art/">Instagram DM</a>.</p>
                     <button type="button" class="email-inquiry-btn" id="btn-email-inquiry" data-i18n="send_purchase_inquiry">Send Purchase Inquiry</button>
                 </div>
 
@@ -123,6 +124,6 @@
     </div>
 
     <!-- Application Script -->
-    <script src="app.js"></script>
+    <script src="app.js?v=pricing-inquiry"></script>
 </body>
 </html>
