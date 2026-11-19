@@ -3,6 +3,22 @@
 // ==========================================================================
 const ARTWORKS_DATA = [
     {
+        id: 17,
+        title: "The Flowerpot of Love | 사랑의 화분",
+        artist: "Rawfaw",
+        image: "assets/flowerpot-of-love.jpg",
+        price: "Price on request",
+        priceKrw: "문의바람",
+        category: "ORIGINAL",
+        color: "terracotta",
+        isNew: true,
+        dimensions: "30 × 60 cm",
+        material: "캔버스에 유화 (Oil on canvas)",
+        year: "2026",
+        description: "This painting depicts two different flowerpots becoming one as they look at, understand, and love each other.",
+        descriptionKo: "두 개의 다른 화분이 하나의 화분으로 합쳐지면서 서로를 바라보고, 이해하고, 사랑하는 모습을 담은 그림입니다."
+    },
+    {
         id: 2,
         title: "The Flowerpot of Time | 시간의 화분",
         artist: "Rawfaw",
@@ -337,6 +353,7 @@ let krwRate = null; // 1 USD in KRW
 
 function formatPrice(art) {
     if (art.soldOut) return t("sold_out");
+    if (!art.numericPrice) return currentLang === "ko" ? (art.priceKrw || art.price) : art.price;
     if (isKoreanVisitor) {
         // priceKrw is a domestic price the artist sets by hand in the admin
         // tool — when present it's the real price, not an estimate, so it's
@@ -691,7 +708,7 @@ function renderCatalog() {
             // New items first
             if (a.isNew && !b.isNew) return -1;
             if (!a.isNew && b.isNew) return 1;
-            return a.id - b.id; // Keep original id order
+            return 0; // Keep catalog order within each group
         } else if (currentSort === "ARTIST") {
             return a.artist.localeCompare(b.artist);
         } else if (currentSort === "TITLE") {
