@@ -6,7 +6,7 @@ const ARTWORKS_DATA = [
         id: 17,
         title: "The Flowerpot of Love | 사랑의 화분",
         artist: "Rawfaw",
-        image: "assets/flowerpot-of-love.jpg",
+        image: "assets/flowerpot-of-love.jpg?v=2",
         price: "Price on request",
         priceKrw: "문의바람",
         category: "ORIGINAL",
