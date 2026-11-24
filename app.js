@@ -729,8 +729,8 @@ function renderCatalog() {
     } else {
         noResults.classList.add("hidden");
         
-        filteredArtworks.forEach((art, index) => {
-            const cardElement = createCardHTML(art, index);
+        filteredArtworks.forEach((art) => {
+            const cardElement = createCardHTML(art);
             catalogGrid.appendChild(cardElement);
         });
     }
@@ -748,8 +748,8 @@ function createCardHTML(art, index) {
         card.setAttribute("data-color", art.color);
     }
 
-    // Grid mode: Highlight the first item as in Reference Image 2
-    if (currentView === "GRID" && index === 1) {
+    // Grid mode: feature Flowerpot of the Body (Eye) as a text card.
+    if (currentView === "GRID" && art.id === 10) {
         card.classList.add("card-highlight");
     }
 
